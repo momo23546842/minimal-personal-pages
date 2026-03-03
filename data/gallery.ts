@@ -162,7 +162,7 @@ export const australiaPhotos = [
 export const philippinesPhotos = [
   {
     category: 'philippines',
-    image: '/images/Philippines/canyoning-kawasan-cebu.jpg',
+    image: '/images/Philippines/canyoning-Kawasan-cebu.jpg',
     title: 'Canyoning',
     location: 'Kawasan Falls, Cebu',
     caption: 'Thrilling and so worth it.',
