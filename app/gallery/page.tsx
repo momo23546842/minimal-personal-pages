@@ -1,13 +1,18 @@
 "use client"
 
 import { useState } from "react"
-import { FavoritesGrid, food, places } from "@/components/favorites"
+import { FavoritesGrid, food, japan, australia, philippines } from "@/components/favorites"
 import Link from "next/link"
 
 export default function GalleryPage() {
-  const [tab, setTab] = useState<'all'|'food'|'places'>('all')
+  const [tab, setTab] = useState<'all'|'food'|'japan'|'australia'|'philippines'>('all')
 
-  const items = tab === 'all' ? [...food, ...places] : tab === 'food' ? food : places
+  const items =
+    tab === 'all' ? [...food, ...japan, ...australia, ...philippines]
+    : tab === 'food' ? food
+    : tab === 'japan' ? japan
+    : tab === 'australia' ? australia
+    : philippines
 
   return (
     <main className="px-6 py-16">
@@ -25,27 +30,41 @@ export default function GalleryPage() {
         <div className="mb-6 flex gap-2">
           <button onClick={() => setTab('all')} className={`px-3 py-1 rounded-md ${tab==='all' ? 'bg-primary text-primary-foreground' : 'bg-secondary text-secondary-foreground'}`}>All</button>
           <button onClick={() => setTab('food')} className={`px-3 py-1 rounded-md ${tab==='food' ? 'bg-primary text-primary-foreground' : 'bg-secondary text-secondary-foreground'}`}>Food</button>
-          <button onClick={() => setTab('places')} className={`px-3 py-1 rounded-md ${tab==='places' ? 'bg-primary text-primary-foreground' : 'bg-secondary text-secondary-foreground'}`}>Places</button>
+          <button onClick={() => setTab('japan')} className={`px-3 py-1 rounded-md ${tab==='japan' ? 'bg-primary text-primary-foreground' : 'bg-secondary text-secondary-foreground'}`}>Japan</button>
+          <button onClick={() => setTab('australia')} className={`px-3 py-1 rounded-md ${tab==='australia' ? 'bg-primary text-primary-foreground' : 'bg-secondary text-secondary-foreground'}`}>Australia</button>
+          <button onClick={() => setTab('philippines')} className={`px-3 py-1 rounded-md ${tab==='philippines' ? 'bg-primary text-primary-foreground' : 'bg-secondary text-secondary-foreground'}`}>Philippines</button>
         </div>
 
-        <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-          {items.map((it, idx) => (
-            <div key={idx} className="group rounded-xl border border-border bg-card p-4 shadow-sm">
-              <div className="h-40 mb-3 w-full rounded-md bg-linear-to-br from-gray-200 to-gray-300 flex items-center justify-center text-4xl text-muted-foreground">
-                🍽️
-              </div>
-              <h4 className="mb-1 text-sm font-semibold text-foreground">{it.title}</h4>
-              {it.caption && <p className="text-xs text-muted-foreground mb-2">{it.caption}</p>}
-              {it.tags && (
-                <div className="flex flex-wrap gap-2">
-                  {it.tags.map((t) => (
-                    <span key={t} className="text-xs text-muted-foreground">#{t}</span>
-                  ))}
-                </div>
-              )}
-            </div>
-          ))}
-        </div>
+        {tab === 'all' ? (
+          <>
+            {/* Food section */}
+            <h2 className="mb-3 text-lg font-semibold text-foreground">Food</h2>
+            <FavoritesGrid items={food} />
+
+            {/* Divider */}
+            <hr className="my-10 border-t border-border" />
+
+            {/* Japan section */}
+            <h2 className="mb-3 text-lg font-semibold text-foreground">Japan</h2>
+            <FavoritesGrid items={japan} />
+
+            {/* Divider */}
+            <hr className="my-10 border-t border-border" />
+
+            {/* Australia section */}
+            <h2 className="mb-3 text-lg font-semibold text-foreground">Australia</h2>
+            <FavoritesGrid items={australia} />
+
+            {/* Divider */}
+            <hr className="my-10 border-t border-border" />
+
+            {/* Philippines section */}
+            <h2 className="mb-3 text-lg font-semibold text-foreground">Philippines</h2>
+            <FavoritesGrid items={philippines} />
+          </>
+        ) : (
+          <FavoritesGrid items={items} />
+        )}
       </div>
     </main>
   )

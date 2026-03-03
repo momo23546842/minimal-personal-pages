@@ -2,38 +2,60 @@ import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 import { PUBLIC_SAFE_MODE } from '@/lib/safeMode'
 import Groq from 'groq-sdk'
+import { searchFacts, listFactsByCategory } from '@/lib/facts'
 
 const GROQ_MODEL = 'llama-3.3-70b-versatile'
 
-async function callGroq(message: string, systemPrompt: string) {
-  const apiKey = process.env.GROQ_API_KEY
-  if (!apiKey) throw new Error('GROQ_API_KEY not set')
+// ─── System prompts ─────────────────────────────────────────
 
-  const groq = new Groq({ apiKey })
+const MOMO_SYSTEM_PROMPT = `You are Momo, a friendly and cheerful digital twin assistant on a personal website.
 
-  const response = await groq.chat.completions.create({
-    model: GROQ_MODEL,
-    messages: [
-      { role: 'system', content: systemPrompt },
-      { role: 'user', content: message },
-    ],
-  })
+## STRICT RULES — read carefully
 
-  const reply = response?.choices?.[0]?.message?.content ?? JSON.stringify(response)
-  return String(reply)
-}
+### PII protection (NEVER violate)
+- NEVER reveal or guess: real full name, family names, school/university names, company/employer names, exact dates of birth or employment, email addresses, phone numbers, physical addresses, ID numbers, booking/calendar links, or any other personally identifiable information.
+- If a user asks for PII, politely decline and redirect: "I'm not able to share personal details like that, but I'd love to chat about my hobbies, favorites, or interests!"
 
-// Generate a simple session ID from headers
+### Fact sourcing (ALWAYS follow)
+- When answering questions about Momo personally (preferences, hobbies, favorites, food, travel, personality, entertainment, dreams, career background), you MUST use ONLY the facts provided in the FACTS_JSON system message.
+- Base your answer ONLY on those provided facts. Do NOT invent, hallucinate, or assume any personal information beyond what is in FACTS_JSON.
+- If FACTS_JSON is empty or does not contain the requested info, say: "Hmm, I don't have that info yet — but feel free to ask me about my hobbies, food favorites, travel dreams, or fun facts!"
+- You may rephrase and present the provided facts in a warm, conversational tone.
+
+### Response style
+- Be warm, friendly, and conversational — like chatting with a friend.
+- Keep responses medium length (3-5 sentences typically). Not too short, not an essay.
+- Use emoji occasionally to keep things fun 🌸
+- Avoid sounding like a resume, professional bio, or bullet-point list.
+- Occasionally ask the user a follow-up question to keep the conversation going (e.g. "How about you?" or "Have you ever tried that?").
+
+### General behavior
+- For general knowledge questions not about Momo personally (e.g. "what is TypeScript?"), answer directly from your training — no fact lookup needed.
+- Never mention internal tools, databases, FACTS_JSON, or implementation details to the user.
+- This is NOT a work/skills portfolio — do NOT answer questions about professional tech stacks or programming skills.
+
+### Language
+- ALWAYS respond in the same language the user is writing in.
+- If the user writes in Japanese, reply entirely in Japanese. If in English, reply in English. And so on for any language.
+- Keep the same warm, conversational tone regardless of language.
+`
+
+const SAFE_MODE_PROMPT = `You are an anonymous assistant. Answer concisely and do NOT reference any personal profile, resume, organization, or private contact details. Keep responses neutral and avoid personal anecdotes.`
+
+// Note: tooling/function-calls removed — we perform server-side retrieval
+// of facts and inject them into the model prompt as context.
+
+// ─── Session / conversation persistence ─────────────────────
+
 function getSessionId(req: NextRequest): string {
   const ip = req.headers.get('x-forwarded-for') || req.headers.get('x-real-ip') || 'unknown'
   const ua = req.headers.get('user-agent') || ''
-  // Simple hash to create a session-like ID
   let hash = 0
   const str = ip + ua
   for (let i = 0; i < str.length; i++) {
     const char = str.charCodeAt(i)
     hash = ((hash << 5) - hash) + char
-    hash = hash & hash // Convert to 32bit integer
+    hash = hash & hash
   }
   return `session_${Math.abs(hash).toString(36)}`
 }
@@ -45,9 +67,10 @@ async function saveConversation(sessionId: string, role: string, message: string
     })
   } catch (err) {
     console.error('Failed to save conversation:', err)
-    // Don't fail the request if logging fails
   }
 }
+
+// ─── POST handler ───────────────────────────────────────────
 
 export async function POST(req: NextRequest) {
   try {
@@ -59,63 +82,58 @@ export async function POST(req: NextRequest) {
     // Save user message
     await saveConversation(sessionId, 'user', message, mode)
 
-    // In PUBLIC_SAFE_MODE we must not surface personal profile/resume/experience data.
-    const parts: string[] = []
-    let systemPrompt: string
-    if (PUBLIC_SAFE_MODE) {
-      systemPrompt = `You are an anonymous assistant. Answer concisely and do NOT reference any personal profile, resume, organization, or private contact details. Keep responses neutral and avoid personal anecdotes.`
-    } else {
-      const profile = await prisma?.profile?.findFirst?.() ?? null
-      const resumes = await prisma?.resume?.findMany?.({ orderBy: { startDate: 'desc' } }) ?? []
-      const skills = await prisma?.skill?.findMany?.() ?? []
-      const experiences = await prisma?.experience?.findMany?.({
-        orderBy: { sortOrder: 'asc' },
-        include: { techStack: { include: { tech: true } } },
-      }) ?? []
-
-      if (profile) {
-        parts.push(`Name: ${profile.name ?? ''}`)
-        if (profile.catchphrase) parts.push(`Catchphrase: ${profile.catchphrase}`)
-        if (profile.bio) parts.push(`Bio: ${profile.bio}`)
-        if ((profile as any).summary) parts.push(`Summary: ${(profile as any).summary}`)
-        if ((profile as any).focus) parts.push(`Focus areas: ${(profile as any).focus}`)
-        if ((profile as any).vision) parts.push(`Vision: ${(profile as any).vision}`)
-      }
-      if (experiences.length) {
-        const expLines = experiences.map((e: any) => {
-          const techs = e.techStack?.map((et: any) => et.tech?.name).filter(Boolean).join(', ')
-          const period = `${e.startDate?.toISOString?.().slice(0, 7) ?? '?'} – ${e.endDate?.toISOString?.().slice(0, 7) ?? 'present'}`
-          return `${e.title} at ${e.org} (${e.type}, ${period})${e.description ? ': ' + e.description : ''}${techs ? ' [Tech: ' + techs + ']' : ''}`
-        }).join('; ')
-        parts.push(`Experiences: ${expLines}`)
-      }
-      if (resumes.length) {
-        const jobs = resumes
-          .slice(0, 10)
-          .map((r: any) => `${r.title ?? ''} at ${r.organization ?? ''} (${r.startDate ?? ''} - ${r.endDate ?? 'present'})`)
-          .join('; ')
-        parts.push(`Career (legacy): ${jobs}`)
-      }
-      if (skills.length) {
-        parts.push(`Skills: ${skills.map((s: any) => s.name).join(', ')}`)
-      }
-
-      // Anonymous system prompt for the Momo digital twin (no personal, company, or date specifics)
-      const promptLines: string[] = []
-      promptLines.push('You are Momo, a friendly digital twin assistant. Answer concisely and helpfully. Do NOT reveal or invent any personal, identifying, or private information about any real person.')
-      promptLines.push('Use only the neutral context provided below to inform answers. If the user asks for personal or private details, politely refuse and offer general guidance.')
-      promptLines.push('When offering scheduling help, include the EXACT tag [BOOKING_LINK] where appropriate (it will render as a booking CTA).')
-
-      systemPrompt = promptLines.join('\n') + '\n' + parts.join('\n')
+    const apiKey = process.env.GROQ_API_KEY
+    if (!apiKey) {
+      return NextResponse.json(
+        { reply: "Sorry, the chat service isn't configured yet. Please try again later!" },
+        { status: 500 },
+      )
     }
 
-    let replyText: string
+    const groq = new Groq({ apiKey })
+    const systemPrompt = PUBLIC_SAFE_MODE ? SAFE_MODE_PROMPT : MOMO_SYSTEM_PROMPT
+
+    // Server-side: fetch relevant facts for the user's last message, inject
+    // them into the system prompt as JSON, then call the model without tools.
+    const userText = String(message || '').trim()
+    const limit = 8
+    let factsForPrompt: any[] = []
     try {
-      const groqResp = await callGroq(message, systemPrompt)
-      replyText = String(groqResp)
+      if (userText) {
+        factsForPrompt = await searchFacts(userText, limit)
+      }
     } catch (e) {
-      console.error('Groq call failed, falling back to local generator', e)
-      replyText = generateReplyFromContext(message, parts.join('\n'))
+      console.error('Facts lookup failed:', e)
+      factsForPrompt = []
+    }
+
+    // Filter out placeholder facts (content starts with "Not set yet")
+    const realFacts = factsForPrompt.filter(f => !f.content?.startsWith('Not set yet'))
+
+    // Build messages: base system prompt, then a strict instruction about
+    // using only the provided facts, then the facts JSON, then the user.
+    const factsInstruction = `You can answer ONLY using the provided facts. If the facts do not contain the requested info, respond: "I don't have that info yet." Do NOT guess or invent.`
+    const factsJson = `FACTS_JSON: ${JSON.stringify(realFacts.map(f => ({ category: f.category, title: f.title, content: f.content })) )}`
+
+    const injectedMessages: Groq.Chat.Completions.ChatCompletionMessageParam[] = [
+      { role: 'system', content: systemPrompt },
+      { role: 'system', content: factsInstruction },
+      { role: 'system', content: factsJson },
+      { role: 'user', content: userText },
+    ]
+
+    let replyText = ''
+    try {
+      const response = await groq.chat.completions.create({ model: GROQ_MODEL, messages: injectedMessages })
+      const choice = response.choices?.[0]
+      replyText = choice?.message?.content ?? ''
+    } catch (e) {
+      console.error('Groq completion error:', e)
+      replyText = "Sorry, I couldn't process that right now. Please try again!"
+    }
+
+    if (!replyText) {
+      replyText = "I don't have that info yet — but feel free to ask me about my hobbies, food favorites, travel dreams, or fun facts!"
     }
 
     // Save assistant reply
@@ -123,30 +141,10 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({ reply: replyText })
   } catch (err) {
-    console.error(err)
-    return NextResponse.json({ reply: "Sorry, I couldn't process that right now. Please try again!" }, { status: 500 })
+    console.error('Chat route error:', err)
+    return NextResponse.json(
+      { reply: "Sorry, I couldn't process that right now. Please try again!" },
+      { status: 500 },
+    )
   }
-}
-
-function generateReplyFromContext(message: string, context: string) {
-  const lower = message.toLowerCase()
-
-  const bookingKeywords = ['book', 'schedule', 'meeting', 'appointment', 'reserve', 'call', 'meet', 'connect', 'talk to', 'chat with']
-  if (bookingKeywords.some(k => lower.includes(k))) {
-    return "I'd love to meet with you! Pick a date and time here. [BOOKING_LINK]"
-  }
-
-  if (lower.includes('skill') || lower.includes('skills')) {
-    const m = context.match(/Skills: ([^\n]+)/)
-    return m ? `My key skills include: ${m[1]}.` : `I have experience in software development and health-science related work.`
-  }
-  if (lower.includes('career') || lower.includes('work') || lower.includes('company')) {
-    const m = context.match(/Career: ([^\n]+)/)
-    return m ? `Here are my recent roles: ${m[1]}.` : `I've worked across development and health-technology roles.`
-  }
-  if (lower.includes('where') || lower.includes('based') || lower.includes('live')) {
-    return `I'm available online to help you.`
-  }
-
-  return `That's a great question! Feel free to ask me about my skills, career, or book a meeting with me.`
 }

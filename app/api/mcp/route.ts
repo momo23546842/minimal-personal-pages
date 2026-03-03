@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 import { PUBLIC_SAFE_MODE } from '@/lib/safeMode'
+import { searchFacts, listFactsByCategory } from '@/lib/facts'
 
 // Centralized tools metadata (used by GET handshake, initialize, and tools/list)
 const toolsList = [
@@ -18,6 +19,29 @@ const toolsList = [
     name: 'getSkills',
     description: "Returns a list of general skills and expertise tags for the digital twin.",
     inputSchema: { type: 'object', properties: {} },
+  },
+  {
+    name: 'searchFacts',
+    description: "Search public-safe facts about Momo by keyword. Returns matching facts about hobbies, food, travel, personality, fun Q&A, etc. Only returns public-safe information — never PII.",
+    inputSchema: {
+      type: 'object',
+      properties: {
+        query: { type: 'string', description: 'Search keyword or phrase (e.g. "favorite food", "hobbies", "travel")' },
+        limit: { type: 'number', description: 'Max results to return (default 8)' },
+      },
+      required: ['query'],
+    },
+  },
+  {
+    name: 'listFactsByCategory',
+    description: "List all public-safe facts in a given category. Categories: hobbies, food, travel, personality, fun, tech.",
+    inputSchema: {
+      type: 'object',
+      properties: {
+        category: { type: 'string', description: 'Fact category (hobbies, food, travel, personality, fun, tech)' },
+      },
+      required: ['category'],
+    },
   },
 ]
 
@@ -146,6 +170,8 @@ export async function POST(req: Request) {
           if (fnName === 'getProfile') toolResult = await getProfile()
           else if (fnName === 'getCareer') toolResult = await getCareer()
           else if (fnName === 'getSkills') toolResult = await getSkills()
+          else if (fnName === 'searchFacts') toolResult = await searchFacts(args?.query ?? '', args?.limit ?? 8)
+          else if (fnName === 'listFactsByCategory') toolResult = await listFactsByCategory(args?.category ?? '')
           else toolResult = { error: `unknown tool: ${fnName}` }
         } catch (e) {
           console.error('MCP tool execution error', e)

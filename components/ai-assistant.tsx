@@ -30,7 +30,7 @@ export function AiAssistant() {
       role: "assistant",
       content: PUBLIC_SAFE_MODE
         ? "Hello — I'm an anonymous assistant. Ask me anything."
-        : "Hey! I'm Momo. Ask me anything about my work, skills, or career. You can also book a meeting with me — just say a date!",
+            : "Hey! I'm Momo. Ask me about my hobbies, favorites, or interests!",
     },
   ])
   const [isCallActive, setIsCallActive] = useState(false)
@@ -336,7 +336,7 @@ export function AiAssistant() {
     setIsListening(false); setCallStatus("")
   }
 
-  const chatPlaceholder = PUBLIC_SAFE_MODE ? "Ask the assistant anything" : "Ask me anything or say a date to book!"
+  const chatPlaceholder = PUBLIC_SAFE_MODE ? "Ask the assistant anything" : "Ask me about my hobbies or favorites!"
 
   return (
     <section id="assistant" className="relative px-6 py-12">
@@ -345,7 +345,7 @@ export function AiAssistant() {
         <p className="mb-2 text-sm font-medium uppercase tracking-widest text-primary">Talk to {DISPLAY_NAME}</p>
         <h2 className="mb-4 text-3xl font-bold tracking-tight text-foreground md:text-4xl">Chat with Me</h2>
         <p className="mb-10 max-w-2xl leading-relaxed text-muted-foreground">
-          {PUBLIC_SAFE_MODE ? 'Ask the assistant general questions.' : 'Ask about my work, skills, or career. You can also book a meeting directly!'}
+          {PUBLIC_SAFE_MODE ? 'Ask the assistant general questions.' : 'Ask about my hobbies, favorites, or interests.'}
         </p>
 
         <div className="overflow-hidden rounded-2xl border border-border bg-card shadow-lg shadow-foreground/3">
@@ -394,7 +394,7 @@ export function AiAssistant() {
                   </div>
                   <div>
                     <h4 className="text-lg font-semibold text-foreground">{DISPLAY_NAME}</h4>
-                    <p className="text-sm text-muted-foreground mt-1">Voice call &middot; Ask anything or book a meeting</p>
+                    <p className="text-sm text-muted-foreground mt-1">Voice call &middot; Ask anything</p>
                     {callError && <p className="text-xs text-destructive mt-2">{callError}</p>}
                   </div>
                   <button onClick={startCall}

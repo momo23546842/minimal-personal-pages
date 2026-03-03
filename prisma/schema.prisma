@@ -115,3 +115,18 @@ model InterviewQA {
   sortOrder Int      @default(0)
   createdAt DateTime @default(now())
 }
+
+model Fact {
+  id        Int      @id @default(autoincrement())
+  slug      String   @unique           // stable key for upserts
+  category  String   // e.g. "hobbies", "food", "travel", "personality", "fun"
+  title     String
+  content   String
+  tags      String[]
+  safety    String   @default("public") // only "public" rows are surfaced
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([safety, category])
+  @@index([safety])
+}

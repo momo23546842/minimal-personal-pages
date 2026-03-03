@@ -1,57 +1,59 @@
 import React from 'react'
+import Image from 'next/image'
+import { MapPin } from 'lucide-react'
+import { foodPhotos, japanPhotos, australiaPhotos, philippinesPhotos } from '@/data/gallery'
 
 type FavItem = {
   title: string
+  location?: string
   caption?: string
   tags?: string[]
+  image?: string
+  category?: string
 }
 
 export function FavoritesGrid({ items }: { items: FavItem[] }) {
   return (
-    <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+    <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 auto-rows-[1fr]">
       {items.map((it, idx) => (
-        <div key={idx} className="group rounded-xl border border-border bg-card p-4 shadow-sm">
-          <div className="h-40 mb-3 w-full rounded-md bg-linear-to-br from-gray-200 to-gray-300 flex items-center justify-center text-4xl text-muted-foreground">
-            🍽️
+        <div key={idx} className="group rounded-xl border border-border bg-card p-4 shadow-sm h-full flex flex-col">
+          <div className="relative w-full aspect-square rounded-md overflow-hidden">
+            {it.image ? (
+              <Image src={it.image} alt={it.title} fill className="object-cover" />
+            ) : (
+              <div className="w-full h-full flex items-center justify-center text-4xl text-muted-foreground bg-linear-to-br from-gray-200 to-gray-300">🍽️</div>
+            )}
           </div>
-          <h4 className="mb-1 text-sm font-semibold text-foreground">{it.title}</h4>
-          {it.caption && <p className="text-xs text-muted-foreground mb-2">{it.caption}</p>}
-          {it.tags && (
-            <div className="flex flex-wrap gap-2">
-              {it.tags.map((t) => (
-                <span key={t} className="text-xs text-muted-foreground">#{t}</span>
-              ))}
-            </div>
-          )}
+          <div className="mt-2 flex-1 min-h-22 flex flex-col justify-between">
+            <h4 className="mb-1 text-sm font-semibold text-foreground">{it.title}</h4>
+            {it.location && (
+              <div className="flex items-center gap-2 text-xs text-muted-foreground mb-1">
+                <MapPin className="h-3 w-3" />
+                <span>{it.location}</span>
+              </div>
+            )}
+            {it.caption && <p className="text-xs text-muted-foreground mb-2">{it.caption}</p>}
+            {it.tags && (
+              <div className="flex flex-wrap gap-2">
+                {it.tags.map((t) => (
+                  <span key={t} className="text-xs text-muted-foreground">#{t}</span>
+                ))}
+              </div>
+            )}
+          </div>
         </div>
       ))}
     </div>
   )
 }
 
-export const food: FavItem[] = [
-    { title: 'Sushi', caption: 'Fresh fish and rice', tags: ['sushi', 'seafood'] },
-    { title: 'Fruit', caption: 'Seasonal sweet fruits', tags: ['fruit'] },
-    { title: 'Lindt Chocolate', caption: 'Smooth dark chocolate', tags: ['chocolate'] },
-    { title: 'Cheese Kimbap', caption: 'Korean cheesy roll', tags: ['kimbap', 'korean'] },
-    { title: 'Fried Chicken', caption: 'Crispy and juicy', tags: ['chicken'] },
-    { title: 'Pajeon', caption: 'Savory pancake', tags: ['pajeon'] },
-    { title: 'Ramen', caption: 'Comfort bowl', tags: ['ramen'] },
-    { title: 'Tempura', caption: 'Lightly fried', tags: ['tempura'] },
-    { title: 'Mochi', caption: 'Chewy sweets', tags: ['mochi'] },
-  ]
+export const food: FavItem[] = foodPhotos
 
-export const places: FavItem[] = [
-    { title: 'Perth', caption: 'Lovely coastal city', tags: ['australia'] },
-    { title: 'Quokka Spot', caption: 'Met friendly quokkas', tags: ['wildlife'] },
-    { title: 'Korea', caption: 'Want to visit again', tags: ['travel'] },
-    { title: 'Finland', caption: 'Aurora dreams', tags: ['aurora'] },
-    { title: 'Hiking Trails', caption: 'Nature walks', tags: ['hiking'] },
-    { title: 'Hot Air Balloon', caption: 'Bucket list', tags: ['adventure'] },
-    { title: 'Solo Trips', caption: 'I love solo travel', tags: ['travel'] },
-    { title: 'Perth Beaches', caption: 'Sun and sand', tags: ['beach'] },
-    { title: 'Nature Walks', caption: 'Evening strolls', tags: ['walking'] },
-  ]
+export const australia: FavItem[] = australiaPhotos
+
+export const philippines: FavItem[] = philippinesPhotos
+
+export const japan: FavItem[] = japanPhotos
 
 export function Favorites() {
   return (
@@ -66,8 +68,18 @@ export function Favorites() {
         </div>
 
         <div>
-          <h3 className="mb-4 text-lg font-semibold">Places</h3>
-          <FavoritesGrid items={places} />
+          <h3 className="mb-4 text-lg font-semibold">Japan</h3>
+          <FavoritesGrid items={japan} />
+        </div>
+
+        <div className="mt-8">
+          <h3 className="mb-4 text-lg font-semibold">Australia</h3>
+          <FavoritesGrid items={australia} />
+        </div>
+
+        <div className="mt-8">
+          <h3 className="mb-4 text-lg font-semibold">Philippines</h3>
+          <FavoritesGrid items={philippines} />
         </div>
       </div>
     </section>

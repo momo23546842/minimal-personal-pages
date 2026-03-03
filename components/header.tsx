@@ -110,36 +110,52 @@ export function Header() {
           </div>
         </nav>
 
-        {/* Mobile right-side actions */}
-        <div className="flex items-center gap-3 md:hidden">
+        {/* Mobile right-side actions: Favorites → Chat → Call → Theme → Menu */}
+        <div className="flex items-center gap-2 md:hidden">
+          {/* 1. Favorites pill with text */}
+          {favoritesLink && (
+            <Link
+              href={favoritesLink.href}
+              aria-label="Favorites"
+              className="inline-flex items-center gap-1.5 rounded-full bg-green-100 px-3 py-1.5 text-xs font-medium text-green-800 transition-colors active:bg-green-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary dark:bg-[oklch(0.32_0.06_140/0.18)] dark:text-green-200"
+            >
+              <Camera className="h-3.5 w-3.5" />
+              <span className="whitespace-nowrap">Favorites</span>
+            </Link>
+          )}
+
+          {/* 2. Chat */}
           <button
             onClick={() => scrollToAssistant("chat")}
-            className="flex h-9 w-9 items-center justify-center rounded-full bg-primary/10 text-primary transition-colors active:bg-primary/20"
+            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary transition-colors active:bg-primary/20"
             aria-label="Chat"
           >
             <MessageCircle className="h-4 w-4" />
           </button>
 
+          {/* 3. Call */}
           {!PUBLIC_SAFE_MODE && (
             <button
               onClick={() => scrollToAssistant("call")}
-              className="flex h-9 w-9 items-center justify-center rounded-full bg-[oklch(0.55_0.12_150/0.12)] text-[oklch(0.45_0.10_150)] transition-colors active:bg-[oklch(0.55_0.12_150/0.22)] dark:text-[oklch(0.70_0.12_150)]"
+              className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[oklch(0.55_0.12_150/0.12)] text-[oklch(0.45_0.10_150)] transition-colors active:bg-[oklch(0.55_0.12_150/0.22)] dark:text-[oklch(0.70_0.12_150)]"
               aria-label="Call"
             >
               <Phone className="h-4 w-4" />
             </button>
           )}
 
+          {/* 4. Theme toggle */}
           {mounted && (
             <button
               onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
-              className="flex h-8 w-8 items-center justify-center rounded-full bg-secondary text-foreground"
+              className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-secondary text-foreground"
               aria-label="Toggle theme"
             >
               {resolvedTheme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
             </button>
           )}
 
+          {/* 5. Hamburger menu */}
           <button
             className="text-foreground"
             onClick={() => setMobileOpen(!mobileOpen)}
