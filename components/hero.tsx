@@ -21,7 +21,7 @@ export function Hero() {
           </h1>
           <p className="mx-auto mb-6 max-w-xl text-lg leading-relaxed text-muted-foreground md:mx-0">
             This is my personal intro page. If you want to know something about me, just use the chat!
-            You can ask about my hobbies or my favorite foods.
+            You can ask about my hobbies, favorite foods, and more.
           </p>
           <a
             href="#assistant"
