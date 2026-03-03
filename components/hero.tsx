@@ -20,7 +20,8 @@ export function Hero() {
             <span className="text-balance">Momo</span>
           </h1>
           <p className="mx-auto mb-6 max-w-xl text-lg leading-relaxed text-muted-foreground md:mx-0">
-            Hi, I'm Momo. Just talk to me. (Personal details are off limits 😉)
+            This is my personal intro page. If you want to know something about me, just use the chat!
+            You can ask about my hobbies or my favorite foods.
           </p>
           <a
             href="#assistant"
