@@ -1,12 +1,15 @@
 import React from 'react'
 
 const items = [
-  { text: 'Ride a hot air balloon', done: false },
-  { text: 'See the aurora in Finland', done: false },
-  { text: 'Visit Korea', done: true },
-  { text: 'Travel to more countries', done: false },
-  { text: 'Explore more quiet nature places', done: true },
-  { text: 'Build something meaningful', done: false },
+  { text: 'Visit Melbourne', done: false },
+  { text: 'Ride in a hot air balloon', done: false },
+  { text: 'Travel to South Korea', done: false },
+  { text: 'Visit Tasmania', done: false },
+  { text: 'See Uluru', done: false },
+  { text: 'Travel to New Zealand', done: false },
+  { text: 'Watch the stars in a place with a beautiful night sky', done: false },
+  { text: 'Finish reading a full book in English', done: false },
+  { text: 'Travel to all 47 prefectures of Japan', done: false },
 ]
 
 export default function Future() {
