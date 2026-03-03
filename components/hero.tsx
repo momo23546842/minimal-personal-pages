@@ -1,6 +1,7 @@
 "use client"
 
 import { ArrowDown } from "lucide-react"
+import Image from "next/image"
 import { PUBLIC_SAFE_MODE } from "@/lib/safeMode"
 
 export function Hero() {
@@ -29,11 +30,14 @@ export function Hero() {
           </a>
         </div>
         <div className="flex shrink-0 items-center justify-center">
-          <div className="h-44 w-44 flex items-center justify-center overflow-hidden rounded-full border-4 border-primary/20 bg-linear-to-br from-primary/10 to-primary/5 md:h-56 md:w-56">
-            <svg width="80" height="80" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-primary">
-              <circle cx="12" cy="8" r="3.5" fill="#a7f3d0" />
-              <path d="M4 20c0-3.3 4-5 8-5s8 1.7 8 5" stroke="#7dd3c6" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
+          <div className="relative h-44 w-44 overflow-hidden rounded-full border-4 border-primary/20 bg-linear-to-br from-primary/10 to-primary/5 md:h-56 md:w-56">
+            <Image
+              src="/images/profilepic.jpg"
+              alt="Momo profile"
+              fill
+              sizes="(max-width: 768px) 176px, 224px"
+              className="object-cover"
+            />
           </div>
         </div>
       </div>
