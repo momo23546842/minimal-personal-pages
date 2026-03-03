@@ -6,12 +6,12 @@ type FavItem = {
   tags?: string[]
 }
 
-function FavoritesGrid({ items }: { items: FavItem[] }) {
+export function FavoritesGrid({ items }: { items: FavItem[] }) {
   return (
     <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
       {items.map((it, idx) => (
         <div key={idx} className="group rounded-xl border border-border bg-card p-4 shadow-sm">
-          <div className="h-40 mb-3 w-full rounded-md bg-gradient-to-br from-gray-200 to-gray-300 flex items-center justify-center text-4xl text-muted-foreground">
+          <div className="h-40 mb-3 w-full rounded-md bg-linear-to-br from-gray-200 to-gray-300 flex items-center justify-center text-4xl text-muted-foreground">
             🍽️
           </div>
           <h4 className="mb-1 text-sm font-semibold text-foreground">{it.title}</h4>
@@ -29,8 +29,7 @@ function FavoritesGrid({ items }: { items: FavItem[] }) {
   )
 }
 
-export function Favorites() {
-  const food: FavItem[] = [
+export const food: FavItem[] = [
     { title: 'Sushi', caption: 'Fresh fish and rice', tags: ['sushi', 'seafood'] },
     { title: 'Fruit', caption: 'Seasonal sweet fruits', tags: ['fruit'] },
     { title: 'Lindt Chocolate', caption: 'Smooth dark chocolate', tags: ['chocolate'] },
@@ -42,7 +41,7 @@ export function Favorites() {
     { title: 'Mochi', caption: 'Chewy sweets', tags: ['mochi'] },
   ]
 
-  const places: FavItem[] = [
+export const places: FavItem[] = [
     { title: 'Perth', caption: 'Lovely coastal city', tags: ['australia'] },
     { title: 'Quokka Spot', caption: 'Met friendly quokkas', tags: ['wildlife'] },
     { title: 'Korea', caption: 'Want to visit again', tags: ['travel'] },
@@ -54,6 +53,7 @@ export function Favorites() {
     { title: 'Nature Walks', caption: 'Evening strolls', tags: ['walking'] },
   ]
 
+export function Favorites() {
   return (
     <section id="favorites" className="px-6 py-16">
       <div className="mx-auto max-w-5xl">

@@ -3,7 +3,7 @@
 //  - normal: expects an LLM-backed Momo reply
 //  - force-llm-fallback: sends `x-force-llm-fail: 1` (honored only in dev)
 
-import fetch from 'node-fetch'
+// Use global fetch available in newer Node runtimes; avoid node-fetch import to prevent build-time errors
 
 async function run() {
   const base = process.env.WEBHOOK_BASE || 'http://localhost:3000'

@@ -20,7 +20,7 @@ export default function Future() {
           <ul className="space-y-3">
             {items.map((it, i) => (
               <li key={i} className="flex items-start gap-3">
-                <div className={`mt-1 h-4 w-4 flex-shrink-0 rounded-full ${it.done ? 'bg-primary' : 'border border-border bg-background'}`} />
+                <div className={`mt-1 h-4 w-4 shrink-0 rounded-full ${it.done ? 'bg-primary' : 'border border-border bg-background'}`} />
                 <div>
                   <p className="text-sm font-medium text-foreground">{it.text}</p>
                   <p className="text-xs text-muted-foreground">{it.done ? 'Done' : 'Planned'}</p>

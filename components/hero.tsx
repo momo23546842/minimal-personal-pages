@@ -10,7 +10,7 @@ export function Hero() {
       className="relative flex min-h-[60vh] items-center justify-center px-6 pt-24 sm:pt-28 md:pt-6"
     >
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
-        <div className="absolute left-1/2 top-1/3 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/5 blur-3xl" />
+        <div className="absolute left-1/2 top-1/3 h-150 w-150 -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/5 blur-3xl" />
       </div>
 
       <div className="relative z-10 mx-auto flex max-w-5xl flex-col-reverse items-center gap-8 md:flex-row md:gap-16">
@@ -29,7 +29,7 @@ export function Hero() {
           </a>
         </div>
         <div className="flex shrink-0 items-center justify-center">
-          <div className="h-44 w-44 flex items-center justify-center overflow-hidden rounded-full border-4 border-primary/20 bg-gradient-to-br from-primary/10 to-primary/5 md:h-56 md:w-56">
+          <div className="h-44 w-44 flex items-center justify-center overflow-hidden rounded-full border-4 border-primary/20 bg-linear-to-br from-primary/10 to-primary/5 md:h-56 md:w-56">
             <svg width="80" height="80" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-primary">
               <circle cx="12" cy="8" r="3.5" fill="#a7f3d0" />
               <path d="M4 20c0-3.3 4-5 8-5s8 1.7 8 5" stroke="#7dd3c6" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />

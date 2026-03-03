@@ -2,7 +2,7 @@ import { Header } from "@/components/header"
 import { Hero } from "@/components/hero"
 import { AiAssistant } from "@/components/ai-assistant"
 import { About } from "@/components/about"
-import Favorites from "@/components/favorites"
+// Favorites moved to a dedicated /gallery page
 import Future from "@/components/future"
 import { Contact } from "@/components/contact"
 import { Footer } from "@/components/footer"
@@ -18,10 +18,9 @@ export default function Page() {
         {!PUBLIC_SAFE_MODE && (
           <>
             <About />
-            <Favorites />
             <Future />
             <Contact />
-            {/* Career and Works removed */}
+            {/* Gallery moved to /gallery */}
           </>
         )}
 

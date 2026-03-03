@@ -66,7 +66,7 @@ export function Contact() {
           </div>
 
           <form
-            className="flex flex-col gap-4 rounded-xl border border-border bg-card p-6 shadow-sm shadow-foreground/[0.03]"
+            className="flex flex-col gap-4 rounded-xl border border-border bg-card p-6 shadow-sm shadow-foreground/3"
             onSubmit={handleSubmit}
           >
             <div className="flex flex-col gap-1.5">

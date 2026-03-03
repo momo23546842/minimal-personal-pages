@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { PUBLIC_SAFE_MODE } from '@/lib/safeMode'
 import { Geist, Geist_Mono } from "next/font/google";
+import { Header } from '@/components/header'
 import "./globals.css";
 import ThemeProvider from "@/components/theme-provider";
 import Script from 'next/script'
@@ -39,6 +40,7 @@ export default function RootLayout({
           }}
         />
         <ThemeProvider>
+          <Header />
           {children}
         </ThemeProvider>
       </body>
