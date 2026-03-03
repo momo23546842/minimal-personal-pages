@@ -345,7 +345,9 @@ export function AiAssistant() {
         <p className="mb-2 text-sm font-medium uppercase tracking-widest text-primary">Talk to {DISPLAY_NAME}</p>
         <h2 className="mb-4 text-3xl font-bold tracking-tight text-foreground md:text-4xl">Chat with Me</h2>
         <p className="mb-10 max-w-2xl leading-relaxed text-muted-foreground">
-          {PUBLIC_SAFE_MODE ? 'Ask the assistant general questions.' : 'Ask about my hobbies, favorites, or interests.'}
+          {PUBLIC_SAFE_MODE
+            ? 'Ask the assistant general questions.'
+            : 'Chat with me about my hobbies, favorite foods, travel stories, or anything you’re curious about — I’ll reply casually and may ask a follow-up!'}
         </p>
 
         <div className="overflow-hidden rounded-2xl border border-border bg-card shadow-lg shadow-foreground/3">
