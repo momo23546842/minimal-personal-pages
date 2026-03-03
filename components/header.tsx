@@ -1,6 +1,7 @@
 "use client"
 
 import React, { useState, useEffect } from "react"
+import { useRouter } from 'next/navigation'
 import Link from "next/link"
 import { Menu, X, Sun, Moon, MessageCircle, Phone, Camera } from "lucide-react"
 import { PUBLIC_SAFE_MODE } from "@/lib/safeMode"
@@ -21,6 +22,7 @@ export function Header() {
   const [mobileOpen, setMobileOpen] = useState(false)
   const { resolvedTheme, setTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
+  const router = useRouter()
 
   useEffect(() => {
     setMounted(true)
@@ -31,13 +33,25 @@ export function Header() {
 
   const scrollToAssistant = (tab: "chat" | "call") => {
     const el = document.getElementById("assistant")
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth" })
-      // Dispatch custom event to switch tab
-      setTimeout(() => {
-        window.dispatchEvent(new CustomEvent("switch-assistant-tab", { detail: tab }))
-      }, 400)
+    const doScroll = () => {
+      const target = document.getElementById("assistant")
+      if (target) {
+        target.scrollIntoView({ behavior: "smooth" })
+        setTimeout(() => {
+          window.dispatchEvent(new CustomEvent("switch-assistant-tab", { detail: tab }))
+        }, 400)
+      }
     }
+
+    if (el) {
+      doScroll()
+    } else {
+      // If assistant isn't present on the current route, navigate home then scroll
+      router.push("/")
+      // give Next a moment to render the home content, then attempt to scroll
+      setTimeout(doScroll, 600)
+    }
+
     setMobileOpen(false)
   }
 
