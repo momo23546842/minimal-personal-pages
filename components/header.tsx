@@ -85,7 +85,10 @@ export function Header() {
             {favoritesLink && (
               <Link
                 href={favoritesLink.href}
-                className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-sm font-medium bg-green-100 text-green-800 transition-colors hover:bg-green-200 dark:bg-[oklch(0.32_0.06_140/0.18)] dark:text-green-200 dark:hover:bg-[oklch(0.32_0.06_140/0.28)]"
+                className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-sm font-medium transition-colors"
+                style={{ backgroundColor: '#E4C7C7', color: '#5A6670' }}
+                onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = '#D7BABA'; e.currentTarget.style.color = '#5A6670'; }}
+                onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = '#E4C7C7'; e.currentTarget.style.color = '#5A6670'; }}
               >
                 <Camera className="h-4 w-4" />
                 {favoritesLink.label}
@@ -95,7 +98,10 @@ export function Header() {
             <div className="flex items-center gap-2">
               <button
                 onClick={() => scrollToAssistant("chat")}
-                className="flex items-center gap-1.5 rounded-full bg-primary/10 px-3.5 py-1.5 text-xs font-medium text-primary transition-colors hover:bg-primary/20"
+                className="flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-xs font-medium text-white shadow-sm transition-colors"
+                style={{ backgroundColor: '#6F7F89' }}
+                onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#5F6F79')}
+                onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#6F7F89')}
               >
                 <MessageCircle className="h-3.5 w-3.5" />
                 Chat
@@ -103,7 +109,10 @@ export function Header() {
               {!PUBLIC_SAFE_MODE && (
                 <button
                   onClick={() => scrollToAssistant("call")}
-                  className="flex items-center gap-1.5 rounded-full bg-[oklch(0.55_0.12_150/0.12)] px-3.5 py-1.5 text-xs font-medium text-[oklch(0.45_0.10_150)] transition-colors hover:bg-[oklch(0.55_0.12_150/0.22)] dark:text-[oklch(0.70_0.12_150)]"
+                  className="flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-xs font-medium text-white shadow-sm transition-colors"
+                  style={{ backgroundColor: '#6F7F89' }}
+                  onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#5F6F79')}
+                  onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#6F7F89')}
                 >
                   <Phone className="h-3.5 w-3.5" />
                   Call
@@ -131,7 +140,8 @@ export function Header() {
             <Link
               href={favoritesLink.href}
               aria-label="Favorites"
-              className="inline-flex items-center gap-1.5 rounded-full bg-green-100 px-3 py-1.5 text-xs font-medium text-green-800 transition-colors active:bg-green-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary dark:bg-[oklch(0.32_0.06_140/0.18)] dark:text-green-200"
+              className="inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-medium transition-colors"
+              style={{ backgroundColor: '#E4C7C7', color: '#5A6670' }}
             >
               <Camera className="h-3.5 w-3.5" />
               <span className="whitespace-nowrap">Favorites</span>
@@ -141,7 +151,8 @@ export function Header() {
           {/* 2. Chat */}
           <button
             onClick={() => scrollToAssistant("chat")}
-            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary transition-colors active:bg-primary/20"
+            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-white shadow-sm transition-colors"
+            style={{ backgroundColor: '#6F7F89' }}
             aria-label="Chat"
           >
             <MessageCircle className="h-4 w-4" />
@@ -151,7 +162,8 @@ export function Header() {
           {!PUBLIC_SAFE_MODE && (
             <button
               onClick={() => scrollToAssistant("call")}
-              className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[oklch(0.55_0.12_150/0.12)] text-[oklch(0.45_0.10_150)] transition-colors active:bg-[oklch(0.55_0.12_150/0.22)] dark:text-[oklch(0.70_0.12_150)]"
+              className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-white shadow-sm transition-colors"
+              style={{ backgroundColor: '#6F7F89' }}
               aria-label="Call"
             >
               <Phone className="h-4 w-4" />
@@ -199,7 +211,8 @@ export function Header() {
               <Link
                 href={favoritesLink.href}
                 onClick={() => setMobileOpen(false)}
-                className="flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium bg-green-100 text-green-800 transition-colors hover:bg-green-200"
+                className="flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium transition-colors"
+                style={{ backgroundColor: '#E4C7C7', color: '#5A6670' }}
               >
                 <Camera className="h-4 w-4" />
                 {favoritesLink.label}

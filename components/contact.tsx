@@ -35,10 +35,10 @@ export function Contact() {
       <div className="pointer-events-none absolute inset-0 bg-card/40" />
 
       <div className="relative mx-auto max-w-4xl">
-        <p className="mb-2 text-sm font-medium uppercase tracking-widest text-primary">
+        <p className="mb-2 text-center text-sm font-medium uppercase tracking-widest" style={{ color: 'var(--color-heading)' }}>
           Contact
         </p>
-        <h2 className="mb-12 text-3xl font-bold tracking-tight text-foreground md:text-4xl">
+        <h2 className="mb-12 text-center text-3xl font-bold tracking-tight text-foreground md:text-4xl" style={{ color: 'var(--color-heading)' }}>
           {"Let's Connect"}
         </h2>
 
@@ -66,7 +66,7 @@ export function Contact() {
           </div>
 
           <form
-            className="flex flex-col gap-4 rounded-xl border border-border bg-card p-6 shadow-sm shadow-foreground/3"
+            className="flex flex-col gap-4 rounded-xl border border-border bg-card p-6 shadow-md shadow-foreground/6"
             onSubmit={handleSubmit}
           >
             <div className="flex flex-col gap-1.5">
@@ -98,7 +98,10 @@ export function Contact() {
               </div>
             ) : (
               <button type="submit" disabled={status === "sending" || !form.email || !form.message}
-                className="mt-2 flex items-center justify-center gap-2 rounded-lg bg-primary px-6 py-2.5 text-sm font-medium text-primary-foreground shadow-md shadow-primary/20 transition-all hover:shadow-lg hover:shadow-primary/30 hover:brightness-110 disabled:opacity-40">
+                className="mt-2 flex items-center justify-center gap-2 rounded-full px-6 py-2.5 text-sm font-medium text-white shadow-sm transition-all disabled:opacity-40"
+                style={{ backgroundColor: '#6F7F89' }}
+                onMouseEnter={(e) => { if (!(e.currentTarget as HTMLButtonElement).disabled) e.currentTarget.style.backgroundColor = '#5F6F79' }}
+                onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#6F7F89')}>
                 {status === "sending" ? <><Loader2 className="h-4 w-4 animate-spin" /> Sending...</> : <><Send className="h-4 w-4" /> Send Message</>}
               </button>
             )}

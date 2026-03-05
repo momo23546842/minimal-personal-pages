@@ -214,7 +214,8 @@ export function AiAssistant() {
           <input type="email" placeholder="Email *" value={bookingForm.email} onChange={e => setBookingForm(f=>({...f,email:e.target.value}))} className="rounded-lg border border-border bg-background px-3 py-2 text-xs focus:border-primary focus:outline-none" />
           <input type="text" placeholder="Message (optional)" value={bookingForm.message} onChange={e => setBookingForm(f=>({...f,message:e.target.value}))} className="rounded-lg border border-border bg-background px-3 py-2 text-xs focus:border-primary focus:outline-none" />
           <button onClick={handleBookingSubmit} disabled={!bookingForm.name||!bookingForm.email||isBooking}
-            className="mt-1 flex items-center justify-center gap-2 rounded-lg bg-primary px-4 py-2 text-xs font-medium text-primary-foreground shadow-md hover:brightness-110 disabled:opacity-40">
+            className="mt-1 flex items-center justify-center gap-2 rounded-full px-4 py-2 text-xs font-medium text-white shadow-sm disabled:opacity-40"
+            style={{ backgroundColor: '#6F7F89' }}>
             {isBooking ? <><Loader2 className="h-3 w-3 animate-spin" /> Booking...</> : <><Check className="h-3 w-3" /> Confirm</>}
           </button>
         </div></div>)
@@ -228,7 +229,8 @@ export function AiAssistant() {
       const parts = msg.content.split("[BOOKING_LINK]")
       return (<><span>{parts[0]}</span>
         <button onClick={() => document.getElementById("booking")?.scrollIntoView({behavior:"smooth"})}
-          className="mt-2 flex items-center gap-1.5 rounded-full bg-primary px-4 py-2 text-xs font-medium text-primary-foreground shadow-md hover:brightness-110">
+          className="mt-2 flex items-center gap-1.5 rounded-full px-4 py-2 text-xs font-medium text-white shadow-sm"
+          style={{ backgroundColor: '#6F7F89' }}>
           <CalendarDays className="h-3 w-3" /> Open Calendar
         </button>{parts[1] && <span>{parts[1]}</span>}</>)
     }
@@ -342,15 +344,15 @@ export function AiAssistant() {
     <section id="assistant" className="relative px-6 py-12">
       <div className="pointer-events-none absolute inset-0 bg-card/40" />
       <div className="relative mx-auto max-w-4xl">
-        <p className="mb-2 text-sm font-medium uppercase tracking-widest text-primary">Talk to {DISPLAY_NAME}</p>
-        <h2 className="mb-4 text-3xl font-bold tracking-tight text-foreground md:text-4xl">Chat with Me</h2>
+        <p className="mb-2 text-sm font-medium uppercase tracking-widest" style={{ color: 'var(--color-heading)' }}>Talk to {DISPLAY_NAME}</p>
+        <h2 className="mb-4 text-3xl font-bold tracking-tight text-foreground md:text-4xl" style={{ color: 'var(--color-heading)' }}>Chat with Me</h2>
         <p className="mb-10 max-w-2xl leading-relaxed text-muted-foreground">
           {PUBLIC_SAFE_MODE
             ? 'Ask the assistant general questions.'
             : 'Chat with me about my hobbies, favorite foods, travel stories, or anything you’re curious about — I’ll reply casually and may ask a follow-up!'}
         </p>
 
-        <div className="overflow-hidden rounded-2xl border border-border bg-card shadow-lg shadow-foreground/3">
+        <div className="overflow-hidden rounded-2xl border border-border bg-card shadow-lg shadow-foreground/8">
           <div className="flex border-b border-border">
             <button onClick={() => setTab("chat")} className={`flex flex-1 items-center justify-center gap-2 py-4 text-sm font-medium transition-colors ${tab === "chat" ? "border-b-2 border-primary text-primary" : "text-muted-foreground hover:text-foreground"}`}>
               <MessageCircle className="h-4 w-4" /> Chat
@@ -376,7 +378,7 @@ export function AiAssistant() {
               <div className="border-t border-border bg-background/50 px-6 py-4">
                 <form onSubmit={e => { e.preventDefault(); handleSend() }} className="flex items-center gap-3">
                   <input type="text" value={input} onChange={e => setInput(e.target.value)} placeholder={chatPlaceholder} className="flex-1 rounded-xl border border-border bg-card px-5 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none" />
-                  <button type="submit" disabled={!input.trim()} className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-primary text-primary-foreground shadow-md shadow-primary/20 transition-colors hover:brightness-110 disabled:opacity-40">
+                  <button type="submit" disabled={!input.trim()} className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl text-white shadow-sm transition-colors disabled:opacity-40" style={{ backgroundColor: '#6F7F89' }}>
                     <Send className="h-4 w-4" />
                   </button>
                 </form>
@@ -400,8 +402,8 @@ export function AiAssistant() {
                     {callError && <p className="text-xs text-destructive mt-2">{callError}</p>}
                   </div>
                   <button onClick={startCall}
-                    className="flex h-16 w-16 items-center justify-center rounded-full shadow-lg shadow-[oklch(0.55_0.12_150/0.3)] transition-transform hover:scale-110 active:scale-95"
-                    style={{ background: 'oklch(0.55 0.12 150)' }}>
+                    className="flex h-16 w-16 items-center justify-center rounded-full shadow-lg transition-transform hover:scale-110 active:scale-95"
+                    style={{ backgroundColor: '#6F7F89', boxShadow: '0 10px 15px -3px rgba(111,127,137,0.3)' }}>
                     <Phone className="h-7 w-7 text-white" />
                   </button>
                   <p className="text-xs text-muted-foreground">Best in Chrome</p>
