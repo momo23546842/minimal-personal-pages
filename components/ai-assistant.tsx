@@ -241,6 +241,7 @@ export function AiAssistant() {
   }
 
   const stopSpeaking = useCallback(() => {
+    // Stop ElevenLabs audio
     if (audioRef.current) {
       audioRef.current.pause()
       audioRef.current.currentTime = 0
@@ -250,8 +251,24 @@ export function AiAssistant() {
       URL.revokeObjectURL(audioUrlRef.current)
       audioUrlRef.current = null
     }
+    // Stop browser speech fallback
+    window.speechSynthesis?.cancel()
     setIsSpeaking(false)
     isSpeakingRef.current = false
+  }, [])
+
+  const speakFallback = useCallback((text: string, onEnd?: () => void) => {
+    if (!window.speechSynthesis) { onEnd?.(); return }
+    window.speechSynthesis.cancel()
+    const utt = new SpeechSynthesisUtterance(text)
+    utt.rate = 1.1; utt.pitch = 1.05; utt.lang = "en-US"
+    const voices = window.speechSynthesis.getVoices()
+    const voice = voices.find(v => v.name.includes("Samantha")||v.name.includes("Karen")||v.name.includes("Zira")||v.name.toLowerCase().includes("female"))
+    if (voice) utt.voice = voice
+    utt.onstart = () => { setIsSpeaking(true); isSpeakingRef.current = true }
+    utt.onend = () => { setIsSpeaking(false); isSpeakingRef.current = false; onEnd?.() }
+    utt.onerror = () => { setIsSpeaking(false); isSpeakingRef.current = false; onEnd?.() }
+    window.speechSynthesis.speak(utt)
   }, [])
 
   const speak = useCallback(async (text: string, onEnd?: () => void) => {
@@ -300,12 +317,12 @@ export function AiAssistant() {
 
       await audio.play()
     } catch (err) {
-      console.error('ElevenLabs TTS error:', err)
+      console.error('ElevenLabs TTS failed, falling back to browser:', err)
       setIsSpeaking(false)
       isSpeakingRef.current = false
-      onEnd?.()
+      speakFallback(clean, onEnd)
     }
-  }, [voiceEnabled, stopSpeaking])
+  }, [voiceEnabled, stopSpeaking, speakFallback])
 
   const startListening = () => {
     const SR = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition
