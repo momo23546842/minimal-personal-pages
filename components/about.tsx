@@ -1,22 +1,29 @@
 import { PUBLIC_SAFE_MODE } from "@/lib/safeMode"
 import Image from "next/image"
-import { MapPin, Palette, Camera, Coffee } from "lucide-react"
+import { Palette, Camera, Coffee } from "lucide-react"
 import styles from "./about.module.css"
 
 export function About() {
   if (PUBLIC_SAFE_MODE) return null
 
   const destinations = [
-    { name: "Sydney, Australia", src: "/images/Australia/operahouseandhabourbridge-sydney.jpg" },
-    { name: "Kumamoto, Japan", src: "/images/Japan/kumamotojyo.jpg" },
-    { name: "Cebu, Philippines", src: "/images/Philippines/canyoning-kawasan-cebu.jpg" },
+    { alt: "Sydney, Australia", src: "/images/Australia/operahouseandhabourbridge-sydney.jpg", area: 'areaA' },
+    { alt: "Kumamoto, Japan", src: "/images/Japan/kumamotojyo.jpg", area: 'areaB1' },
+    { alt: "Korankei, Aichi", src: "/images/Japan/korankei-aichi.jpg", area: 'areaB2' },
+    { alt: "Art Gallery, Sydney", src: "/images/Australia/Art-Gallery-sydney.jpg", area: 'areaC' },
+    { alt: "Enoshima, Japan", src: "/images/Japan/enoshima.jpg", area: 'areaD' },
+    { alt: "Quokka, Perth", src: "/images/Australia/quokka-perth.jpg", area: 'areaE1' },
+    { alt: "Parasailing, Cebu", src: "/images/Philippines/Parasailing-cebu.jpg", area: 'areaE2' },
+    { alt: "Blue Mountains", src: "/images/Australia/bluemountain-sydney.jpg", area: 'areaF' },
+    { alt: "Bondi, Australia", src: "/images/Australia/sculpturebythesea-bondi.jpg", area: 'areaG' },
+    { alt: "Miyazaki, Japan", src: "/images/Japan/miyazaki-moai.jpg", area: 'areaH' },
   ]
 
   const skills = [
-    { label: "Web Design", color: "var(--color-pink)" },
-    { label: "UX / UI Design", color: "var(--color-green)" },
-    { label: "Photography & Editing", color: "var(--color-blue)" },
-    { label: "Travel Planning", color: "var(--color-yellow)" },
+    { label: "Nature & Hiking", color: "var(--color-pink)" },
+    { label: "Good Food", color: "var(--color-green)" },
+    { label: "Traveling", color: "var(--color-blue)" },
+    { label: "Exploring New Places", color: "var(--color-yellow)" },
   ]
 
   return (
@@ -61,7 +68,7 @@ export function About() {
               <Palette size={24} color="var(--color-heading)" />
             </div>
             <span className={styles.iconCardTitle}>What I Do</span>
-            <span className={styles.iconCardSub}>Design &amp; Development</span>
+            <span className={styles.iconCardSub}>Nutrition × IT</span>
           </div>
 
           <div className={styles.iconCard}>
@@ -77,7 +84,7 @@ export function About() {
               <Coffee size={24} color="var(--color-heading)" />
             </div>
             <span className={styles.iconCardTitle}>Fun Facts</span>
-            <span className={styles.iconCardSub}>Coffee Lover &amp; Night Owl</span>
+            <span className={styles.iconCardSub}>Hiking &amp; Good Food</span>
           </div>
         </div>
 
@@ -93,7 +100,7 @@ export function About() {
           </div>
 
           <div className={styles.skillsCard}>
-            <h3 className={styles.skillsTitle}>Skills &amp; Expertise</h3>
+            <h3 className={styles.skillsTitle}>Things I Love</h3>
             <ul className={styles.skillsList}>
               {skills.map((s) => (
                 <li key={s.label} className={styles.skillItem}>
@@ -110,17 +117,13 @@ export function About() {
           <h3 className={styles.destTitle}>Favorite Destinations</h3>
           <div className={styles.destGrid}>
             {destinations.map((d) => (
-              <div key={d.name} className={styles.destCard}>
+              <div key={d.alt} className={`${styles.destCard} ${styles[d.area]}`}>
                 <Image
                   src={d.src}
-                  alt={d.name}
+                  alt={d.alt}
                   fill
-                  sizes="(max-width: 768px) 100vw, 33vw"
+                  sizes="(max-width: 768px) 50vw, 25vw"
                 />
-                <div className={styles.destOverlay}>
-                  <MapPin size={16} className={styles.destPin} />
-                  <span className={styles.destName}>{d.name}</span>
-                </div>
               </div>
             ))}
           </div>
