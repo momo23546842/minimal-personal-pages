@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useRef, useEffect, useCallback } from "react"
-import { Send, Mic, MicOff, Phone, PhoneOff, MessageCircle, CalendarDays, Clock, Check, Loader2, User, Volume2, VolumeX } from "lucide-react"
+import { Send, Mic, MicOff, Phone, PhoneOff, MessageCircle, CalendarDays, Clock, Check, Loader2, User } from "lucide-react"
 import { PUBLIC_SAFE_MODE } from "@/lib/safeMode"
 
 interface Message {
@@ -43,14 +43,12 @@ export function AiAssistant() {
   const [bookingSlot, setBookingSlot] = useState<Slot | null>(null)
   const [bookingDate, setBookingDate] = useState<string | null>(null)
   const [isBooking, setIsBooking] = useState(false)
-  const [voiceEnabled, setVoiceEnabled] = useState(true)
   const scrollRef = useRef<HTMLDivElement>(null)
   const recognitionRef = useRef<any>(null)
   const isCallActiveRef = useRef(false)
   const isSpeakingRef = useRef(false)
   const callTimerRef = useRef<any>(null)
-  const audioRef = useRef<HTMLAudioElement | null>(null)
-  const audioUrlRef = useRef<string | null>(null)
+  
 
   useEffect(() => {
     const handler = (e: Event) => {
@@ -241,104 +239,24 @@ export function AiAssistant() {
   }
 
   const stopSpeaking = useCallback(() => {
-    // Stop ElevenLabs audio
-    if (audioRef.current) {
-      audioRef.current.pause()
-      audioRef.current.currentTime = 0
-      audioRef.current = null
-    }
-    if (audioUrlRef.current) {
-      URL.revokeObjectURL(audioUrlRef.current)
-      audioUrlRef.current = null
-    }
-    // Stop browser speech fallback
     window.speechSynthesis?.cancel()
     setIsSpeaking(false)
     isSpeakingRef.current = false
   }, [])
 
-  const speakFallback = useCallback((text: string, onEnd?: () => void) => {
+  const speak = useCallback((text: string, onEnd?: () => void) => {
     if (!window.speechSynthesis) { onEnd?.(); return }
     window.speechSynthesis.cancel()
-    const utt = new SpeechSynthesisUtterance(text)
-    utt.rate = 1.1; utt.pitch = 1.05; utt.lang = "en-US"
+    const clean = text.replace(/\[BOOKING_LINK\]/g, "")
+    const utt = new SpeechSynthesisUtterance(clean)
+    utt.rate = 1.15; utt.pitch = 1.1; utt.lang = "en-US"
     const voices = window.speechSynthesis.getVoices()
     const voice = voices.find(v => v.name.includes("Samantha")||v.name.includes("Karen")||v.name.includes("Zira")||v.name.toLowerCase().includes("female"))
     if (voice) utt.voice = voice
     utt.onstart = () => { setIsSpeaking(true); isSpeakingRef.current = true }
     utt.onend = () => { setIsSpeaking(false); isSpeakingRef.current = false; onEnd?.() }
-    utt.onerror = () => { setIsSpeaking(false); isSpeakingRef.current = false; onEnd?.() }
     window.speechSynthesis.speak(utt)
   }, [])
-
-  const speak = useCallback(async (text: string, onEnd?: () => void) => {
-    if (!voiceEnabled) { onEnd?.(); return }
-    stopSpeaking()
-    const clean = text.replace(/\[BOOKING_LINK\]/g, "").trim()
-    if (!clean) { onEnd?.(); return }
-
-    setIsSpeaking(true)
-    isSpeakingRef.current = true
-
-    try {
-      const res = await fetch('/api/tts', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ text: clean }),
-      })
-
-      if (!res.ok) {
-        const errText = await res.text().catch(() => '')
-        // Use warn instead of error to avoid noisy stack traces for expected
-        // cases like quota/exhausted keys. Surface a short UI notice and
-        // fallback to browser TTS.
-        if (res.status === 401) {
-          console.warn('ElevenLabs TTS unavailable (401). Using browser fallback.')
-        } else {
-          console.warn('ElevenLabs TTS non-OK response:', res.status)
-        }
-        if (typeof setCallError === 'function') {
-          setCallError('Voice service unavailable — using browser fallback')
-          setTimeout(() => setCallError(null), 4000)
-        }
-        speakFallback(clean, onEnd)
-        return
-      }
-
-      const blob = await res.blob()
-      const url = URL.createObjectURL(blob)
-      audioUrlRef.current = url
-
-      const audio = new Audio(url)
-      audioRef.current = audio
-
-      audio.onended = () => {
-        setIsSpeaking(false)
-        isSpeakingRef.current = false
-        URL.revokeObjectURL(url)
-        audioUrlRef.current = null
-        audioRef.current = null
-        onEnd?.()
-      }
-
-      audio.onerror = () => {
-        console.error('Audio playback error')
-        setIsSpeaking(false)
-        isSpeakingRef.current = false
-        URL.revokeObjectURL(url)
-        audioUrlRef.current = null
-        audioRef.current = null
-        onEnd?.()
-      }
-
-      await audio.play()
-    } catch (err) {
-      console.error('ElevenLabs TTS failed, falling back to browser:', err)
-      setIsSpeaking(false)
-      isSpeakingRef.current = false
-      speakFallback(clean, onEnd)
-    }
-  }, [voiceEnabled, stopSpeaking, speakFallback])
 
   const startListening = () => {
     const SR = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition
