@@ -287,7 +287,13 @@ export function AiAssistant() {
         body: JSON.stringify({ text: clean }),
       })
 
-      if (!res.ok) throw new Error(`TTS ${res.status}`)
+      if (!res.ok) {
+        const errText = await res.text().catch(() => '')
+        console.error('ElevenLabs TTS error:', res.status, errText)
+        // Graceful fallback to browser speech (don't throw to avoid noisy stack)
+        speakFallback(clean, onEnd)
+        return
+      }
 
       const blob = await res.blob()
       const url = URL.createObjectURL(blob)
