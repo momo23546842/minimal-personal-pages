@@ -3,7 +3,7 @@
    ======================================== */
 
 .section {
-  padding: 5rem 1.5rem;
+  padding: 6rem 1.5rem;
   background-color: var(--color-off-white-alt);
 }
 
@@ -26,7 +26,7 @@
 .heading {
   text-align: center;
   font-family: var(--font-playfair), 'Playfair Display', serif;
-  font-size: clamp(2rem, 4.5vw, 3.2rem);
+  font-size: clamp(2.2rem, 5vw, 3.4rem);
   font-weight: 700;
   color: var(--color-heading);
   margin-bottom: 0.4rem;
@@ -39,7 +39,7 @@
   letter-spacing: 0.22em;
   color: var(--color-blue-gray);
   opacity: 0.6;
-  margin-bottom: 3rem;
+  margin-bottom: 3.5rem;
 }
 
 /* ---- Top grid: hero photo + intro card ---- */
@@ -60,10 +60,10 @@
 /* Hero photo */
 .heroPhoto {
   position: relative;
-  border-radius: 1rem;
+  border-radius: 0.5rem;
   overflow: hidden;
   aspect-ratio: 4 / 5;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
 }
 
 @media (min-width: 768px) {
@@ -99,9 +99,9 @@
   gap: 1.2rem;
   background: var(--card);
   border: 1px solid var(--border);
-  border-radius: 1rem;
-  padding: 2rem 2.2rem;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  border-radius: 0.5rem;
+  padding: 2.2rem 2.4rem;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
 }
 
 .introTitle {
@@ -133,15 +133,15 @@
   gap: 0.6rem;
   background: var(--card);
   border: 1px solid var(--border);
-  border-radius: 0.875rem;
+  border-radius: 0.5rem;
   padding: 1.5rem 1rem;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.03);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .iconCard:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
 }
 
 .iconCircle {
@@ -184,10 +184,10 @@
 
 .lifestylePhoto {
   position: relative;
-  border-radius: 1rem;
+  border-radius: 0.5rem;
   overflow: hidden;
   aspect-ratio: 4 / 3;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
 }
 
 .lifestylePhoto img {
@@ -204,9 +204,9 @@
   gap: 1rem;
   background: var(--card);
   border: 1px solid var(--border);
-  border-radius: 1rem;
-  padding: 2rem 2.2rem;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  border-radius: 0.5rem;
+  padding: 2.2rem 2.4rem;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
 }
 
 .skillsTitle {

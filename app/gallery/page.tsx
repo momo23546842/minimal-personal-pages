@@ -16,11 +16,11 @@ export default function GalleryPage() {
     : cafe
 
   return (
-    <main className="px-6 py-16">
+    <main className="px-6 py-20">
       <div className="mx-auto max-w-5xl">
         <div className="flex items-center justify-between mb-6">
           <div>
-            <h1 className="text-3xl font-bold">Gallery</h1>
+            <h1 className="text-3xl font-bold" style={{ fontFamily: "var(--font-playfair), 'Playfair Display', serif" }}>Gallery</h1>
             <p className="text-sm text-muted-foreground">A small collection of favorites.</p>
           </div>
           <div className="hidden sm:block">

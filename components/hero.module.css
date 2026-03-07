@@ -67,10 +67,10 @@
 .subtitle {
   font-family: var(--font-sans);
   font-size: clamp(0.95rem, 1.6vw, 1.1rem);
-  line-height: 1.8;
+  line-height: 1.85;
   color: var(--color-blue-gray);
   opacity: 0.8;
-  max-width: 420px;
+  max-width: 440px;
   white-space: pre-line;
 }
 
@@ -95,7 +95,7 @@
 .cta:hover {
   background-color: #5F6F79;
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(111, 127, 137, 0.25);
+  box-shadow: 0 6px 18px rgba(111, 127, 137, 0.2);
 }
 
 /* ---- Right: photo side ---- */
@@ -110,6 +110,7 @@
   max-width: 440px;
   aspect-ratio: 3 / 4;
   overflow: hidden;
+  border-radius: 2px;
 }
 
 .photoFrame img {

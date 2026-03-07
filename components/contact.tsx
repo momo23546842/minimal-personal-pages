@@ -31,7 +31,7 @@ export function Contact() {
   }
 
   return (
-    <section id="contact" className="relative px-6 py-28">
+    <section id="contact" className="relative px-6 py-32">
       <div className="pointer-events-none absolute inset-0 bg-card/40" />
 
       <div className="relative mx-auto max-w-4xl">
@@ -66,7 +66,7 @@ export function Contact() {
           </div>
 
           <form
-            className="flex flex-col gap-4 rounded-xl border border-border bg-card p-6 shadow-md shadow-foreground/6"
+            className="flex flex-col gap-4 rounded-lg border border-border bg-card p-6 shadow-[0_2px_12px_rgba(0,0,0,0.04)]"
             onSubmit={handleSubmit}
           >
             <div className="flex flex-col gap-1.5">

@@ -16,8 +16,8 @@ export function FavoritesGrid({ items }: { items: FavItem[] }) {
   return (
     <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 auto-rows-[1fr]">
       {items.map((it, idx) => (
-        <div key={idx} className="group rounded-xl border border-border bg-card p-4 shadow-sm h-full flex flex-col">
-          <div className="relative w-full aspect-square rounded-md overflow-hidden">
+        <div key={idx} className="group rounded-lg border border-border bg-card p-4 shadow-[0_1px_6px_rgba(0,0,0,0.03)] h-full flex flex-col">
+          <div className="relative w-full aspect-square rounded-sm overflow-hidden">
             {it.image ? (
               <Image src={it.image} alt={it.title} fill className="object-cover" />
             ) : (
