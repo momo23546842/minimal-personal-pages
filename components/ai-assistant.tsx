@@ -289,8 +289,18 @@ export function AiAssistant() {
 
       if (!res.ok) {
         const errText = await res.text().catch(() => '')
-        console.error('ElevenLabs TTS error:', res.status, errText)
-        // Graceful fallback to browser speech (don't throw to avoid noisy stack)
+        // Use warn instead of error to avoid noisy stack traces for expected
+        // cases like quota/exhausted keys. Surface a short UI notice and
+        // fallback to browser TTS.
+        if (res.status === 401) {
+          console.warn('ElevenLabs TTS unavailable (401). Using browser fallback.')
+        } else {
+          console.warn('ElevenLabs TTS non-OK response:', res.status)
+        }
+        if (typeof setCallError === 'function') {
+          setCallError('Voice service unavailable — using browser fallback')
+          setTimeout(() => setCallError(null), 4000)
+        }
         speakFallback(clean, onEnd)
         return
       }
