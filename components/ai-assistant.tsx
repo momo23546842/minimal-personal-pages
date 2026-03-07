@@ -1,7 +1,7 @@
 "use client"
 
-import { useState, useRef, useEffect } from "react"
-import { Send, Mic, MicOff, Phone, PhoneOff, MessageCircle, CalendarDays, Clock, Check, Loader2, User } from "lucide-react"
+import { useState, useRef, useEffect, useCallback } from "react"
+import { Send, Mic, MicOff, Phone, PhoneOff, MessageCircle, CalendarDays, Clock, Check, Loader2, User, Volume2, VolumeX } from "lucide-react"
 import { PUBLIC_SAFE_MODE } from "@/lib/safeMode"
 
 interface Message {
@@ -43,11 +43,14 @@ export function AiAssistant() {
   const [bookingSlot, setBookingSlot] = useState<Slot | null>(null)
   const [bookingDate, setBookingDate] = useState<string | null>(null)
   const [isBooking, setIsBooking] = useState(false)
+  const [voiceEnabled, setVoiceEnabled] = useState(true)
   const scrollRef = useRef<HTMLDivElement>(null)
   const recognitionRef = useRef<any>(null)
   const isCallActiveRef = useRef(false)
   const isSpeakingRef = useRef(false)
   const callTimerRef = useRef<any>(null)
+  const audioRef = useRef<HTMLAudioElement | null>(null)
+  const audioUrlRef = useRef<string | null>(null)
 
   useEffect(() => {
     const handler = (e: Event) => {
@@ -237,21 +240,72 @@ export function AiAssistant() {
     return <span>{msg.content}</span>
   }
 
-  const stopSpeaking = () => { window.speechSynthesis?.cancel(); setIsSpeaking(false); isSpeakingRef.current = false }
+  const stopSpeaking = useCallback(() => {
+    if (audioRef.current) {
+      audioRef.current.pause()
+      audioRef.current.currentTime = 0
+      audioRef.current = null
+    }
+    if (audioUrlRef.current) {
+      URL.revokeObjectURL(audioUrlRef.current)
+      audioUrlRef.current = null
+    }
+    setIsSpeaking(false)
+    isSpeakingRef.current = false
+  }, [])
 
-  const speak = (text: string, onEnd?: () => void) => {
-    if (!window.speechSynthesis) { onEnd?.(); return }
-    window.speechSynthesis.cancel()
-    const clean = text.replace(/\[BOOKING_LINK\]/g, "")
-    const utt = new SpeechSynthesisUtterance(clean)
-    utt.rate = 1.15; utt.pitch = 1.1; utt.lang = "en-US"
-    const voices = window.speechSynthesis.getVoices()
-    const voice = voices.find(v => v.name.includes("Samantha")||v.name.includes("Karen")||v.name.includes("Zira")||v.name.toLowerCase().includes("female"))
-    if (voice) utt.voice = voice
-    utt.onstart = () => { setIsSpeaking(true); isSpeakingRef.current = true }
-    utt.onend = () => { setIsSpeaking(false); isSpeakingRef.current = false; onEnd?.() }
-    window.speechSynthesis.speak(utt)
-  }
+  const speak = useCallback(async (text: string, onEnd?: () => void) => {
+    if (!voiceEnabled) { onEnd?.(); return }
+    stopSpeaking()
+    const clean = text.replace(/\[BOOKING_LINK\]/g, "").trim()
+    if (!clean) { onEnd?.(); return }
+
+    setIsSpeaking(true)
+    isSpeakingRef.current = true
+
+    try {
+      const res = await fetch('/api/tts', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ text: clean }),
+      })
+
+      if (!res.ok) throw new Error(`TTS ${res.status}`)
+
+      const blob = await res.blob()
+      const url = URL.createObjectURL(blob)
+      audioUrlRef.current = url
+
+      const audio = new Audio(url)
+      audioRef.current = audio
+
+      audio.onended = () => {
+        setIsSpeaking(false)
+        isSpeakingRef.current = false
+        URL.revokeObjectURL(url)
+        audioUrlRef.current = null
+        audioRef.current = null
+        onEnd?.()
+      }
+
+      audio.onerror = () => {
+        console.error('Audio playback error')
+        setIsSpeaking(false)
+        isSpeakingRef.current = false
+        URL.revokeObjectURL(url)
+        audioUrlRef.current = null
+        audioRef.current = null
+        onEnd?.()
+      }
+
+      await audio.play()
+    } catch (err) {
+      console.error('ElevenLabs TTS error:', err)
+      setIsSpeaking(false)
+      isSpeakingRef.current = false
+      onEnd?.()
+    }
+  }, [voiceEnabled, stopSpeaking])
 
   const startListening = () => {
     const SR = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition
@@ -344,8 +398,20 @@ export function AiAssistant() {
     <section id="assistant" className="relative px-6 py-12">
       <div className="pointer-events-none absolute inset-0 bg-card/40" />
       <div className="relative mx-auto max-w-4xl">
-        <p className="mb-2 text-sm font-medium uppercase tracking-widest" style={{ color: 'var(--color-heading)' }}>Talk to {DISPLAY_NAME}</p>
-        <h2 className="mb-4 text-3xl font-bold tracking-tight text-foreground md:text-4xl" style={{ color: 'var(--color-heading)' }}>Chat with Me</h2>
+        <div className="flex items-start justify-between">
+          <div>
+            <p className="mb-2 text-sm font-medium uppercase tracking-widest" style={{ color: 'var(--color-heading)' }}>Talk to {DISPLAY_NAME}</p>
+            <h2 className="mb-4 text-3xl font-bold tracking-tight text-foreground md:text-4xl" style={{ color: 'var(--color-heading)' }}>Chat with Me</h2>
+          </div>
+          <button
+            onClick={() => setVoiceEnabled(v => !v)}
+            title={voiceEnabled ? 'Disable voice' : 'Enable voice'}
+            className="mt-1 flex items-center gap-1.5 rounded-full border border-border px-3 py-1.5 text-xs font-medium text-muted-foreground transition-colors hover:text-foreground"
+          >
+            {voiceEnabled ? <Volume2 className="h-3.5 w-3.5" /> : <VolumeX className="h-3.5 w-3.5" />}
+            {voiceEnabled ? 'Voice On' : 'Voice Off'}
+          </button>
+        </div>
         <p className="mb-10 max-w-2xl leading-relaxed text-muted-foreground">
           {PUBLIC_SAFE_MODE
             ? 'Ask the assistant general questions.'
