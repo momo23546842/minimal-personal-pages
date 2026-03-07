@@ -1,7 +1,7 @@
 import React from 'react'
 import Image from 'next/image'
 import { MapPin } from 'lucide-react'
-import { foodPhotos, japanPhotos, australiaPhotos, philippinesPhotos } from '@/data/gallery'
+import { foodPhotos, japanPhotos, australiaPhotos, philippinesPhotos, cafePhotos } from '@/data/gallery'
 
 type FavItem = {
   title: string
@@ -54,6 +54,8 @@ export const australia: FavItem[] = australiaPhotos
 export const philippines: FavItem[] = philippinesPhotos
 
 export const japan: FavItem[] = japanPhotos
+
+export const cafe: FavItem[] = cafePhotos
 
 export function Favorites() {
   return (

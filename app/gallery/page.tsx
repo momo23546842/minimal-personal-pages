@@ -1,18 +1,19 @@
 "use client"
 
 import { useState } from "react"
-import { FavoritesGrid, food, japan, australia, philippines } from "@/components/favorites"
+import { FavoritesGrid, food, japan, australia, philippines, cafe } from "@/components/favorites"
 import Link from "next/link"
 
 export default function GalleryPage() {
-  const [tab, setTab] = useState<'all'|'food'|'japan'|'australia'|'philippines'>('all')
+  const [tab, setTab] = useState<'all'|'food'|'japan'|'australia'|'philippines'|'cafe'>('all')
 
   const items =
-    tab === 'all' ? [...food, ...japan, ...australia, ...philippines]
+    tab === 'all' ? [...food, ...japan, ...australia, ...philippines, ...cafe]
     : tab === 'food' ? food
     : tab === 'japan' ? japan
     : tab === 'australia' ? australia
-    : philippines
+    : tab === 'philippines' ? philippines
+    : cafe
 
   return (
     <main className="px-6 py-16">
@@ -33,6 +34,7 @@ export default function GalleryPage() {
           <button onClick={() => setTab('japan')} className={`px-3 py-1 rounded-md ${tab==='japan' ? 'bg-primary text-primary-foreground' : 'bg-secondary text-secondary-foreground'}`}>Japan</button>
           <button onClick={() => setTab('australia')} className={`px-3 py-1 rounded-md ${tab==='australia' ? 'bg-primary text-primary-foreground' : 'bg-secondary text-secondary-foreground'}`}>Australia</button>
           <button onClick={() => setTab('philippines')} className={`px-3 py-1 rounded-md ${tab==='philippines' ? 'bg-primary text-primary-foreground' : 'bg-secondary text-secondary-foreground'}`}>Philippines</button>
+          <button onClick={() => setTab('cafe')} className={`px-3 py-1 rounded-md ${tab==='cafe' ? 'bg-primary text-primary-foreground' : 'bg-secondary text-secondary-foreground'}`}>Cafe</button>
         </div>
 
         {tab === 'all' ? (
@@ -61,6 +63,13 @@ export default function GalleryPage() {
             {/* Philippines section */}
             <h2 className="mb-3 text-lg font-semibold text-foreground">Philippines</h2>
             <FavoritesGrid items={philippines} />
+
+            {/* Divider */}
+            <hr className="my-10 border-t border-border" />
+
+            {/* Cafe section */}
+            <h2 className="mb-3 text-lg font-semibold text-foreground">Cafe</h2>
+            <FavoritesGrid items={cafe} />
           </>
         ) : (
           <FavoritesGrid items={items} />

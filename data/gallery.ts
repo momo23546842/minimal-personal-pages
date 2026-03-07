@@ -36,6 +36,30 @@ export const foodPhotos = [
 export const japanPhotos = [
   {
     category: 'japan',
+    image: '/images/Japan/otaru-hokkaido-japan1.jpg',
+    title: 'Otaru Canal',
+    location: 'Hokkaido, Japan',
+    caption: 'The historic Otaru Canal, famous for its charming stone warehouses and lantern-lit atmosphere.',
+    tags: ['canal', 'hokkaido']
+  },
+  {
+    category: 'japan',
+    image: '/images/Japan/kumamoto-aso.jpg',
+    title: 'Aso',
+    location: 'Kumamoto',
+    caption: 'Wide volcanic landscapes that feel otherworldly.',
+    tags: ['volcano', 'nature', 'kumamoto']
+  },
+  {
+    category: 'japan',
+    image: '/images/Japan/kusatsu-japan.jpg',
+    title: 'Kusatsu Onsen',
+    location: 'Gunma, Japan',
+    caption: 'One of Japan\'s most famous hot spring towns.',
+    tags: ['onsen', 'gunma']
+  },
+  {
+    category: 'japan',
     image: '/images/Japan/enoshima.jpg',
     title: 'Enoshima',
     location: 'Enoshima',
@@ -49,14 +73,6 @@ export const japanPhotos = [
     location: 'Aichi',
     caption: 'A lovely gorge especially pretty during autumn colors.',
     tags: ['nature', 'autumn', 'aichi']
-  },
-  {
-    category: 'japan',
-    image: '/images/Japan/kumamoto-aso.jpg',
-    title: 'Aso',
-    location: 'Kumamoto',
-    caption: 'Wide volcanic landscapes that feel otherworldly.',
-    tags: ['volcano', 'nature', 'kumamoto']
   },
   {
     category: 'japan',
@@ -156,6 +172,82 @@ export const australiaPhotos = [
     location: 'Bondi',
     caption: 'Outdoor sculptures with an ocean backdrop.',
     tags: ['art', 'bondi']
+  }
+]
+
+export const cafePhotos = [
+  {
+    category: 'cafe',
+    image: '/images/cafe/birichina-cafe-bondi-sydney.jpg',
+    title: 'Birichina Cafe (Bondi)',
+    location: 'Bondi, Sydney',
+    caption: 'Italian-inspired bites by the beach.',
+    tags: ['coffee', 'bondi', 'sydney']
+  },
+  {
+    category: 'cafe',
+    image: '/images/cafe/lune-sydney.jpg',
+    title: 'Lune Croissanterie (Sydney)',
+    location: 'Sydney',
+    caption: 'Iconic croissants and pastries.',
+    tags: ['pastry', 'sydney']
+  },
+  {
+    category: 'cafe',
+    image: '/images/cafe/paramountcoffeeproject-surryhills-sydney.jpg',
+    title: 'Paramount Coffee Project (Surry Hills)',
+    location: 'Surry Hills, Sydney',
+    caption: 'A specialty coffee destination.',
+    tags: ['coffee', 'surry hills', 'sydney']
+  },
+  {
+    category: 'cafe',
+    image: '/images/cafe/speedoscafe-bondi-sydney.jpg',
+    title: 'Speedos Cafe (Bondi)',
+    location: 'Bondi, Sydney',
+    caption: 'Beachside brunch with ocean views.',
+    tags: ['brunch', 'bondi', 'sydney']
+  },
+  {
+    category: 'cafe',
+    image: '/images/cafe/thebrothers-sydney.jpg',
+    title: 'The Brothers Cafe (Sydney)',
+    location: 'Sydney',
+    caption: 'Great coffee and a cozy atmosphere.',
+    tags: ['coffee', 'sydney']
+  },
+  {
+    category: 'cafe',
+    image: '/images/cafe/theteacosy-therocks-sydney.jpg',
+    title: 'The Tea Cosy (The Rocks)',
+    location: 'The Rocks, Sydney',
+    caption: 'A charming tearoom tucked in the historic Rocks.',
+    tags: ['tea', 'the rocks', 'sydney']
+  },
+  {
+    category: 'cafe',
+    image: '/images/cafe/two-good-eggs-cafe-surryhills.jpg',
+    title: 'Two Good Eggs Cafe (Surry Hills)',
+    location: 'Surry Hills, Sydney',
+    caption: 'Comfort brunch done right.',
+    tags: ['brunch', 'surry hills', 'sydney']
+  }
+  ,
+  {
+    category: 'cafe',
+    image: '/images/cafe/bills-surryhills-sydney.jpg',
+    title: 'Bills',
+    location: 'Surry Hills, Sydney',
+    caption: 'A popular cafe known for its relaxed atmosphere and delicious brunch.',
+    tags: ['brunch', 'surry hills', 'sydney']
+  },
+  {
+    category: 'cafe',
+    image: '/images/cafe/singleo-surryhills-sydney.jpg',
+    title: 'Single O',
+    location: 'Surry Hills, Sydney',
+    caption: 'A well-known Sydney cafe famous for specialty coffee.',
+    tags: ['coffee', 'surry hills', 'sydney']
   }
 ]
 
