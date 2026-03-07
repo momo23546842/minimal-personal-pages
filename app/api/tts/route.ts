@@ -12,6 +12,8 @@ export async function POST(req: NextRequest) {
 
     const apiKey = process.env.ELEVENLABS_API_KEY
     const voiceId = process.env.ELEVENLABS_VOICE_ID
+    const maxCharsEnv = process.env.ELEVENLABS_MAX_CHARS || ''
+    const maxChars = maxCharsEnv ? parseInt(maxCharsEnv, 10) : 1000
 
     if (!apiKey || !voiceId) {
       return NextResponse.json(
@@ -19,6 +21,9 @@ export async function POST(req: NextRequest) {
         { status: 500 },
       )
     }
+
+    // Truncate text to reduce per-request cost and avoid quota errors
+    const outgoingText = text.length > maxChars ? text.slice(0, maxChars) : text
 
     const res = await fetch(`${ELEVENLABS_BASE}/${voiceId}`, {
       method: 'POST',
@@ -28,7 +33,7 @@ export async function POST(req: NextRequest) {
         Accept: 'audio/mpeg',
       },
       body: JSON.stringify({
-        text,
+        text: outgoingText,
         model_id: 'eleven_multilingual_v2',
         voice_settings: {
           stability: 0.5,
@@ -51,12 +56,15 @@ export async function POST(req: NextRequest) {
     // Stream the audio bytes back to the client
     const audioBuffer = await res.arrayBuffer()
 
+    const headers: Record<string, string> = {
+      'Content-Type': 'audio/mpeg',
+      'Cache-Control': 'no-store',
+    }
+    if (outgoingText !== text) headers['X-TTS-TRUNCATED'] = '1'
+
     return new NextResponse(audioBuffer, {
       status: 200,
-      headers: {
-        'Content-Type': 'audio/mpeg',
-        'Cache-Control': 'no-store',
-      },
+      headers,
     })
   } catch (err) {
     console.error('TTS route error:', err)
