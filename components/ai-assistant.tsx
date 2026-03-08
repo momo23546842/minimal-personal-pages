@@ -349,20 +349,8 @@ export function AiAssistant() {
     <section id="assistant" className="relative px-6 py-12">
       <div className="pointer-events-none absolute inset-0 bg-card/40" />
       <div className="relative mx-auto max-w-4xl">
-        <div className="flex items-start justify-between">
-          <div>
-            <p className="mb-2 text-sm font-medium uppercase tracking-widest" style={{ color: 'var(--color-heading)' }}>Talk to {DISPLAY_NAME}</p>
-            <h2 className="mb-4 text-3xl font-bold tracking-tight text-foreground md:text-4xl" style={{ color: 'var(--color-heading)' }}>Chat with Me</h2>
-          </div>
-          <button
-            onClick={() => setVoiceEnabled(v => !v)}
-            title={voiceEnabled ? 'Disable voice' : 'Enable voice'}
-            className="mt-1 flex items-center gap-1.5 rounded-full border border-border px-3 py-1.5 text-xs font-medium text-muted-foreground transition-colors hover:text-foreground"
-          >
-            {voiceEnabled ? <Volume2 className="h-3.5 w-3.5" /> : <VolumeX className="h-3.5 w-3.5" />}
-            {voiceEnabled ? 'Voice On' : 'Voice Off'}
-          </button>
-        </div>
+        <p className="mb-2 text-sm font-medium uppercase tracking-widest" style={{ color: 'var(--color-heading)' }}>Talk to {DISPLAY_NAME}</p>
+        <h2 className="mb-4 text-3xl font-bold tracking-tight text-foreground md:text-4xl" style={{ color: 'var(--color-heading)' }}>Chat with Me</h2>
         <p className="mb-10 max-w-2xl leading-relaxed text-muted-foreground">
           {PUBLIC_SAFE_MODE
             ? 'Ask the assistant general questions.'
