@@ -14,7 +14,7 @@ type FavItem = {
 
 export function FavoritesGrid({ items }: { items: FavItem[] }) {
   return (
-    <div className="grid gap-3 grid-cols-3 auto-rows-[1fr]">
+    <div className="grid gap-2 md:gap-6 grid-cols-2 md:grid-cols-3 auto-rows-[1fr]">
       {items.map((it, idx) => (
         <div key={idx} className="group rounded-lg border border-border bg-card p-2 md:p-4 shadow-[0_1px_6px_rgba(0,0,0,0.03)] h-full flex flex-col">
           <div className="relative w-full aspect-square rounded-sm overflow-hidden">
@@ -25,16 +25,16 @@ export function FavoritesGrid({ items }: { items: FavItem[] }) {
             )}
           </div>
           <div className="mt-2 flex-1 min-h-22 flex flex-col justify-between">
-            <h4 className="mb-1 text-xs md:text-sm font-semibold text-foreground">{it.title}</h4>
+            <h4 className="mb-1 text-xs font-semibold text-foreground">{it.title}</h4>
             {it.location && (
-              <div className="flex items-center gap-2 text-xs text-muted-foreground mb-1">
+              <div className="flex items-center gap-2 text-[10px] md:text-xs text-muted-foreground mb-1">
                 <MapPin className="h-3 w-3" />
                 <span>{it.location}</span>
               </div>
             )}
-            {it.caption && <p className="text-[10px] md:text-xs text-muted-foreground mb-2">{it.caption}</p>}
+            {it.caption && <p className="hidden sm:block text-[10px] md:text-xs text-muted-foreground mb-2">{it.caption}</p>}
             {it.tags && (
-              <div className="flex flex-wrap gap-2">
+              <div className="hidden sm:flex flex-wrap gap-2">
                 {it.tags.map((t) => (
                   <span key={t} className="text-[10px] md:text-xs text-muted-foreground">#{t}</span>
                 ))}
