@@ -38,7 +38,7 @@ export default function RootLayout({
           strategy="beforeInteractive"
           dangerouslySetInnerHTML={{
             __html:
-              `(function(){try{const t=localStorage.getItem('theme');if(t){document.documentElement.classList.remove('light','dark');document.documentElement.classList.add(t);document.documentElement.style.colorScheme = t === 'dark' ? 'dark' : 'light';}}catch(e){}})();`,
+              `(function(){try{document.documentElement.classList.remove('light','dark');document.documentElement.classList.add('light');document.documentElement.style.colorScheme = 'light';localStorage.setItem('theme','light')}catch(e){}})();`,
           }}
         />
         <ThemeProvider>
