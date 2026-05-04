@@ -3,7 +3,7 @@ import Image from 'next/image'
 import { MapPin } from 'lucide-react'
 import { foodPhotos, japanPhotos, australiaPhotos, philippinesPhotos, cafePhotos } from '@/data/gallery'
 
-type FavItem = {
+export type FavItem = {
   title: string
   location?: string
   caption?: string
@@ -12,7 +12,7 @@ type FavItem = {
   category?: string
 }
 
-export function FavoritesGrid({ items }: { items: FavItem[] }) {
+export function FavoritesGrid({ items, onItemClick }: { items: FavItem[], onItemClick?: (item: FavItem) => void }) {
   return (
     <div className="favorites-grid grid gap-4 md:gap-6 grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
       {items.map((it, idx) => (
@@ -26,7 +26,9 @@ export function FavoritesGrid({ items }: { items: FavItem[] }) {
             boxShadow: '0 6px 16px rgba(58, 58, 58, 0.10), 0 3px 8px rgba(58, 58, 58, 0.06)',
             transition: 'box-shadow 0.2s ease, border-color 0.2s ease',
             border: '1px solid rgba(229, 220, 206, 0.5)',
+            cursor: onItemClick ? 'pointer' : 'default',
           }}
+          onClick={() => onItemClick?.(it)}
           onMouseEnter={(e) => {
             e.currentTarget.style.boxShadow = '0 8px 20px rgba(58, 58, 58, 0.14), 0 4px 10px rgba(58, 58, 58, 0.08)'
             e.currentTarget.style.borderColor = 'rgba(122, 145, 114, 0.3)'
