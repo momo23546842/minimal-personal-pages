@@ -25,6 +25,17 @@ export function Header() {
   const [mounted, setMounted] = useState(false)
   const router = useRouter()
 
+  // Navigate to a tab: fires a custom event when already on home page
+  // (avoids hashchange reliability issues), router.push from other pages.
+  const navigateToTab = (tabId: string) => {
+    setMobileOpen(false)
+    if (typeof window !== "undefined" && window.location.pathname === "/") {
+      window.dispatchEvent(new CustomEvent("switch-tab", { detail: tabId }))
+    } else {
+      router.push(`/#${tabId}`)
+    }
+  }
+
   useEffect(() => {
     setMounted(true)
     const onScroll = () => setScrolled(window.scrollY > 20)
@@ -66,33 +77,33 @@ export function Header() {
         borderBottomColor: scrolled ? 'var(--scrapbook-sand, #E5DCCE)' : 'transparent'
       }}
     >
-      <div className="mx-auto flex max-w-[1320px] items-center justify-between px-8 py-4">
-        <a
-          href="#hero"
+      <div className="mx-auto flex max-w-330 items-center justify-between px-8 py-4">
+        <Link
+          href="/"
           className="text-lg font-semibold tracking-tight transition-colors"
           style={{
             color: 'var(--scrapbook-forest-dark, #5A6B4F)',
             fontFamily: "var(--font-baloo, 'Baloo 2', cursive, sans-serif)"
           }}
         >
-          {PUBLIC_SAFE_MODE ? "AI" : "Momo's Page ✨"}
-        </a>
+          {PUBLIC_SAFE_MODE ? "AI" : "Momo's Page"}
+        </Link>
 
         {/* Desktop nav */}
         <nav className="hidden items-center gap-6 md:flex" aria-label="Main navigation">
           {/* Left: anchor links */}
           <div className="flex items-center gap-6">
             {anchorLinks.map((link) => (
-              <Link 
-                key={link.href} 
-                href={link.href} 
-                className="text-sm font-medium transition-colors"
+              <button
+                key={link.href}
+                onClick={() => navigateToTab(link.href.replace("/#", ""))}
+                className="text-sm font-medium transition-colors bg-transparent border-none cursor-pointer p-0"
                 style={{ color: 'var(--scrapbook-text-light, #6B6356)' }}
                 onMouseEnter={(e) => { e.currentTarget.style.color = 'var(--scrapbook-forest-dark, #5A6B4F)' }}
                 onMouseLeave={(e) => { e.currentTarget.style.color = 'var(--scrapbook-text-light, #6B6356)' }}
               >
                 {link.label}
-              </Link>
+              </button>
             ))}
           </div>
 
@@ -273,11 +284,10 @@ export function Header() {
         >
           <div className="flex flex-col gap-1 px-6 pb-6">
             {anchorLinks.map((link) => (
-              <Link
+              <button
                 key={link.href}
-                href={link.href}
-                onClick={() => setMobileOpen(false)}
-                className="rounded-md px-3 py-2 text-sm font-medium transition-colors"
+                onClick={() => navigateToTab(link.href.replace("/#", ""))}
+                className="rounded-md px-3 py-2 text-sm font-medium transition-colors bg-transparent border-none cursor-pointer w-full text-left"
                 style={{ color: 'var(--scrapbook-text-light, #6B6356)' }}
                 onMouseEnter={(e) => { 
                   e.currentTarget.style.backgroundColor = 'var(--scrapbook-cream, #F8F4ED)'
@@ -289,7 +299,7 @@ export function Header() {
                 }}
               >
                 {link.label}
-              </Link>
+              </button>
             ))}
 
             {favoritesLink && (

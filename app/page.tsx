@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Header } from "@/components/header"
 import { ProfileHeader } from "@/components/profile-header"
 import { NotebookTabs } from "@/components/notebook-tabs"
@@ -12,8 +12,57 @@ import { Footer } from "@/components/footer"
 import { PUBLIC_SAFE_MODE } from "@/lib/safeMode"
 import Image from "next/image"
 
+const VALID_TABS = ["about", "journey", "future", "contact"]
+
+function tabFromHash(hash: string): string {
+  const id = hash.replace("#", "")
+  return VALID_TABS.includes(id) ? id : "about"
+}
+
 export default function Page() {
   const [activeTab, setActiveTab] = useState("about")
+
+  // Sync activeTab with URL hash — works on initial load and when the
+  // user navigates from another page (e.g. /gallery → /#journey).
+  useEffect(() => {
+    const activateTab = (tabId: string) => {
+      setActiveTab(tabId)
+      setTimeout(() => {
+        const el = document.getElementById("notebook")
+        if (el) el.scrollIntoView({ behavior: "smooth", block: "start" })
+      }, 50)
+    }
+
+    // Handle browser hash changes (back/forward, cross-page navigation)
+    const syncHash = () => {
+      const tab = tabFromHash(window.location.hash)
+      if (VALID_TABS.includes(tab)) activateTab(tab)
+    }
+
+    // Handle same-page header clicks via custom event
+    const onSwitchTab = (e: Event) => {
+      const tabId = (e as CustomEvent<string>).detail
+      if (VALID_TABS.includes(tabId)) {
+        history.replaceState(null, "", `#${tabId}`)
+        activateTab(tabId)
+      }
+    }
+
+    syncHash() // read current hash on mount
+    window.addEventListener("hashchange", syncHash)
+    window.addEventListener("switch-tab", onSwitchTab)
+    return () => {
+      window.removeEventListener("hashchange", syncHash)
+      window.removeEventListener("switch-tab", onSwitchTab)
+    }
+  }, [])
+
+  // Also update the URL hash whenever the tab changes via the notebook UI,
+  // so the back button and header links stay in sync.
+  const handleTabChange = (tabId: string) => {
+    setActiveTab(tabId)
+    history.replaceState(null, "", `#${tabId}`)
+  }
 
   const tabs = [
     { id: "about", label: "About", icon: "✨" },
@@ -44,9 +93,9 @@ export default function Page() {
         <ProfileHeader />
 
         {/* Tabbed Content Section */}
-        <div style={{ padding: '2rem 0 4rem' }}>
+        <div id="notebook" style={{ padding: '2rem 0 4rem' }}>
           {!PUBLIC_SAFE_MODE && (
-            <NotebookTabs tabs={tabs} activeTab={activeTab} onTabChange={setActiveTab}>
+            <NotebookTabs tabs={tabs} activeTab={activeTab} onTabChange={handleTabChange}>
               {/* Tab Content */}
               {activeTab === "about" && <About />}
               {activeTab === "journey" && (

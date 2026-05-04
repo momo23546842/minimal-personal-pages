@@ -1,11 +1,136 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect, useCallback } from "react"
 import { FavoritesGrid, food, japan, australia, philippines, cafe } from "@/components/favorites"
+import type { FavItem } from "@/components/favorites"
 import Link from "next/link"
+import Image from "next/image"
+import { MapPin, X } from "lucide-react"
+
+function GalleryLightbox({ item, onClose }: { item: FavItem; onClose: () => void }) {
+  // Close on Escape key
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") onClose() }
+    document.addEventListener("keydown", onKey)
+    document.body.style.overflow = "hidden"
+    return () => {
+      document.removeEventListener("keydown", onKey)
+      document.body.style.overflow = ""
+    }
+  }, [onClose])
+
+  return (
+    <div
+      style={{
+        position: "fixed", inset: 0, zIndex: 1000,
+        backgroundColor: "rgba(30, 24, 18, 0.72)",
+        backdropFilter: "blur(4px)",
+        display: "flex", alignItems: "center", justifyContent: "center",
+        padding: "1rem",
+      }}
+      onClick={onClose}
+    >
+      {/* Modal card */}
+      <div
+        style={{
+          background: "#FDFAF5",
+          borderRadius: "6px",
+          padding: "16px 16px 32px",
+          maxWidth: "520px",
+          width: "100%",
+          boxShadow: "0 24px 64px rgba(30, 24, 18, 0.35), 0 8px 24px rgba(30, 24, 18, 0.2)",
+          border: "1px solid rgba(229, 220, 206, 0.7)",
+          position: "relative",
+        }}
+        onClick={(e) => e.stopPropagation()}
+      >
+        {/* Close button */}
+        <button
+          onClick={onClose}
+          style={{
+            position: "absolute", top: "10px", right: "10px",
+            background: "var(--scrapbook-paper-alt, #F0EBE0)",
+            border: "1px solid var(--scrapbook-sand, #E5DCCE)",
+            borderRadius: "50%",
+            width: "30px", height: "30px",
+            display: "flex", alignItems: "center", justifyContent: "center",
+            cursor: "pointer",
+            color: "var(--scrapbook-forest-dark, #5A6B4F)",
+            zIndex: 1,
+          }}
+          aria-label="Close"
+        >
+          <X size={16} />
+        </button>
+
+        {/* Image */}
+        {item.image && (
+          <div style={{ position: "relative", width: "100%", aspectRatio: "4/3", borderRadius: "3px", overflow: "hidden", marginBottom: "18px" }}>
+            <Image src={item.image} alt={item.title} fill style={{ objectFit: "cover" }} sizes="520px" />
+          </div>
+        )}
+
+        {/* Info */}
+        <div style={{ paddingInline: "4px" }}>
+          <h3 style={{
+            fontFamily: "var(--font-baloo, 'Baloo 2', cursive, sans-serif)",
+            fontSize: "1.2rem",
+            fontWeight: 700,
+            color: "var(--scrapbook-forest-dark, #5A6B4F)",
+            marginBottom: "6px",
+          }}>{item.title}</h3>
+
+          {item.location && (
+            <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "10px", color: "var(--scrapbook-text-light, #6B6356)", fontSize: "0.82rem" }}>
+              <MapPin size={13} />
+              <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                {item.placeName && item.mapUrl ? (
+                  <a
+                    href={item.mapUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{ color: 'var(--scrapbook-forest, #7A9172)', textDecoration: 'none', fontWeight: 600 }}
+                    onMouseEnter={(e: any) => { e.currentTarget.style.color = 'var(--scrapbook-forest-dark, #5A6B4F)'; e.currentTarget.style.textDecoration = 'underline' }}
+                    onMouseLeave={(e: any) => { e.currentTarget.style.color = 'var(--scrapbook-forest, #7A9172)'; e.currentTarget.style.textDecoration = 'none' }}
+                  >{item.placeName}</a>
+                ) : null}
+                <span style={{ color: 'var(--scrapbook-text-light, #6B6356)' }}>{item.placeName ? `— ${item.location}` : item.location}</span>
+              </div>
+            </div>
+          )}
+
+          {item.caption && (
+            <p style={{ fontSize: "0.88rem", lineHeight: 1.65, color: "var(--scrapbook-text, #3A3A3A)", marginBottom: "12px" }}>
+              {item.caption}
+            </p>
+          )}
+
+          {item.tags && item.tags.length > 0 && (
+            <div style={{ display: "flex", flexWrap: "wrap", gap: "6px" }}>
+              {item.tags.map((t) => (
+                <span key={t} style={{
+                  fontSize: "0.72rem",
+                  padding: "2px 8px",
+                  borderRadius: "4px",
+                  backgroundColor: "var(--scrapbook-paper-alt, #F0EBE0)",
+                  color: "var(--scrapbook-forest, #7A9172)",
+                  border: "1px solid var(--scrapbook-sand, #E5DCCE)",
+                }}>
+                  #{t}
+                </span>
+              ))}
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  )
+}
 
 export default function GalleryPage() {
   const [tab, setTab] = useState<'all'|'food'|'japan'|'australia'|'philippines'|'cafe'>('all')
+  const [selected, setSelected] = useState<FavItem | null>(null)
+  const closeModal = useCallback(() => setSelected(null), [])
 
   const items =
     tab === 'all' ? [...food, ...japan, ...australia, ...philippines, ...cafe]
@@ -16,6 +141,8 @@ export default function GalleryPage() {
     : cafe
 
   return (
+    <>
+    {selected && <GalleryLightbox item={selected} onClose={closeModal} />}
     <main 
       className="px-3 md:px-6 py-20"
       style={{ backgroundColor: 'transparent' }}
@@ -145,9 +272,9 @@ export default function GalleryPage() {
                 color: 'var(--scrapbook-forest-dark, #5A6B4F)'
               }}
             >
-              Food 🍜
+              Food 
             </h2>
-            <FavoritesGrid items={food} />
+            <FavoritesGrid items={food} onItemClick={setSelected} />
 
             {/* Divider */}
             <hr 
@@ -166,9 +293,9 @@ export default function GalleryPage() {
                 color: 'var(--scrapbook-forest-dark, #5A6B4F)'
               }}
             >
-              Japan 🏯
+              Japan 
             </h2>
-            <FavoritesGrid items={japan} />
+            <FavoritesGrid items={japan} onItemClick={setSelected} />
 
             {/* Divider */}
             <hr 
@@ -187,9 +314,9 @@ export default function GalleryPage() {
                 color: 'var(--scrapbook-forest-dark, #5A6B4F)'
               }}
             >
-              Australia 🦘
+              Australia 
             </h2>
-            <FavoritesGrid items={australia} />
+            <FavoritesGrid items={australia} onItemClick={setSelected} />
 
             {/* Divider */}
             <hr 
@@ -208,9 +335,9 @@ export default function GalleryPage() {
                 color: 'var(--scrapbook-forest-dark, #5A6B4F)'
               }}
             >
-              Philippines 🌊
+              Philippines 
             </h2>
-            <FavoritesGrid items={philippines} />
+            <FavoritesGrid items={philippines} onItemClick={setSelected} />
 
             {/* Divider */}
             <hr 
@@ -229,14 +356,15 @@ export default function GalleryPage() {
                 color: 'var(--scrapbook-forest-dark, #5A6B4F)'
               }}
             >
-              Cafe ☕
+              Cafe 
             </h2>
-            <FavoritesGrid items={cafe} />
+            <FavoritesGrid items={cafe} onItemClick={setSelected} />
           </>
         ) : (
-          <FavoritesGrid items={items} />
+          <FavoritesGrid items={items} onItemClick={setSelected} />
         )}
       </div>
     </main>
+    </>
   )
 }
