@@ -12,6 +12,7 @@ export function Header() {
     ? []
     : [
         { label: "About", href: "/#about" },
+        { label: "Journey", href: "/#journey" },
         { label: "Future", href: "/#future" },
         { label: "Contact", href: "/#contact" },
       ]
@@ -58,15 +59,23 @@ export function Header() {
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? "bg-background/80 backdrop-blur-lg border-b border-border" : "bg-transparent"
+        scrolled ? "backdrop-blur-lg border-b" : ""
       }`}
+      style={{
+        backgroundColor: scrolled ? 'rgba(245, 241, 232, 0.95)' : 'transparent',
+        borderBottomColor: scrolled ? 'var(--scrapbook-sand, #E5DCCE)' : 'transparent'
+      }}
     >
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
+      <div className="mx-auto flex max-w-[1320px] items-center justify-between px-8 py-4">
         <a
           href="#hero"
-          className="text-lg font-semibold tracking-tight text-foreground transition-colors hover:text-primary"
+          className="text-lg font-semibold tracking-tight transition-colors"
+          style={{
+            color: 'var(--scrapbook-forest-dark, #5A6B4F)',
+            fontFamily: "var(--font-baloo, 'Baloo 2', cursive, sans-serif)"
+          }}
         >
-          {PUBLIC_SAFE_MODE ? "AI" : "MK"}
+          {PUBLIC_SAFE_MODE ? "AI" : "Momo's Page ✨"}
         </a>
 
         {/* Desktop nav */}
@@ -74,7 +83,14 @@ export function Header() {
           {/* Left: anchor links */}
           <div className="flex items-center gap-6">
             {anchorLinks.map((link) => (
-              <Link key={link.href} href={link.href} className="text-sm text-muted-foreground transition-colors hover:text-foreground">
+              <Link 
+                key={link.href} 
+                href={link.href} 
+                className="text-sm font-medium transition-colors"
+                style={{ color: 'var(--scrapbook-text-light, #6B6356)' }}
+                onMouseEnter={(e) => { e.currentTarget.style.color = 'var(--scrapbook-forest-dark, #5A6B4F)' }}
+                onMouseLeave={(e) => { e.currentTarget.style.color = 'var(--scrapbook-text-light, #6B6356)' }}
+              >
                 {link.label}
               </Link>
             ))}
@@ -85,10 +101,23 @@ export function Header() {
             {favoritesLink && (
               <Link
                 href={favoritesLink.href}
-                className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-sm font-medium transition-colors"
-                style={{ backgroundColor: '#E4C7C7', color: '#5A6670' }}
-                onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = '#D7BABA'; e.currentTarget.style.color = '#5A6670'; }}
-                onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = '#E4C7C7'; e.currentTarget.style.color = '#5A6670'; }}
+                className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-sm font-medium transition-all"
+                style={{ 
+                  backgroundColor: 'var(--scrapbook-tab-cream, #E8E0D5)', 
+                  color: 'var(--scrapbook-text, #3A3A3A)',
+                  border: '1px solid var(--scrapbook-sand, #E5DCCE)',
+                  boxShadow: '0 2px 6px rgba(58, 58, 58, 0.08)'
+                }}
+                onMouseEnter={(e) => { 
+                  e.currentTarget.style.backgroundColor = 'var(--scrapbook-sand, #E5DCCE)'
+                  e.currentTarget.style.transform = 'translateY(-1px)'
+                  e.currentTarget.style.boxShadow = '0 4px 10px rgba(58, 58, 58, 0.12)'
+                }}
+                onMouseLeave={(e) => { 
+                  e.currentTarget.style.backgroundColor = 'var(--scrapbook-tab-cream, #E8E0D5)'
+                  e.currentTarget.style.transform = 'translateY(0)'
+                  e.currentTarget.style.boxShadow = '0 2px 6px rgba(58, 58, 58, 0.08)'
+                }}
               >
                 <Camera className="h-4 w-4" />
                 {favoritesLink.label}
@@ -98,10 +127,21 @@ export function Header() {
             <div className="flex items-center gap-2">
               <button
                 onClick={() => scrollToAssistant("chat")}
-                className="flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-xs font-medium text-white shadow-sm transition-colors"
-                style={{ backgroundColor: '#6F7F89' }}
-                onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#5F6F79')}
-                onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#6F7F89')}
+                className="flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-xs font-medium text-white shadow-sm transition-all"
+                style={{ 
+                  backgroundColor: 'var(--scrapbook-forest, #7A9172)',
+                  boxShadow: '0 2px 6px rgba(122, 145, 114, 0.3)'
+                }}
+                onMouseEnter={(e) => { 
+                  e.currentTarget.style.backgroundColor = 'var(--scrapbook-forest-dark, #5A6B4F)'
+                  e.currentTarget.style.transform = 'translateY(-1px)'
+                  e.currentTarget.style.boxShadow = '0 4px 10px rgba(122, 145, 114, 0.4)'
+                }}
+                onMouseLeave={(e) => { 
+                  e.currentTarget.style.backgroundColor = 'var(--scrapbook-forest, #7A9172)'
+                  e.currentTarget.style.transform = 'translateY(0)'
+                  e.currentTarget.style.boxShadow = '0 2px 6px rgba(122, 145, 114, 0.3)'
+                }}
               >
                 <MessageCircle className="h-3.5 w-3.5" />
                 Chat
@@ -109,10 +149,21 @@ export function Header() {
               {!PUBLIC_SAFE_MODE && (
                 <button
                   onClick={() => scrollToAssistant("call")}
-                  className="flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-xs font-medium text-white shadow-sm transition-colors"
-                  style={{ backgroundColor: '#6F7F89' }}
-                  onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#5F6F79')}
-                  onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#6F7F89')}
+                  className="flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-xs font-medium text-white shadow-sm transition-all"
+                  style={{ 
+                    backgroundColor: 'var(--scrapbook-leaf, #8FA582)',
+                    boxShadow: '0 2px 6px rgba(143, 165, 130, 0.3)'
+                  }}
+                  onMouseEnter={(e) => { 
+                    e.currentTarget.style.backgroundColor = 'var(--scrapbook-forest, #7A9172)'
+                    e.currentTarget.style.transform = 'translateY(-1px)'
+                    e.currentTarget.style.boxShadow = '0 4px 10px rgba(143, 165, 130, 0.4)'
+                  }}
+                  onMouseLeave={(e) => { 
+                    e.currentTarget.style.backgroundColor = 'var(--scrapbook-leaf, #8FA582)'
+                    e.currentTarget.style.transform = 'translateY(0)'
+                    e.currentTarget.style.boxShadow = '0 2px 6px rgba(143, 165, 130, 0.3)'
+                  }}
                 >
                   <Phone className="h-3.5 w-3.5" />
                   Call
@@ -124,8 +175,15 @@ export function Header() {
             {mounted && (
               <button
                 onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
-                className="flex h-8 w-8 items-center justify-center rounded-full bg-secondary text-foreground transition-colors hover:bg-primary hover:text-primary-foreground"
+                className="flex h-8 w-8 items-center justify-center rounded-full transition-all"
+                style={{
+                  backgroundColor: 'var(--scrapbook-cream, #F8F4ED)',
+                  color: 'var(--scrapbook-forest-dark, #5A6B4F)',
+                  border: '1px solid var(--scrapbook-sand, #E5DCCE)'
+                }}
                 aria-label={`Switch to ${resolvedTheme === "dark" ? "light" : "dark"} mode`}
+                onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = 'var(--scrapbook-sand, #E5DCCE)' }}
+                onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'var(--scrapbook-cream, #F8F4ED)' }}
               >
                 {resolvedTheme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
               </button>
@@ -140,11 +198,15 @@ export function Header() {
             <Link
               href={favoritesLink.href}
               aria-label="Favorites"
-              className="inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-medium transition-colors"
-              style={{ backgroundColor: '#E4C7C7', color: '#5A6670' }}
+              className="inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-medium transition-all"
+              style={{ 
+                backgroundColor: 'var(--scrapbook-tab-cream, #E8E0D5)', 
+                color: 'var(--scrapbook-text, #3A3A3A)',
+                border: '1px solid var(--scrapbook-sand, #E5DCCE)'
+              }}
             >
               <Camera className="h-3.5 w-3.5" />
-              <span className="whitespace-nowrap">Favorites</span>
+              <span className="mobile-fav-text whitespace-nowrap">Favorites</span>
             </Link>
           )}
 
@@ -152,7 +214,7 @@ export function Header() {
           <button
             onClick={() => scrollToAssistant("chat")}
             className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-white shadow-sm transition-colors"
-            style={{ backgroundColor: '#6F7F89' }}
+            style={{ backgroundColor: 'var(--scrapbook-forest, #7A9172)' }}
             aria-label="Chat"
           >
             <MessageCircle className="h-4 w-4" />
@@ -163,7 +225,7 @@ export function Header() {
             <button
               onClick={() => scrollToAssistant("call")}
               className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-white shadow-sm transition-colors"
-              style={{ backgroundColor: '#6F7F89' }}
+              style={{ backgroundColor: 'var(--scrapbook-leaf, #8FA582)' }}
               aria-label="Call"
             >
               <Phone className="h-4 w-4" />
@@ -174,7 +236,12 @@ export function Header() {
           {mounted && (
             <button
               onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
-              className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-secondary text-foreground"
+              className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full transition-colors"
+              style={{
+                backgroundColor: 'var(--scrapbook-cream, #F8F4ED)',
+                color: 'var(--scrapbook-forest-dark, #5A6B4F)',
+                border: '1px solid var(--scrapbook-sand, #E5DCCE)'
+              }}
               aria-label="Toggle theme"
             >
               {resolvedTheme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
@@ -183,7 +250,8 @@ export function Header() {
 
           {/* 5. Hamburger menu */}
           <button
-            className="text-foreground"
+            className="transition-colors"
+            style={{ color: 'var(--scrapbook-forest-dark, #5A6B4F)' }}
             onClick={() => setMobileOpen(!mobileOpen)}
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
           >
@@ -194,14 +262,31 @@ export function Header() {
 
       {/* Mobile nav */}
       {mobileOpen && (
-        <nav className="border-b border-border bg-background/95 backdrop-blur-lg md:hidden" aria-label="Mobile navigation">
+        <nav 
+          className="md:hidden" 
+          aria-label="Mobile navigation"
+          style={{
+            backgroundColor: 'rgba(245, 241, 232, 0.98)',
+            backdropFilter: 'blur(12px)',
+            borderBottom: '2px solid var(--scrapbook-sand, #E5DCCE)'
+          }}
+        >
           <div className="flex flex-col gap-1 px-6 pb-6">
             {anchorLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
                 onClick={() => setMobileOpen(false)}
-                className="rounded-md px-3 py-2 text-sm text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
+                className="rounded-md px-3 py-2 text-sm font-medium transition-colors"
+                style={{ color: 'var(--scrapbook-text-light, #6B6356)' }}
+                onMouseEnter={(e) => { 
+                  e.currentTarget.style.backgroundColor = 'var(--scrapbook-cream, #F8F4ED)'
+                  e.currentTarget.style.color = 'var(--scrapbook-forest-dark, #5A6B4F)'
+                }}
+                onMouseLeave={(e) => { 
+                  e.currentTarget.style.backgroundColor = 'transparent'
+                  e.currentTarget.style.color = 'var(--scrapbook-text-light, #6B6356)'
+                }}
               >
                 {link.label}
               </Link>
@@ -212,7 +297,11 @@ export function Header() {
                 href={favoritesLink.href}
                 onClick={() => setMobileOpen(false)}
                 className="flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium transition-colors"
-                style={{ backgroundColor: '#E4C7C7', color: '#5A6670' }}
+                style={{ 
+                  backgroundColor: 'var(--scrapbook-tab-cream, #E8E0D5)', 
+                  color: 'var(--scrapbook-text, #3A3A3A)',
+                  border: '1px solid var(--scrapbook-sand, #E5DCCE)'
+                }}
               >
                 <Camera className="h-4 w-4" />
                 {favoritesLink.label}

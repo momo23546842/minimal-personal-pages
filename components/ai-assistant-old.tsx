@@ -216,9 +216,7 @@ export function AiAssistant() {
           <input type="text" placeholder="Message (optional)" value={bookingForm.message} onChange={e => setBookingForm(f=>({...f,message:e.target.value}))} className="rounded-lg border border-border bg-background px-3 py-2 text-xs focus:border-primary focus:outline-none" />
           <button onClick={handleBookingSubmit} disabled={!bookingForm.name||!bookingForm.email||isBooking}
             className="mt-1 flex items-center justify-center gap-2 rounded-full px-4 py-2 text-xs font-medium text-white shadow-sm disabled:opacity-40"
-            style={{ backgroundColor: 'var(--scrapbook-forest, #7A9172)' }}
-            onMouseEnter={(e) => { if (!(e.currentTarget as HTMLButtonElement).disabled) e.currentTarget.style.backgroundColor = 'var(--scrapbook-forest-dark, #5A6B4F)' }}
-            onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = 'var(--scrapbook-forest, #7A9172)')}>
+            style={{ backgroundColor: '#6F7F89' }}>
             {isBooking ? <><Loader2 className="h-3 w-3 animate-spin" /> Booking...</> : <><Check className="h-3 w-3" /> Confirm</>}
           </button>
         </div></div>)
@@ -348,73 +346,23 @@ export function AiAssistant() {
   const chatPlaceholder = PUBLIC_SAFE_MODE ? "Ask the assistant anything" : "Ask me about my hobbies or favorites!"
 
   return (
-    <section id="assistant" className="relative px-6 py-12" style={{ backgroundColor: 'transparent' }}>
-      <div className="relative mx-auto max-w-5xl">
-        <h2 
-          className="mb-4 text-3xl font-bold tracking-tight md:text-4xl"
-          style={{
-            color: 'var(--scrapbook-forest-dark, #5A6B4F)',
-            fontFamily: "var(--font-baloo, 'Baloo 2', cursive, sans-serif)",
-            position: 'relative',
-            display: 'inline-block',
-            paddingLeft: '2.5rem'
-          }}
-        >
-          <span style={{ position: 'absolute', left: 0, fontSize: '2rem' }}>💬</span>
-          Chat with Me
-        </h2>
-        <p 
-          className="mb-8 max-w-2xl leading-relaxed"
-          style={{ color: 'var(--scrapbook-text, #3A3A3A)' }}
-        >
+    <section id="assistant" className="relative px-6 py-12">
+      <div className="pointer-events-none absolute inset-0 bg-card/40" />
+      <div className="relative mx-auto max-w-4xl">
+        <p className="mb-2 text-sm font-medium uppercase tracking-widest" style={{ color: 'var(--color-heading)' }}>Talk to {DISPLAY_NAME}</p>
+        <h2 className="mb-4 text-3xl font-bold tracking-tight text-foreground md:text-4xl" style={{ color: 'var(--color-heading)' }}>Chat with Me</h2>
+        <p className="mb-10 max-w-2xl leading-relaxed text-muted-foreground">
           {PUBLIC_SAFE_MODE
             ? 'Ask the assistant general questions.'
-            : 'Chat with me about my hobbies, favorite foods, travel stories, or anything you\'re curious about - I\'ll reply casually and may ask a follow-up!'}
+            : 'Chat with me about my hobbies, favorite foods, travel stories, or anything you’re curious about — I’ll reply casually and may ask a follow-up!'}
         </p>
 
-        <div 
-          className="overflow-hidden rounded-2xl shadow-lg"
-          style={{
-            backgroundColor: 'var(--scrapbook-paper, #FAF7F0)',
-            border: '2px solid var(--scrapbook-brown, #9B8B7E)',
-            boxShadow: '0 8px 24px rgba(58, 58, 58, 0.15)',
-            position: 'relative',
-            backgroundImage: `repeating-linear-gradient(
-              90deg,
-              transparent,
-              transparent 2px,
-              rgba(90, 107, 79, 0.01) 2px,
-              rgba(90, 107, 79, 0.01) 4px
-            )`
-          }}
-        >
-          <div className="flex gap-2 px-4 pt-4">
-            <button 
-              onClick={() => setTab("chat")} 
-              className="flex flex-1 items-center justify-center gap-2 py-3 text-sm font-medium transition-all rounded-t-lg"
-              style={{
-                backgroundColor: tab === "chat" ? 'var(--scrapbook-tab-green, #C8D5C0)' : 'var(--scrapbook-paper-alt, #F0EBE0)',
-                color: tab === "chat" ? 'var(--scrapbook-forest-dark, #5A6B4F)' : 'var(--scrapbook-text-light, #6B6356)',
-                border: tab === "chat" ? '2px solid var(--scrapbook-forest-light, #A6B89A)' : '2px solid transparent',
-                borderBottom: tab === "chat" ? 'none' : '2px solid transparent',
-                transform: tab === "chat" ? 'translateY(2px)' : 'translateY(0)',
-                boxShadow: tab === "chat" ? '0 -4px 8px rgba(58, 58, 58, 0.08)' : 'none'
-              }}
-            >
+        <div className="overflow-hidden rounded-2xl border border-border bg-card shadow-lg shadow-foreground/8">
+          <div className="flex border-b border-border">
+            <button onClick={() => setTab("chat")} className={`flex flex-1 items-center justify-center gap-2 py-4 text-sm font-medium transition-colors ${tab === "chat" ? "border-b-2 border-primary text-primary" : "text-muted-foreground hover:text-foreground"}`}>
               <MessageCircle className="h-4 w-4" /> Chat
             </button>
-            <button 
-              onClick={() => setTab("call")} 
-              className="flex flex-1 items-center justify-center gap-2 py-3 text-sm font-medium transition-all rounded-t-lg"
-              style={{
-                backgroundColor: tab === "call" ? 'var(--scrapbook-tab-brown, #D9CFC0)' : 'var(--scrapbook-paper-alt, #F0EBE0)',
-                color: tab === "call" ? 'var(--scrapbook-forest-dark, #5A6B4F)' : 'var(--scrapbook-text-light, #6B6356)',
-                border: tab === "call" ? '2px solid var(--scrapbook-brown, #9B8B7E)' : '2px solid transparent',
-                borderBottom: tab === "call" ? 'none' : '2px solid transparent',
-                transform: tab === "call" ? 'translateY(2px)' : 'translateY(0)',
-                boxShadow: tab === "call" ? '0 -4px 8px rgba(58, 58, 58, 0.08)' : 'none'
-              }}
-            >
+            <button onClick={() => setTab("call")} className={`flex flex-1 items-center justify-center gap-2 py-4 text-sm font-medium transition-colors ${tab === "call" ? "border-b-2 border-sage-call text-sage-call dark:border-[oklch(0.70_0.12_150)] dark:text-[oklch(0.70_0.12_150)]" : "text-muted-foreground hover:text-foreground"}`}>
               <Phone className="h-4 w-4" /> Call
             </button>
           </div>
@@ -425,55 +373,17 @@ export function AiAssistant() {
                 <div className="flex flex-col gap-4">
                   {messages.map(msg => (
                     <div key={msg.id} className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}>
-                      <div 
-                        className="max-w-[85%] rounded-2xl px-5 py-3 text-sm leading-relaxed"
-                        style={{
-                          backgroundColor: msg.role === "user" 
-                            ? 'var(--scrapbook-forest, #7A9172)' 
-                            : 'var(--scrapbook-cream, #F8F4ED)',
-                          color: msg.role === "user" 
-                            ? 'white' 
-                            : 'var(--scrapbook-text, #3A3A3A)',
-                          border: msg.role === "user" 
-                            ? 'none' 
-                            : '1px solid var(--scrapbook-sand, #E5DCCE)',
-                          boxShadow: '0 2px 6px rgba(58, 58, 58, 0.08)'
-                        }}
-                      >
+                      <div className={`max-w-[85%] rounded-2xl px-5 py-3 text-sm leading-relaxed ${msg.role === "user" ? "bg-primary text-primary-foreground" : "bg-secondary text-secondary-foreground"}`}>
                         {msg.role === "assistant" ? renderMessage(msg) : msg.content}
                       </div>
                     </div>
                   ))}
                 </div>
               </div>
-              <div 
-                className="px-6 py-4"
-                style={{
-                  borderTop: '2px solid var(--scrapbook-sand, #E5DCCE)',
-                  backgroundColor: 'var(--scrapbook-cream, #F8F4ED)'
-                }}
-              >
+              <div className="border-t border-border bg-background/50 px-6 py-4">
                 <form onSubmit={e => { e.preventDefault(); handleSend() }} className="flex items-center gap-3">
-                  <input 
-                    type="text" 
-                    value={input} 
-                    onChange={e => setInput(e.target.value)} 
-                    placeholder={chatPlaceholder} 
-                    className="flex-1 rounded-xl px-5 py-3 text-sm focus:outline-none"
-                    style={{
-                      backgroundColor: 'white',
-                      border: '1px solid var(--scrapbook-sand, #E5DCCE)',
-                      color: 'var(--scrapbook-text, #3A3A3A)'
-                    }}
-                  />
-                  <button 
-                    type="submit" 
-                    disabled={!input.trim()} 
-                    className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl text-white shadow-sm transition-colors disabled:opacity-40" 
-                    style={{ backgroundColor: 'var(--scrapbook-forest, #7A9172)' }}
-                    onMouseEnter={(e) => { if (!(e.currentTarget as HTMLButtonElement).disabled) e.currentTarget.style.backgroundColor = 'var(--scrapbook-forest-dark, #5A6B4F)' }}
-                    onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = 'var(--scrapbook-forest, #7A9172)')}
-                  >
+                  <input type="text" value={input} onChange={e => setInput(e.target.value)} placeholder={chatPlaceholder} className="flex-1 rounded-xl border border-border bg-card px-5 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none" />
+                  <button type="submit" disabled={!input.trim()} className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl text-white shadow-sm transition-colors disabled:opacity-40" style={{ backgroundColor: '#6F7F89' }}>
                     <Send className="h-4 w-4" />
                   </button>
                 </form>

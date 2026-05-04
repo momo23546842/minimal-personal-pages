@@ -92,7 +92,7 @@ export function About() {
         <div className={styles.bottomGrid}>
           <div className={styles.lifestylePhoto}>
             <Image
-              src="/images/Japan/kumamoto-aso.jpg"
+              src="/images/bondi-sunrise.jpg"
               alt="Landscape"
               fill
               sizes="(max-width: 768px) 100vw, 50vw"
@@ -112,22 +112,7 @@ export function About() {
           </div>
         </div>
 
-        {/* Favorite Destinations */}
-        <div className={styles.destSection}>
-          <h3 className={styles.destTitle}>Favorite Destinations</h3>
-          <div className={styles.destGrid}>
-            {destinations.map((d) => (
-              <div key={d.alt} className={`${styles.destCard} ${styles[d.area]}`}>
-                <Image
-                  src={d.src}
-                  alt={d.alt}
-                  fill
-                  sizes="(max-width: 768px) 50vw, 25vw"
-                />
-              </div>
-            ))}
-          </div>
-        </div>
+        {/* Favorite Destinations section removed for About page (kept in Gallery) */}
       </div>
     </section>
   )

@@ -36,7 +36,7 @@ export default function ThemeProvider({ children }: Props) {
     <NextThemesProvider
       attribute="class"
       enableSystem={false}
-      defaultTheme="dark"
+      defaultTheme="light"
       storageKey="theme"
     >
       {children}

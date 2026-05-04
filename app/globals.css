@@ -5,21 +5,48 @@
 @custom-variant dark (&:is(.dark *));
 
 /* ========================================
-   Custom Color Palette
+   Custom Color Palette - Nature/Forest Scrapbook Theme
    ======================================== */
 :root {
+  /* — Scrapbook Paper Backgrounds — */
+  --scrapbook-bg: #F5F1E8;              /* Light beige paper background */
+  --scrapbook-paper: #FAF7F0;           /* Off-white notebook paper */
+  --scrapbook-paper-alt: #F0EBE0;       /* Kraft paper tone */
+  
+  /* — Nature/Forest Colors (Muted Tones) — */
+  --scrapbook-forest-dark: #5A6B4F;     /* Deep forest green */
+  --scrapbook-forest: #7A9172;          /* Muted sage green */
+  --scrapbook-forest-light: #A6B89A;    /* Light moss green */
+  --scrapbook-leaf: #8FA582;            /* Leaf green */
+  
+  /* — Earthy Accents — */
+  --scrapbook-brown: #9B8B7E;           /* Soft brown */
+  --scrapbook-brown-dark: #7A6B5D;      /* Dark kraft */
+  --scrapbook-cream: #F8F4ED;           /* Cream accent */
+  --scrapbook-sand: #E5DCCE;            /* Sandy beige */
+  
+  /* — Tab Colors (Muted Nature Tones) — */
+  --scrapbook-tab-green: #C8D5C0;       /* Pale green tab */
+  --scrapbook-tab-brown: #D9CFC0;       /* Beige brown tab */
+  --scrapbook-tab-sage: #B8C5B0;        /* Sage tab */
+  --scrapbook-tab-cream: #E8E0D5;       /* Cream tab */
+  
+  /* — Text Colors — */
+  --scrapbook-text: #3A3A3A;            /* Almost black text */
+  --scrapbook-text-light: #6B6356;      /* Lighter brown text */
+  
   /* — Base colors — */
-  --color-off-white: #f5f5f3;
-  --color-off-white-alt: #f0f0ee;
-  --color-blue-gray: #2f2f2f;
+  --color-off-white: #F5F1E8;
+  --color-off-white-alt: #F0EBE0;
+  --color-blue-gray: #3A3A3A;
 
   /* — Accent colors (muted / kusumi tones) — */
-  --color-pink: #E4C7C7;
-  --color-green: #C1D1C1;
-  --color-yellow: #E9DDB6;
-  --color-blue: #B8C8D4;
+  --color-pink: #D4C5BC;
+  --color-green: #A6B89A;
+  --color-yellow: #E5DCCE;
+  --color-blue: #A8B5B2;
   /* Deep heading blue to use for prominent section labels */
-  --color-heading: #2f2f2f;
+  --color-heading: #3A3A3A;
 
   /* — Glassmorphism — */
   --color-glass: rgba(255, 255, 255, 0.4);
@@ -166,9 +193,12 @@
   }
   html {
     scroll-behavior: smooth;
+    /* Clean soft paper background — no decorative pattern */
+    background-color: #F5F1E8;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply text-foreground;
+    background-color: transparent;
   }
 
   /* Headings use Playfair Display for a more stylish look */
@@ -188,4 +218,62 @@
 }
 .scrollbar-hide::-webkit-scrollbar {
   display: none; /* Safari and Chrome */
+}
+
+/* ========================================
+   Mobile overrides (≤640px)
+   ======================================== */
+@media (max-width: 640px) {
+  /* Prevent horizontal overflow site-wide */
+  body {
+    overflow-x: hidden;
+  }
+
+  /* Journey polaroid grid: 2 columns, no rotation */
+  .journey-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 0.875rem !important;
+  }
+
+  .journey-grid > div {
+    transform: none !important;
+    padding: 8px 8px 26px !important;
+  }
+
+  /* Gallery cards: keep 2-col, tighten gap */
+  .favorites-grid {
+    gap: 0.75rem !important;
+  }
+
+  .favorites-grid > div {
+    padding: 8px 8px 26px !important;
+  }
+
+  /* Hide Favorites link text in mobile header bar on small screens */
+  .mobile-fav-text {
+    display: none;
+  }
+}
+
+/* Very small mobile: only icon in mobile header Favorites */
+@media (max-width: 400px) {
+  .mobile-fav-text {
+    display: none;
+  }
+}
+
+/* ========================================
+   Desktop layout enhancements (≥1025px)
+   ======================================== */
+@media (min-width: 1025px) {
+  /* Journey polaroid grid: wider columns, comfortable spacing */
+  .journey-grid {
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)) !important;
+    gap: 2.5rem !important;
+  }
+
+  /* Gallery favorites grid: wider cards */
+  .favorites-grid {
+    gap: 1.75rem !important;
+  }
 }
