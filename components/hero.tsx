@@ -26,7 +26,7 @@ export function Hero() {
         <div className={styles.photoSide}>
           <div className={styles.photoFrame}>
             <Image
-              src="/images/profilepic.jpg"
+              src="/images/profile1.jpg"
               alt="Momo profile"
               fill
               sizes="(max-width: 768px) 100vw, 50vw"

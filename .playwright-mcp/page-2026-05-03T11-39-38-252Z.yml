@@ -1,0 +1,503 @@
+- generic [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e3]:
+      - link "Momo's Page ✨" [ref=e4] [cursor=pointer]:
+        - /url: "#hero"
+      - navigation "Main navigation" [ref=e5]:
+        - generic [ref=e6]:
+          - link "About" [ref=e7] [cursor=pointer]:
+            - /url: /#about
+          - link "Future" [ref=e8] [cursor=pointer]:
+            - /url: /#future
+          - link "Contact" [ref=e9] [cursor=pointer]:
+            - /url: /#contact
+        - generic [ref=e10]:
+          - link "Favorites" [ref=e11] [cursor=pointer]:
+            - /url: /gallery
+            - img [ref=e12]
+            - text: Favorites
+          - generic [ref=e15]:
+            - button "Chat" [ref=e16]:
+              - img [ref=e17]
+              - text: Chat
+            - button "Call" [ref=e19]:
+              - img [ref=e20]
+              - text: Call
+  - main [ref=e22]:
+    - generic [ref=e23]:
+      - generic [ref=e24]:
+        - generic [ref=e25]:
+          - heading "Gallery 📸" [level=1] [ref=e26]
+          - paragraph [ref=e27]: A small collection of favorites.
+        - link "← Back home" [ref=e29] [cursor=pointer]:
+          - /url: /
+      - generic [ref=e30]:
+        - button "All" [ref=e31]
+        - button "Food" [ref=e32]
+        - button "Japan" [ref=e33]
+        - button "Australia" [ref=e34]
+        - button "Philippines" [ref=e35]
+        - button "Cafe" [ref=e36]
+      - heading "Food 🍜" [level=2] [ref=e37]
+      - generic [ref=e38]:
+        - generic [ref=e39]:
+          - img "Egg Rice" [ref=e41]
+          - generic [ref=e42]:
+            - heading "Egg Rice" [level=4] [ref=e43]
+            - generic [ref=e44]:
+              - img [ref=e45]
+              - generic [ref=e48]: Kamakura
+            - paragraph [ref=e49]: Simple, warm, and perfect — I could eat this anytime.
+            - generic [ref=e50]:
+              - generic [ref=e51]: "#rice"
+              - generic [ref=e52]: "#japan"
+        - generic [ref=e53]:
+          - img "Seafood Bowl" [ref=e55]
+          - generic [ref=e56]:
+            - heading "Seafood Bowl" [level=4] [ref=e57]
+            - generic [ref=e58]:
+              - img [ref=e59]
+              - generic [ref=e62]: Chiba
+            - paragraph [ref=e63]: Fresh seafood with a seaside vibe. Instant happiness.
+            - generic [ref=e64]:
+              - generic [ref=e65]: "#seafood"
+              - generic [ref=e66]: "#japan"
+        - generic [ref=e67]:
+          - img "Gyutan Don Set" [ref=e69]
+          - generic [ref=e70]:
+            - heading "Gyutan Don Set" [level=4] [ref=e71]
+            - generic [ref=e72]:
+              - img [ref=e73]
+              - generic [ref=e76]: Miyazaki
+            - paragraph [ref=e77]: Hearty and satisfying — especially after a long day.
+            - generic [ref=e78]:
+              - generic [ref=e79]: "#beef"
+              - generic [ref=e80]: "#japan"
+        - generic [ref=e81]:
+          - img "Anmitsu" [ref=e83]
+          - generic [ref=e84]:
+            - heading "Anmitsu" [level=4] [ref=e85]
+            - generic [ref=e86]:
+              - img [ref=e87]
+              - generic [ref=e90]: Enoshima
+            - paragraph [ref=e91]: Sweet, chilled, and nostalgic. A perfect coastal dessert.
+            - generic [ref=e92]:
+              - generic [ref=e93]: "#dessert"
+              - generic [ref=e94]: "#japan"
+      - separator [ref=e95]
+      - heading "Japan 🏯" [level=2] [ref=e96]
+      - generic [ref=e97]:
+        - generic [ref=e98]:
+          - img "Otaru Canal" [ref=e100]
+          - generic [ref=e101]:
+            - heading "Otaru Canal" [level=4] [ref=e102]
+            - generic [ref=e103]:
+              - img [ref=e104]
+              - generic [ref=e107]: Hokkaido, Japan
+            - paragraph [ref=e108]: The historic Otaru Canal, famous for its charming stone warehouses and lantern-lit atmosphere.
+            - generic [ref=e109]:
+              - generic [ref=e110]: "#canal"
+              - generic [ref=e111]: "#hokkaido"
+        - generic [ref=e112]:
+          - img "Aso" [ref=e114]
+          - generic [ref=e115]:
+            - heading "Aso" [level=4] [ref=e116]
+            - generic [ref=e117]:
+              - img [ref=e118]
+              - generic [ref=e121]: Kumamoto
+            - paragraph [ref=e122]: Wide volcanic landscapes that feel otherworldly.
+            - generic [ref=e123]:
+              - generic [ref=e124]: "#volcano"
+              - generic [ref=e125]: "#nature"
+              - generic [ref=e126]: "#kumamoto"
+        - generic [ref=e127]:
+          - img "Kusatsu Onsen" [ref=e129]
+          - generic [ref=e130]:
+            - heading "Kusatsu Onsen" [level=4] [ref=e131]
+            - generic [ref=e132]:
+              - img [ref=e133]
+              - generic [ref=e136]: Gunma, Japan
+            - paragraph [ref=e137]: One of Japan's most famous hot spring towns.
+            - generic [ref=e138]:
+              - generic [ref=e139]: "#onsen"
+              - generic [ref=e140]: "#gunma"
+        - generic [ref=e141]:
+          - img "Enoshima" [ref=e143]
+          - generic [ref=e144]:
+            - heading "Enoshima" [level=4] [ref=e145]
+            - generic [ref=e146]:
+              - img [ref=e147]
+              - generic [ref=e150]: Enoshima
+            - paragraph [ref=e151]: Coastal island with great sea views and sweet treats.
+            - generic [ref=e152]:
+              - generic [ref=e153]: "#coast"
+              - generic [ref=e154]: "#dessert"
+              - generic [ref=e155]: "#kanagawa"
+        - generic [ref=e156]:
+          - img "Korankei" [ref=e158]
+          - generic [ref=e159]:
+            - heading "Korankei" [level=4] [ref=e160]
+            - generic [ref=e161]:
+              - img [ref=e162]
+              - generic [ref=e165]: Aichi
+            - paragraph [ref=e166]: A lovely gorge especially pretty during autumn colors.
+            - generic [ref=e167]:
+              - generic [ref=e168]: "#nature"
+              - generic [ref=e169]: "#autumn"
+              - generic [ref=e170]: "#aichi"
+        - generic [ref=e171]:
+          - img "Kumamoto Castle" [ref=e173]
+          - generic [ref=e174]:
+            - heading "Kumamoto Castle" [level=4] [ref=e175]
+            - generic [ref=e176]:
+              - img [ref=e177]
+              - generic [ref=e180]: Kumamoto
+            - paragraph [ref=e181]: A stately castle with a storied history and graceful grounds.
+            - generic [ref=e182]:
+              - generic [ref=e183]: "#castle"
+              - generic [ref=e184]: "#history"
+              - generic [ref=e185]: "#kumamoto"
+        - generic [ref=e186]:
+          - img "Kurokawa Onsen" [ref=e188]
+          - generic [ref=e189]:
+            - heading "Kurokawa Onsen" [level=4] [ref=e190]
+            - generic [ref=e191]:
+              - img [ref=e192]
+              - generic [ref=e195]: Kumamoto
+            - paragraph [ref=e196]: Charming hot-spring town with rustic ryokan vibes.
+            - generic [ref=e197]:
+              - generic [ref=e198]: "#onsen"
+              - generic [ref=e199]: "#relax"
+              - generic [ref=e200]: "#kumamoto"
+        - generic [ref=e201]:
+          - img "Miyazaki Moai" [ref=e203]
+          - generic [ref=e204]:
+            - heading "Miyazaki Moai" [level=4] [ref=e205]
+            - generic [ref=e206]:
+              - img [ref=e207]
+              - generic [ref=e210]: Miyazaki
+            - paragraph [ref=e211]: Unexpected stone figures on a quiet stretch of coastline.
+            - generic [ref=e212]:
+              - generic [ref=e213]: "#quirky"
+              - generic [ref=e214]: "#coast"
+              - generic [ref=e215]: "#miyazaki"
+        - generic [ref=e216]:
+          - img "Starbucks Meguro" [ref=e218]
+          - generic [ref=e219]:
+            - heading "Starbucks Meguro" [level=4] [ref=e220]
+            - generic [ref=e221]:
+              - img [ref=e222]
+              - generic [ref=e225]: Tokyo
+            - paragraph [ref=e226]: A cozy coffee stop tucked into a leafy Tokyo neighborhood.
+            - generic [ref=e227]:
+              - generic [ref=e228]: "#coffee"
+              - generic [ref=e229]: "#tokyo"
+      - separator [ref=e230]
+      - heading "Australia 🦘" [level=2] [ref=e231]
+      - generic [ref=e232]:
+        - generic [ref=e233]:
+          - img "Art Gallery" [ref=e235]
+          - generic [ref=e236]:
+            - heading "Art Gallery" [level=4] [ref=e237]
+            - generic [ref=e238]:
+              - img [ref=e239]
+              - generic [ref=e242]: Sydney
+            - paragraph [ref=e243]: A great spot for modern and classic exhibitions.
+            - generic [ref=e244]:
+              - generic [ref=e245]: "#art"
+              - generic [ref=e246]: "#sydney"
+        - generic [ref=e247]:
+          - img "Blue Mountains" [ref=e249]
+          - generic [ref=e250]:
+            - heading "Blue Mountains" [level=4] [ref=e251]
+            - generic [ref=e252]:
+              - img [ref=e253]
+              - generic [ref=e256]: Sydney
+            - paragraph [ref=e257]: Foggy cliffs and eucalyptus-scented walks.
+            - generic [ref=e258]:
+              - generic [ref=e259]: "#nature"
+              - generic [ref=e260]: "#sydney"
+        - generic [ref=e261]:
+          - img "Lantern Festival" [ref=e263]
+          - generic [ref=e264]:
+            - heading "Lantern Festival" [level=4] [ref=e265]
+            - generic [ref=e266]:
+              - img [ref=e267]
+              - generic [ref=e270]: Sydney
+            - paragraph [ref=e271]: Colorful lights and a festive evening vibe.
+            - generic [ref=e272]:
+              - generic [ref=e273]: "#festival"
+              - generic [ref=e274]: "#sydney"
+        - generic [ref=e275]:
+          - img "Bondi Market" [ref=e277]
+          - generic [ref=e278]:
+            - heading "Bondi Market" [level=4] [ref=e279]
+            - generic [ref=e280]:
+              - img [ref=e281]
+              - generic [ref=e284]: Bondi
+            - paragraph [ref=e285]: Local stalls and beachside treats to browse.
+            - generic [ref=e286]:
+              - generic [ref=e287]: "#market"
+              - generic [ref=e288]: "#bondi"
+        - generic [ref=e289]:
+          - img "Opera House & Harbour" [ref=e291]
+          - generic [ref=e292]:
+            - heading "Opera House & Harbour" [level=4] [ref=e293]
+            - generic [ref=e294]:
+              - img [ref=e295]
+              - generic [ref=e298]: Sydney
+            - paragraph [ref=e299]: Iconic views you can’t miss in the harbor.
+            - generic [ref=e300]:
+              - generic [ref=e301]: "#iconic"
+              - generic [ref=e302]: "#sydney"
+        - generic [ref=e303]:
+          - img "Quokka Spot" [ref=e305]
+          - generic [ref=e306]:
+            - heading "Quokka Spot" [level=4] [ref=e307]
+            - generic [ref=e308]:
+              - img [ref=e309]
+              - generic [ref=e312]: Perth
+            - paragraph [ref=e313]: Meet friendly quokkas and enjoy sunny walks.
+            - generic [ref=e314]:
+              - generic [ref=e315]: "#wildlife"
+              - generic [ref=e316]: "#perth"
+        - generic [ref=e317]:
+          - img "Royal National Park" [ref=e319]
+          - generic [ref=e320]:
+            - heading "Royal National Park" [level=4] [ref=e321]
+            - generic [ref=e322]:
+              - img [ref=e323]
+              - generic [ref=e326]: Sydney
+            - paragraph [ref=e327]: Coastal trails and hidden beaches for day hikes.
+            - generic [ref=e328]:
+              - generic [ref=e329]: "#hiking"
+              - generic [ref=e330]: "#sydney"
+        - generic [ref=e331]:
+          - img "Sculpture by the Sea" [ref=e333]
+          - generic [ref=e334]:
+            - heading "Sculpture by the Sea" [level=4] [ref=e335]
+            - generic [ref=e336]:
+              - img [ref=e337]
+              - generic [ref=e340]: Bondi
+            - paragraph [ref=e341]: Outdoor sculptures with an ocean backdrop.
+            - generic [ref=e342]:
+              - generic [ref=e343]: "#art"
+              - generic [ref=e344]: "#bondi"
+      - separator [ref=e345]
+      - heading "Philippines 🌊" [level=2] [ref=e346]
+      - generic [ref=e347]:
+        - generic [ref=e348]:
+          - img "Canyoning" [ref=e350]
+          - generic [ref=e351]:
+            - heading "Canyoning" [level=4] [ref=e352]
+            - generic [ref=e353]:
+              - img [ref=e354]
+              - generic [ref=e357]: Kawasan Falls, Cebu
+            - paragraph [ref=e358]: Thrilling and so worth it.
+            - generic [ref=e359]:
+              - generic [ref=e360]: "#adventure"
+              - generic [ref=e361]: "#cebu"
+        - generic [ref=e362]:
+          - img "Volunteer Day" [ref=e364]
+          - generic [ref=e365]:
+            - heading "Volunteer Day" [level=4] [ref=e366]
+            - generic [ref=e367]:
+              - img [ref=e368]
+              - generic [ref=e371]: Cebu
+            - paragraph [ref=e372]: One of my favorite memories.
+            - generic [ref=e373]:
+              - generic [ref=e374]: "#volunteer"
+              - generic [ref=e375]: "#cebu"
+        - generic [ref=e376]:
+          - img "Parasailing" [ref=e378]
+          - generic [ref=e379]:
+            - heading "Parasailing" [level=4] [ref=e380]
+            - generic [ref=e381]:
+              - img [ref=e382]
+              - generic [ref=e385]: Cebu
+            - paragraph [ref=e386]: Blue sky, blue sea, pure fun.
+            - generic [ref=e387]:
+              - generic [ref=e388]: "#beach"
+              - generic [ref=e389]: "#cebu"
+      - separator [ref=e390]
+      - heading "Cafe ☕" [level=2] [ref=e391]
+      - generic [ref=e392]:
+        - generic [ref=e393]:
+          - img "Birichina Cafe (Bondi)" [ref=e395]
+          - generic [ref=e396]:
+            - heading "Birichina Cafe (Bondi)" [level=4] [ref=e397]
+            - generic [ref=e398]:
+              - img [ref=e399]
+              - generic [ref=e402]: Bondi, Sydney
+            - paragraph [ref=e403]: Italian-inspired bites by the beach.
+            - generic [ref=e404]:
+              - generic [ref=e405]: "#coffee"
+              - generic [ref=e406]: "#bondi"
+              - generic [ref=e407]: "#sydney"
+        - generic [ref=e408]:
+          - img "Lune Croissanterie (Sydney)" [ref=e410]
+          - generic [ref=e411]:
+            - heading "Lune Croissanterie (Sydney)" [level=4] [ref=e412]
+            - generic [ref=e413]:
+              - img [ref=e414]
+              - generic [ref=e417]: Sydney
+            - paragraph [ref=e418]: Iconic croissants and pastries.
+            - generic [ref=e419]:
+              - generic [ref=e420]: "#pastry"
+              - generic [ref=e421]: "#sydney"
+        - generic [ref=e422]:
+          - img "Paramount Coffee Project (Surry Hills)" [ref=e424]
+          - generic [ref=e425]:
+            - heading "Paramount Coffee Project (Surry Hills)" [level=4] [ref=e426]
+            - generic [ref=e427]:
+              - img [ref=e428]
+              - generic [ref=e431]: Surry Hills, Sydney
+            - paragraph [ref=e432]: A specialty coffee destination.
+            - generic [ref=e433]:
+              - generic [ref=e434]: "#coffee"
+              - generic [ref=e435]: "#surry hills"
+              - generic [ref=e436]: "#sydney"
+        - generic [ref=e437]:
+          - img "Speedos Cafe (Bondi)" [ref=e439]
+          - generic [ref=e440]:
+            - heading "Speedos Cafe (Bondi)" [level=4] [ref=e441]
+            - generic [ref=e442]:
+              - img [ref=e443]
+              - generic [ref=e446]: Bondi, Sydney
+            - paragraph [ref=e447]: Beachside brunch with ocean views.
+            - generic [ref=e448]:
+              - generic [ref=e449]: "#brunch"
+              - generic [ref=e450]: "#bondi"
+              - generic [ref=e451]: "#sydney"
+        - generic [ref=e452]:
+          - img "The Brothers Cafe (Sydney)" [ref=e454]
+          - generic [ref=e455]:
+            - heading "The Brothers Cafe (Sydney)" [level=4] [ref=e456]
+            - generic [ref=e457]:
+              - img [ref=e458]
+              - generic [ref=e461]: Sydney
+            - paragraph [ref=e462]: Great coffee and a cozy atmosphere.
+            - generic [ref=e463]:
+              - generic [ref=e464]: "#coffee"
+              - generic [ref=e465]: "#sydney"
+        - generic [ref=e466]:
+          - img "The Tea Cosy (The Rocks)" [ref=e468]
+          - generic [ref=e469]:
+            - heading "The Tea Cosy (The Rocks)" [level=4] [ref=e470]
+            - generic [ref=e471]:
+              - img [ref=e472]
+              - generic [ref=e475]: The Rocks, Sydney
+            - paragraph [ref=e476]: A charming tearoom tucked in the historic Rocks.
+            - generic [ref=e477]:
+              - generic [ref=e478]: "#tea"
+              - generic [ref=e479]: "#the rocks"
+              - generic [ref=e480]: "#sydney"
+        - generic [ref=e481]:
+          - img "Two Good Eggs Cafe (Surry Hills)" [ref=e483]
+          - generic [ref=e484]:
+            - heading "Two Good Eggs Cafe (Surry Hills)" [level=4] [ref=e485]
+            - generic [ref=e486]:
+              - img [ref=e487]
+              - generic [ref=e490]: Surry Hills, Sydney
+            - paragraph [ref=e491]: Comfort brunch done right.
+            - generic [ref=e492]:
+              - generic [ref=e493]: "#brunch"
+              - generic [ref=e494]: "#surry hills"
+              - generic [ref=e495]: "#sydney"
+        - generic [ref=e496]:
+          - img "Bills" [ref=e498]
+          - generic [ref=e499]:
+            - heading "Bills" [level=4] [ref=e500]
+            - generic [ref=e501]:
+              - img [ref=e502]
+              - generic [ref=e505]: Surry Hills, Sydney
+            - paragraph [ref=e506]: A popular cafe known for its relaxed atmosphere and delicious brunch.
+            - generic [ref=e507]:
+              - generic [ref=e508]: "#brunch"
+              - generic [ref=e509]: "#surry hills"
+              - generic [ref=e510]: "#sydney"
+        - generic [ref=e511]:
+          - img "Single O" [ref=e513]
+          - generic [ref=e514]:
+            - heading "Single O" [level=4] [ref=e515]
+            - generic [ref=e516]:
+              - img [ref=e517]
+              - generic [ref=e520]: Surry Hills, Sydney
+            - paragraph [ref=e521]: A well-known Sydney cafe famous for specialty coffee.
+            - generic [ref=e522]:
+              - generic [ref=e523]: "#coffee"
+              - generic [ref=e524]: "#surry hills"
+              - generic [ref=e525]: "#sydney"
+  - generic [active]:
+    - generic [ref=e528]:
+      - generic [ref=e529]:
+        - generic [ref=e530]:
+          - navigation [ref=e531]:
+            - button "previous" [disabled] [ref=e532]:
+              - img "previous" [ref=e533]
+            - generic [ref=e535]:
+              - generic [ref=e536]: 1/
+              - text: "1"
+            - button "next" [disabled] [ref=e537]:
+              - img "next" [ref=e538]
+          - img
+        - generic [ref=e540]:
+          - link "Next.js 16.1.6 (stale) Turbopack" [ref=e541] [cursor=pointer]:
+            - /url: https://nextjs.org/docs/messages/version-staleness
+            - img [ref=e542]
+            - generic "There is a newer version (16.2.4) available, upgrade recommended!" [ref=e544]: Next.js 16.1.6 (stale)
+            - generic [ref=e545]: Turbopack
+          - img
+      - dialog "Build Error" [ref=e547]:
+        - generic [ref=e550]:
+          - generic [ref=e551]:
+            - generic [ref=e552]:
+              - generic [ref=e554]: Build Error
+              - generic [ref=e555]:
+                - button "Copy Error Info" [ref=e556] [cursor=pointer]:
+                  - img [ref=e557]
+                - button "No related documentation found" [disabled] [ref=e559]:
+                  - img [ref=e560]
+                - button "Attach Node.js inspector" [ref=e562] [cursor=pointer]:
+                  - img [ref=e563]
+            - generic [ref=e572]: Parsing ecmascript source code failed
+          - generic [ref=e574]:
+            - generic [ref=e576]:
+              - img [ref=e578]
+              - generic [ref=e581]: ./components/ai-assistant.tsx (372:95)
+              - button "Open in editor" [ref=e582] [cursor=pointer]:
+                - img [ref=e584]
+            - generic [ref=e587]:
+              - generic [ref=e588]: Parsing ecmascript source code failed
+              - generic [ref=e589]: 370 |
+              - generic [ref=e590]: "{"
+              - text: PUBLIC_SAFE_MODE
+              - generic [ref=e591]: 371 |
+              - text: "?"
+              - generic [ref=e592]: "'Ask the assistant general questions.'"
+              - text: ">"
+              - generic [ref=e593]: 372 |
+              - text: ":"
+              - generic [ref=e594]: "'Chat with me about my hobbies, favorite foods, travel stories, or anything you'"
+              - generic [ref=e595]: re curious about —
+              - text: I
+              - generic [ref=e596]: "'ll reply casually and may ask a follow-up!'"
+              - generic [ref=e597]: "}"
+              - generic [ref=e598]: "|"
+              - text: ^^
+              - generic [ref=e599]: 373 |
+              - text: </p>
+              - generic [ref=e600]: 374 |
+              - generic [ref=e601]: 375 |
+              - text: <div
+              - generic [ref=e602]: "Expected '</', got 'ident' Import traces: Client Component Browser: ./components/ai-assistant.tsx [Client Component Browser] ./app/page.tsx [Client Component Browser] ./app/page.tsx [Server Component] Client Component SSR: ./components/ai-assistant.tsx [Client Component SSR] ./app/page.tsx [Client Component SSR] ./app/page.tsx [Server Component]"
+        - generic [ref=e603]: "1"
+        - generic [ref=e604]: "2"
+    - generic [ref=e609] [cursor=pointer]:
+      - button "Open Next.js Dev Tools" [ref=e610]:
+        - img [ref=e611]
+      - button "Open issues overlay" [ref=e615]:
+        - generic [ref=e616]:
+          - generic [ref=e617]: "0"
+          - generic [ref=e618]: "1"
+        - generic [ref=e619]: Issue

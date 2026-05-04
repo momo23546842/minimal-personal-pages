@@ -1,0 +1,143 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e3]:
+      - link "Momo's Page ✨" [ref=e4] [cursor=pointer]:
+        - /url: "#hero"
+      - navigation "Main navigation" [ref=e5]:
+        - generic [ref=e6]:
+          - link "About" [ref=e7] [cursor=pointer]:
+            - /url: /#about
+          - link "Future" [ref=e8] [cursor=pointer]:
+            - /url: /#future
+          - link "Contact" [ref=e9] [cursor=pointer]:
+            - /url: /#contact
+        - generic [ref=e10]:
+          - link "Favorites" [ref=e11] [cursor=pointer]:
+            - /url: /gallery
+            - img [ref=e12]
+            - text: Favorites
+          - generic [ref=e15]:
+            - button "Chat" [ref=e16]:
+              - img [ref=e17]
+              - text: Chat
+            - button "Call" [ref=e19]:
+              - img [ref=e20]
+              - text: Call
+  - banner [ref=e22]:
+    - generic [ref=e23]:
+      - link "Momo's Page ✨" [ref=e24] [cursor=pointer]:
+        - /url: "#hero"
+      - navigation "Main navigation" [ref=e25]:
+        - generic [ref=e26]:
+          - link "About" [ref=e27] [cursor=pointer]:
+            - /url: /#about
+          - link "Future" [ref=e28] [cursor=pointer]:
+            - /url: /#future
+          - link "Contact" [ref=e29] [cursor=pointer]:
+            - /url: /#contact
+        - generic [ref=e30]:
+          - link "Favorites" [ref=e31] [cursor=pointer]:
+            - /url: /gallery
+            - img [ref=e32]
+            - text: Favorites
+          - generic [ref=e35]:
+            - button "Chat" [ref=e36]:
+              - img [ref=e37]
+              - text: Chat
+            - button "Call" [ref=e39]:
+              - img [ref=e40]
+              - text: Call
+  - main [ref=e42]:
+    - generic [ref=e43]:
+      - generic: 🍃
+      - generic: 🌿
+      - generic: 🌱
+      - generic [ref=e44]:
+        - img "Momo profile" [ref=e48]
+        - generic [ref=e50]:
+          - heading "Momo" [level=1] [ref=e51]
+          - paragraph [ref=e54]: Collecting little moments from my journey
+    - generic [ref=e56]:
+      - generic [ref=e57]:
+        - button "✨ About" [ref=e58] [cursor=pointer]:
+          - generic [ref=e59]: ✨
+          - generic [ref=e60]: About
+        - button "📸 Journey" [ref=e61] [cursor=pointer]:
+          - generic [ref=e62]: 📸
+          - generic [ref=e63]: Journey
+        - button "🌟 Future" [ref=e64] [cursor=pointer]:
+          - generic [ref=e65]: 🌟
+          - generic [ref=e66]: Future
+        - button "💌 Contact" [ref=e67] [cursor=pointer]:
+          - generic [ref=e68]: 💌
+          - generic [ref=e69]: Contact
+      - generic [ref=e73]:
+        - paragraph [ref=e74]: About
+        - heading "About Me" [level=2] [ref=e75]
+        - paragraph [ref=e76]: Creative / Design / Travel
+        - generic [ref=e77]:
+          - img "Momo - lifestyle" [ref=e79]
+          - generic [ref=e80]:
+            - heading "Hello! I'm Momo" [level=3] [ref=e81]
+            - paragraph [ref=e82]: Welcome to my page!
+            - paragraph [ref=e83]: This is a small space where I keep the things I like. Food I enjoy, places I've been, places I want to go someday. And a chat where you can just talk to me.
+            - paragraph [ref=e84]: There's nothing particularly special here, but somehow, it feels like me.
+        - generic [ref=e85]:
+          - generic [ref=e86]:
+            - img [ref=e88]
+            - generic [ref=e94]: What I Do
+            - generic [ref=e95]: Nutrition × IT
+          - generic [ref=e96]:
+            - img [ref=e98]
+            - generic [ref=e101]: My Hobbies
+            - generic [ref=e102]: Photography & Travel
+          - generic [ref=e103]:
+            - img [ref=e105]
+            - generic [ref=e110]: Fun Facts
+            - generic [ref=e111]: Hiking & Good Food
+        - generic [ref=e112]:
+          - img "Landscape" [ref=e114]
+          - generic [ref=e115]:
+            - heading "Things I Love" [level=3] [ref=e116]
+            - list [ref=e117]:
+              - listitem [ref=e118]: Nature & Hiking
+              - listitem [ref=e120]: Good Food
+              - listitem [ref=e122]: Traveling
+              - listitem [ref=e124]: Exploring New Places
+        - generic [ref=e126]:
+          - heading "🍃 Favorite Destinations" [level=3] [ref=e127]
+          - generic [ref=e128]:
+            - img "Sydney, Australia" [ref=e130]
+            - img "Kumamoto, Japan" [ref=e132]
+            - img "Korankei, Aichi" [ref=e134]
+            - img "Art Gallery, Sydney" [ref=e136]
+            - img "Enoshima, Japan" [ref=e138]
+            - img "Quokka, Perth" [ref=e140]
+            - img "Parasailing, Cebu" [ref=e142]
+            - img "Blue Mountains" [ref=e144]
+            - img "Bondi, Australia" [ref=e146]
+            - img "Miyazaki, Japan" [ref=e148]
+    - generic [ref=e150]:
+      - heading "💬 Chat with Me" [level=2] [ref=e151]:
+        - generic [ref=e152]: 💬
+        - text: Chat with Me
+      - paragraph [ref=e153]: Chat with me about my hobbies, favorite foods, travel stories, or anything you're curious about - I'll reply casually and may ask a follow-up!
+      - generic [ref=e154]:
+        - generic [ref=e155]:
+          - button "Chat" [ref=e156]:
+            - img [ref=e157]
+            - text: Chat
+          - button "Call" [ref=e159]:
+            - img [ref=e160]
+            - text: Call
+        - generic [ref=e162]:
+          - generic [ref=e166]: Hey! I'm Momo. Ask me about my hobbies, favorites, or interests!
+          - generic [ref=e168]:
+            - textbox "Ask me about my hobbies or favorites!" [ref=e169]
+            - button [disabled] [ref=e170]:
+              - img [ref=e171]
+  - contentinfo [ref=e174]:
+    - generic [ref=e175]:
+      - paragraph [ref=e176]: © 2026 Momo
+      - link "GitHub" [ref=e178] [cursor=pointer]:
+        - /url: https://github.com
