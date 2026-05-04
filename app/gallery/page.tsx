@@ -81,9 +81,21 @@ function GalleryLightbox({ item, onClose }: { item: FavItem; onClose: () => void
           }}>{item.title}</h3>
 
           {item.location && (
-            <div style={{ display: "flex", alignItems: "center", gap: "5px", marginBottom: "10px", color: "var(--scrapbook-text-light, #6B6356)", fontSize: "0.82rem" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "10px", color: "var(--scrapbook-text-light, #6B6356)", fontSize: "0.82rem" }}>
               <MapPin size={13} />
-              <span>{item.location}</span>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                {item.placeName && item.mapUrl ? (
+                  <a
+                    href={item.mapUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{ color: 'var(--scrapbook-forest, #7A9172)', textDecoration: 'none', fontWeight: 600 }}
+                    onMouseEnter={(e: any) => { e.currentTarget.style.color = 'var(--scrapbook-forest-dark, #5A6B4F)'; e.currentTarget.style.textDecoration = 'underline' }}
+                    onMouseLeave={(e: any) => { e.currentTarget.style.color = 'var(--scrapbook-forest, #7A9172)'; e.currentTarget.style.textDecoration = 'none' }}
+                  >{item.placeName}</a>
+                ) : null}
+                <span style={{ color: 'var(--scrapbook-text-light, #6B6356)' }}>{item.placeName ? `— ${item.location}` : item.location}</span>
+              </div>
             </div>
           )}
 
@@ -260,7 +272,7 @@ export default function GalleryPage() {
                 color: 'var(--scrapbook-forest-dark, #5A6B4F)'
               }}
             >
-              Food 🍜
+              Food 
             </h2>
             <FavoritesGrid items={food} onItemClick={setSelected} />
 
@@ -281,7 +293,7 @@ export default function GalleryPage() {
                 color: 'var(--scrapbook-forest-dark, #5A6B4F)'
               }}
             >
-              Japan 🏯
+              Japan 
             </h2>
             <FavoritesGrid items={japan} onItemClick={setSelected} />
 
@@ -302,7 +314,7 @@ export default function GalleryPage() {
                 color: 'var(--scrapbook-forest-dark, #5A6B4F)'
               }}
             >
-              Australia 🦘
+              Australia 
             </h2>
             <FavoritesGrid items={australia} onItemClick={setSelected} />
 
@@ -323,7 +335,7 @@ export default function GalleryPage() {
                 color: 'var(--scrapbook-forest-dark, #5A6B4F)'
               }}
             >
-              Philippines 🌊
+              Philippines 
             </h2>
             <FavoritesGrid items={philippines} onItemClick={setSelected} />
 
@@ -344,7 +356,7 @@ export default function GalleryPage() {
                 color: 'var(--scrapbook-forest-dark, #5A6B4F)'
               }}
             >
-              Cafe ☕
+              Cafe 
             </h2>
             <FavoritesGrid items={cafe} onItemClick={setSelected} />
           </>

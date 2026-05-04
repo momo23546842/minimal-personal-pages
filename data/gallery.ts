@@ -1,10 +1,12 @@
 export const foodPhotos = [
   {
     category: 'food',
-    image: '/images/food/kamakura-egg-rice.jpg',
-    title: 'Egg Rice',
-    location: 'Kamakura',
-    caption: 'Simple, warm, and perfect — I could eat this anytime.',
+    image: '/images/food/kamakura-yoridokoro.jpg',
+    title: 'Tamago Kake Gohan (Egg Rice) Set',
+    location: 'Kamakura, Japan',
+    placeName: 'Yoridokoro',
+    mapUrl: 'https://www.google.com/maps/search/?api=1&query=Yoridokoro+Kamakura',
+    caption: 'You can enjoy a gentle and comforting breakfast here.',
     tags: ['rice', 'japan']
   },
   {

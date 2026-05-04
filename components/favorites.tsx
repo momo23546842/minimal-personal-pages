@@ -6,6 +6,8 @@ import { foodPhotos, japanPhotos, australiaPhotos, philippinesPhotos, cafePhotos
 export type FavItem = {
   title: string
   location?: string
+  placeName?: string
+  mapUrl?: string
   caption?: string
   tags?: string[]
   image?: string
@@ -38,7 +40,7 @@ export function FavoritesGrid({ items, onItemClick }: { items: FavItem[], onItem
             e.currentTarget.style.borderColor = 'rgba(229, 220, 206, 0.5)'
           }}
         >
-          <div className="relative w-full aspect-square rounded-sm overflow-hidden mb-3">
+          <div className="relative w-full aspect-square lg:aspect-4/3 rounded-sm overflow-hidden mb-3">
             {it.image ? (
               <Image src={it.image} alt={it.title} fill className="object-cover" />
             ) : (
@@ -47,25 +49,38 @@ export function FavoritesGrid({ items, onItemClick }: { items: FavItem[], onItem
           </div>
           <div className="px-1">
             <h4 
-              className="mb-1.5 text-xs md:text-sm font-bold leading-tight"
+              className="mb-2 text-xs md:text-sm font-bold leading-tight"
               style={{ 
                 fontFamily: 'var(--font-sans)',
                 color: 'var(--scrapbook-forest-dark, #5A6B4F)'
               }}
             >{it.title}</h4>
             {it.location && (
-              <div className="flex items-center gap-1.5 text-[10px] md:text-xs mb-1.5" style={{ color: 'var(--scrapbook-text-light, #6B6356)' }}>
+              <div className="flex items-center gap-1.5 text-[10px] md:text-xs mb-2" style={{ color: 'var(--scrapbook-text-light, #6B6356)' }}>
                 <MapPin className="h-3 w-3 shrink-0" />
-                <span className="line-clamp-1">{it.location}</span>
+                <div className="flex items-center gap-1 leading-tight">
+                  {it.placeName && it.mapUrl ? (
+                    <a
+                      href={it.mapUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="line-clamp-1 font-medium"
+                      style={{ color: 'var(--scrapbook-forest, #7A9172)', textDecoration: 'none' }}
+                      onMouseEnter={(e) => { e.currentTarget.style.color = 'var(--scrapbook-forest-dark, #5A6B4F)'; e.currentTarget.style.textDecoration = 'underline' }}
+                      onMouseLeave={(e) => { e.currentTarget.style.color = 'var(--scrapbook-forest, #7A9172)'; e.currentTarget.style.textDecoration = 'none' }}
+                    >{it.placeName}</a>
+                  ) : null}
+                  <span className="line-clamp-1" style={{ color: 'var(--scrapbook-text-light, #6B6356)' }}>{it.placeName ? ` — ${it.location}` : it.location}</span>
+                </div>
               </div>
             )}
             {it.caption && (
-              <p className="text-[9px] md:text-[10px] leading-relaxed line-clamp-2" style={{ color: 'var(--scrapbook-text, #3A3A3A)', opacity: 0.75 }}>
+              <p className="text-[9px] md:text-[10px] line-clamp-2" style={{ color: 'var(--scrapbook-text, #3A3A3A)', opacity: 0.75, lineHeight: 1.6, marginTop: '6px' }}>
                 {it.caption}
               </p>
             )}
             {it.tags && (
-              <div className="flex flex-wrap gap-1.5 mt-2">
+              <div className="flex flex-wrap gap-1.5 mt-3">
                 {it.tags.slice(0, 3).map((t) => (
                   <span 
                     key={t} 
