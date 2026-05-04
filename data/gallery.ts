@@ -12,26 +12,40 @@ export const foodPhotos = [
   {
     category: 'food',
     image: '/images/food/chiba-kutta-kaisen-don.jpg',
-    title: 'Seafood Bowl',
-    location: 'Chiba',
-    caption: 'Fresh seafood with a seaside vibe. Instant happiness.',
+    title: 'Kaisen-Don (Seafood Bowl)',
+    location: 'Kisarazu,Chiba',
+    placeName: 'Kutta',
+    mapUrl: 'https://www.google.com/maps?q=千葉県木更津市新田3-3-12',
+    caption: 'Fresh seafood with a seaside vibe.',
     tags: ['seafood', 'japan']
   },
   {
     category: 'food',
-    image: '/images/food/miyazaki-gyutan-don-set.jpg',
-    title: 'Gyutan Don Set',
-    location: 'Miyazaki',
-    caption: 'Hearty and satisfying — especially after a long day.',
-    tags: ['beef', 'japan']
+    image: '/images/food/Unjour.jpg',
+    title: 'A Balanced Japanese Set Meal',
+    location: 'Nisshin, Aichi',
+    placeName: 'Unjour',
+    mapUrl: 'https://www.google.com/maps?q=Unjour+Nisshin+Aichi',
+    caption: 'Healthy, delicious, and colorful meal.',
+    tags: ['healthy', 'japan']
   },
   {
     category: 'food',
     image: '/images/food/enoshima-anmitsu.jpg',
     title: 'Anmitsu',
-    location: 'Enoshima',
+    location: 'Kamakura, Kanagawa',
+    placeName: 'Soba Kirara',
+    mapUrl: 'https://www.google.com/maps?q=茶房雲母+鎌倉',
     caption: 'Sweet, chilled, and nostalgic. A perfect coastal dessert.',
     tags: ['dessert', 'japan']
+  },
+  {
+    category: 'food',
+    image: '/images/food/kanishabu.jpg',
+    title: 'Kani Shabu',
+    location: 'Hokkaido',
+    caption: 'Delicious crab shabu-shabu in a cozy setting.',
+    tags: ['crab', 'hokkaido']
   }
 ]
 
