@@ -46,6 +46,36 @@ export const foodPhotos = [
     location: 'Hokkaido',
     caption: 'Delicious crab shabu-shabu in a cozy setting.',
     tags: ['crab', 'hokkaido']
+  },
+  {
+    category: 'food',
+    image: '/images/food/nikumabushi.jpg',
+    title: 'Nikumabushi',
+    location: 'Nagoya, Aichi',
+    placeName: 'Gajapo',
+    mapUrl: 'https://www.google.com/maps?q=雅じゃぽ+名古屋名駅シンフォニー豊田ビル店',
+    caption: 'Grilled beef rice dish, enjoyed in a variety of ways.',
+    tags: ['beef', 'aichi']
+  },
+  {
+    category: 'food',
+    image: '/images/food/1901.jpg',
+    title: 'Traditional Japanese sweets (wagashi)',
+    location: 'Kawagoe, Saitama',
+    placeName: '1901 TEA SALON',
+    mapUrl: 'https://www.google.com/maps?q=1901+TEA+SALON+Kawagoe+Saitama',
+    caption: 'A calm and cozy place to enjoy traditional Japanese sweets.',
+    tags: ['wagashi', 'Saitama']
+  },
+  {
+    category: 'food',
+    image: '/images/food/AtoZcafe.jpg',
+    title: 'Healthy Japanese Set Meals',
+    location: 'Omotesando, Tokyo',
+    placeName: 'A to Z Cafe',
+    mapUrl: 'https://www.google.com/maps?q=A+to+Z+cafe+表参道',
+    caption: 'A cozy and stylish café offering wholesome Japanese set meals in a relaxed atmosphere.',
+    tags: ['healthy meal', 'Tokyo']
   }
 ]
 

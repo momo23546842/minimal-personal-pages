@@ -19,7 +19,7 @@ export default function Future() {
         <h2 
           className="mb-6 text-2xl font-bold tracking-tight md:text-3xl"
           style={{
-            fontFamily: "var(--font-baloo, 'Baloo 2', cursive, sans-serif)",
+            fontFamily: "var(--font-section, 'M PLUS Rounded 1c', 'Baloo 2', cursive, sans-serif)",
             color: 'var(--scrapbook-forest-dark, #5A6B4F)',
             position: 'relative',
             display: 'inline-block',

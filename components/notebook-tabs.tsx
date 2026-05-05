@@ -6,7 +6,7 @@ import styles from "./notebook-tabs.module.css"
 interface Tab {
   id: string
   label: string
-  icon?: string
+  icon?: ReactNode
 }
 
 interface NotebookTabsProps {

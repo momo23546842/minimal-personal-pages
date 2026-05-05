@@ -9,8 +9,8 @@ import { About } from "@/components/about"
 import Future from "@/components/future"
 import { Contact } from "@/components/contact"
 import { Footer } from "@/components/footer"
+import { Journey } from "@/components/journey"
 import { PUBLIC_SAFE_MODE } from "@/lib/safeMode"
-import Image from "next/image"
 
 const VALID_TABS = ["about", "journey", "future", "contact"]
 
@@ -65,24 +65,42 @@ export default function Page() {
   }
 
   const tabs = [
-    { id: "about", label: "About", icon: "✨" },
-    { id: "journey", label: "Journey", icon: "📸" },
-    { id: "future", label: "Future", icon: "🌟" },
-    { id: "contact", label: "Contact", icon: "💌" },
-  ]
-
-  // Journey content - photo gallery
-  const journeyPhotos = [
-    { alt: "Sydney, Australia", src: "/images/Australia/operahouseandhabourbridge-sydney.jpg" },
-    { alt: "Kumamoto, Japan", src: "/images/Japan/kumamotojyo.jpg" },
-    { alt: "Korankei, Aichi", src: "/images/Japan/korankei-aichi.jpg" },
-    { alt: "Art Gallery, Sydney", src: "/images/Australia/Art-Gallery-sydney.jpg" },
-    { alt: "Enoshima, Japan", src: "/images/Japan/enoshima.jpg" },
-    { alt: "Quokka, Perth", src: "/images/Australia/quokka-perth.jpg" },
-    { alt: "Parasailing, Cebu", src: "/images/Philippines/Parasailing-cebu.jpg" },
-    { alt: "Blue Mountains", src: "/images/Australia/bluemountain-sydney.jpg" },
-    { alt: "Bondi, Australia", src: "/images/Australia/sculpturebythesea-bondi.jpg" },
-    { alt: "Miyazaki, Japan", src: "/images/Japan/miyazaki-moai.jpg" },
+    {
+      id: "about",
+      label: "About",
+      icon: (
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="#5A3A2E">
+          <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+        </svg>
+      ),
+    },
+    {
+      id: "journey",
+      label: "Journey",
+      icon: (
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="#5A3A2E">
+          <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+        </svg>
+      ),
+    },
+    {
+      id: "future",
+      label: "Future",
+      icon: (
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="#5A3A2E">
+          <path d="M11.5 2C6.81 2 3 5.81 3 10.5S6.81 19 11.5 19h.5v3c4.86-2.34 8-7 8-11.5C20 5.81 16.19 2 11.5 2zm1 14.5h-2v-2h2v2zm0-4h-2c0-3.25 3-3 3-5 0-1.1-.9-2-2-2s-2 .9-2 2h-2c0-2.21 1.79-4 4-4s4 1.79 4 4c0 2.5-3 2.75-3 5z"/>
+        </svg>
+      ),
+    },
+    {
+      id: "contact",
+      label: "Contact",
+      icon: (
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="#5A3A2E">
+          <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/>
+        </svg>
+      ),
+    },
   ]
 
   return (
@@ -98,89 +116,7 @@ export default function Page() {
             <NotebookTabs tabs={tabs} activeTab={activeTab} onTabChange={handleTabChange}>
               {/* Tab Content */}
               {activeTab === "about" && <About />}
-              {activeTab === "journey" && (
-                <div style={{ padding: '1rem 0' }}>
-                  <h2 style={{ 
-                    fontFamily: "var(--font-baloo, 'Baloo 2', cursive, sans-serif)",
-                    fontSize: 'clamp(1.75rem, 6vw, 2.5rem)',
-                    color: 'var(--scrapbook-forest-dark, #5A6B4F)',
-                    marginBottom: '1rem',
-                    transform: 'rotate(-1deg)',
-                    display: 'inline-block',
-                    position: 'relative'
-                  }}>
-                    My Journey 📸✨
-                  </h2>
-                  <p style={{ 
-                    marginBottom: '1.5rem', 
-                    color: 'var(--scrapbook-text, #3A3A3A)', 
-                    lineHeight: 1.7,
-                    fontSize: 'clamp(0.9rem, 2.5vw, 1rem)'
-                  }}>
-                    Here are some snapshots from my adventures around the world!
-                  </p>
-                  
-
-                  
-                  <div style={{
-                    display: 'grid',
-                    gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))',
-                    gap: '2rem',
-                    position: 'relative'
-                  }} className="journey-grid">
-                    {journeyPhotos.map((photo, idx) => (
-                      <div
-                        key={photo.alt}
-                        style={{
-                          position: 'relative',
-                          background: '#FFFFFF',
-                          padding: '12px 12px 35px',
-                          borderRadius: '4px',
-                          boxShadow: '0 8px 24px rgba(58, 58, 58, 0.15), 0 4px 12px rgba(58, 58, 58, 0.1)',
-                          transform: `rotate(${idx % 3 === 0 ? '-3' : idx % 3 === 1 ? '2' : '-1'}deg)`,
-                          transition: 'transform 0.3s ease, box-shadow 0.3s ease'
-                        }}
-                        onMouseEnter={(e) => {
-                          e.currentTarget.style.transform = `scale(1.05) rotate(0deg)`
-                          e.currentTarget.style.boxShadow = '0 12px 32px rgba(58, 58, 58, 0.25), 0 6px 16px rgba(58, 58, 58, 0.18)'
-                        }}
-                        onMouseLeave={(e) => {
-                          e.currentTarget.style.transform = `rotate(${idx % 3 === 0 ? '-3' : idx % 3 === 1 ? '2' : '-1'}deg)`
-                          e.currentTarget.style.boxShadow = '0 8px 24px rgba(58, 58, 58, 0.15), 0 4px 12px rgba(58, 58, 58, 0.1)'
-                        }}
-                      >
-                        <Image
-                          src={photo.src}
-                          alt={photo.alt}
-                          width={280}
-                          height={280}
-                          sizes="(max-width: 768px) 50vw, 25vw"
-                          style={{ 
-                            objectFit: 'cover',
-                            width: '100%',
-                            height: 'auto',
-                            aspectRatio: '1 / 1',
-                            borderRadius: '2px'
-                          }}
-                        />
-                        {/* Polaroid caption area */}
-                        <div style={{
-                          position: 'absolute',
-                          bottom: '8px',
-                          left: '12px',
-                          right: '12px',
-                          textAlign: 'center',
-                          fontSize: '0.75rem',
-                          color: 'var(--scrapbook-text-light, #6B6356)',
-                          fontWeight: 500
-                        }}>
-                          {photo.alt}
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
+              {activeTab === "journey" && <Journey />}
               {activeTab === "future" && <Future />}
               {activeTab === "contact" && <Contact />}
             </NotebookTabs>

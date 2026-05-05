@@ -25,7 +25,7 @@
 
 .heading {
   text-align: center;
-  font-family: var(--font-baloo), 'Baloo 2', cursive, sans-serif;
+  font-family: var(--font-section, 'M PLUS Rounded 1c', 'Baloo 2', cursive, sans-serif);
   font-size: clamp(2rem, 5vw, 2.8rem);
   font-weight: 800;
   color: var(--scrapbook-forest-dark, #5A6B4F);

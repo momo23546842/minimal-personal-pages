@@ -8,6 +8,10 @@
    Custom Color Palette - Nature/Forest Scrapbook Theme
    ======================================== */
 :root {
+  /* Section title display font (rounded, friendly) */
+  --font-section: 'M PLUS Rounded 1c', 'Baloo 2', cursive, sans-serif;
+  /* legacy variable left in place (unused): */
+  --font-chango: 'Chango', cursive;
   /* — Scrapbook Paper Backgrounds — */
   --scrapbook-bg: #F5F1E8;              /* Light beige paper background */
   --scrapbook-paper: #FAF7F0;           /* Off-white notebook paper */

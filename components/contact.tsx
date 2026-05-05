@@ -37,7 +37,7 @@ export function Contact() {
           className="mb-8 text-3xl font-bold tracking-tight md:text-4xl"
           style={{ 
             color: 'var(--scrapbook-forest-dark, #5A6B4F)',
-            fontFamily: "var(--font-baloo, 'Baloo 2', cursive, sans-serif)",
+            fontFamily: "var(--font-section, 'M PLUS Rounded 1c', 'Baloo 2', cursive, sans-serif)",
             position: 'relative',
             display: 'inline-block',
             paddingLeft: '2.5rem'
