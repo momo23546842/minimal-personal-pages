@@ -116,6 +116,7 @@
   text-overflow: ellipsis;
 }
 
+
 .description {
   font-size: 0.938rem;
   line-height: 1.7;
@@ -168,28 +169,66 @@
 @media (max-width: 768px) {
   .card {
     grid-template-columns: 1fr;
-    gap: 1.5rem;
-    padding: 1.5rem;
+    gap: 1.25rem;
+    padding: 1.25rem;
+    /* Reset any rotation/transform from desktop */
+    transform: none !important;
   }
 
+  .card:hover {
+    transform: translateY(-3px) !important;
+  }
+
+  /* Cancel reversed direction — single column on mobile is always LTR */
   .card.reversed {
     direction: ltr;
   }
 
   .imageWrapper {
-    aspect-ratio: 16 / 10;
+    aspect-ratio: 16 / 9;
+    width: 100%;
   }
 
   .imageTape {
-    width: 60px;
-    height: 20px;
+    width: 56px;
+    height: 18px;
+    top: -6px;
   }
 
+  .imageFrame {
+    /* Straighten the slight rotation on mobile — looks better in narrow view */
+    transform: rotate(0deg);
+  }
+
+  .card:hover .imageFrame {
+    transform: rotate(0deg);
+  }
+
+  .content {
+    gap: 0.6rem;
+    text-align: left;
+  }
+
+  /* Allow title to wrap on mobile instead of clipping */
   .title {
-    font-size: 1.25rem;
+    font-size: 1.1rem;
+    white-space: normal;
+    overflow: visible;
+    text-overflow: unset;
+    line-height: 1.35;
   }
 
   .description {
     font-size: 0.875rem;
+    line-height: 1.65;
+  }
+
+  .readMoreRow {
+    margin-top: 0.25rem;
+  }
+
+  .tag {
+    font-size: 0.7rem;
+    padding: 0.2rem 0.6rem;
   }
 }

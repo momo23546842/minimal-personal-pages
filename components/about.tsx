@@ -1,30 +1,9 @@
 import { PUBLIC_SAFE_MODE } from "@/lib/safeMode"
 import Image from "next/image"
-import { Palette, Camera, Coffee } from "lucide-react"
 import styles from "./about.module.css"
 
 export function About() {
   if (PUBLIC_SAFE_MODE) return null
-
-  const destinations = [
-    { alt: "Sydney, Australia", src: "/images/Australia/operahouseandhabourbridge-sydney.jpg", area: 'areaA' },
-    { alt: "Kumamoto, Japan", src: "/images/Japan/kumamotojyo.jpg", area: 'areaB1' },
-    { alt: "Korankei, Aichi", src: "/images/Japan/korankei-aichi.jpg", area: 'areaB2' },
-    { alt: "Art Gallery, Sydney", src: "/images/Australia/Art-Gallery-sydney.jpg", area: 'areaC' },
-    { alt: "Enoshima, Japan", src: "/images/Japan/enoshima.jpg", area: 'areaD' },
-    { alt: "Quokka, Perth", src: "/images/Australia/quokka-perth.jpg", area: 'areaE1' },
-    { alt: "Parasailing, Cebu", src: "/images/Philippines/Parasailing-cebu.jpg", area: 'areaE2' },
-    { alt: "Blue Mountains", src: "/images/Australia/bluemountain-sydney.jpg", area: 'areaF' },
-    { alt: "Bondi, Australia", src: "/images/Australia/sculpturebythesea-bondi.jpg", area: 'areaG' },
-    { alt: "Miyazaki, Japan", src: "/images/Japan/miyazaki-moai.jpg", area: 'areaH' },
-  ]
-
-  const skills = [
-    { label: "Nature & Hiking", color: "var(--color-pink)" },
-    { label: "Good Food", color: "var(--color-green)" },
-    { label: "Traveling", color: "var(--color-blue)" },
-    { label: "Exploring New Places", color: "var(--color-yellow)" },
-  ]
 
   return (
     <section id="about" className={styles.section}>
@@ -32,87 +11,61 @@ export function About() {
         {/* Header */}
         <p className={styles.label}>About</p>
         <h2 className={styles.heading}>About Me</h2>
-        <p className={styles.tagline}>Creative / Design / Travel</p>
 
-        {/* Top: hero photo + intro card */}
-        <div className={styles.topGrid}>
-          <div className={styles.heroPhoto}>
-            <Image
-              src="/images/Australia/royalnationalpark-sydney.jpg"
-              alt="Momo - lifestyle"
-              fill
-              sizes="(max-width: 768px) 100vw, 50vw"
-            />
-          </div>
+        {/* 3-column layout: left info | portrait | right info */}
+        <div className={styles.profileLayout}>
 
-          <div className={styles.introCard}>
-            <h3 className={styles.introTitle}>Hello! I&apos;m Momo</h3>
-            <p className={styles.introText}>
-              Welcome to my page!
-            </p>
-            <p className={styles.introText}>
-              This is a small space where I keep the things I like.
-              Food I enjoy, places I&apos;ve been, places I want to go someday.
-              And a chat where you can just talk to me.
-            </p>
-            <p className={styles.introText}>
-              There&apos;s nothing particularly special here, but somehow, it feels like me.
-            </p>
-          </div>
-        </div>
-
-        {/* Icon cards */}
-        <div className={styles.iconCards}>
-          <div className={styles.iconCard}>
-            <div className={styles.iconCircle} style={{ backgroundColor: 'var(--color-yellow)' }}>
-              <Palette size={24} color="var(--color-heading)" />
+          {/* LEFT: individual text blocks, no card */}
+          <div className={styles.leftCol}>
+            <div className={styles.infoBlock}>
+              <span className={styles.infoKey}>Birthday</span>
+              <span className={styles.infoValue}>30 May</span>
             </div>
-            <span className={styles.iconCardTitle}>What I Do</span>
-            <span className={styles.iconCardSub}>Nutrition × IT</span>
-          </div>
-
-          <div className={styles.iconCard}>
-            <div className={styles.iconCircle} style={{ backgroundColor: 'var(--color-green)' }}>
-              <Camera size={24} color="var(--color-heading)" />
+            <div className={styles.infoBlock}>
+              <span className={styles.infoKey}>From</span>
+              <span className={styles.infoValue}>Japan</span>
             </div>
-            <span className={styles.iconCardTitle}>My Hobbies</span>
-            <span className={styles.iconCardSub}>Photography &amp; Travel</span>
-          </div>
-
-          <div className={styles.iconCard}>
-            <div className={styles.iconCircle} style={{ backgroundColor: 'var(--color-pink)' }}>
-              <Coffee size={24} color="var(--color-heading)" />
+            <div className={styles.infoBlock}>
+              <span className={styles.infoKey}>Favorite Food</span>
+              <span className={styles.infoValue}>Sushi</span>
             </div>
-            <span className={styles.iconCardTitle}>Fun Facts</span>
-            <span className={styles.iconCardSub}>Hiking &amp; Good Food</span>
           </div>
+
+          {/* CENTER: circular portrait */}
+          <div className={styles.portraitWrap}>
+            <div className={styles.portraitRing}>
+              <Image
+                src="/images/Australia/royalnationalpark-sydney.jpg"
+                alt="Momo"
+                fill
+                sizes="280px"
+                className={styles.portraitImg}
+              />
+            </div>
+            <p className={styles.portraitName}>Momo</p>
+          </div>
+
+          {/* RIGHT: individual text blocks, no card */}
+          <div className={styles.rightCol}>
+            <div className={styles.infoBlock}>
+              <span className={styles.infoKey}>Hobbies</span>
+              <ul className={styles.hobbyList}>
+                {["Travel", "Hiking", "Gym", "Eating delicious food"].map((h) => (
+                  <li key={h} className={styles.hobbyItem}>{h}</li>
+                ))}
+              </ul>
+            </div>
+            <div className={styles.infoBlock}>
+              <span className={styles.infoKey}>Favorite Color</span>
+              <span className={styles.infoValue}>Gray 🩶</span>
+            </div>
+            <div className={styles.infoBlock}>
+              <span className={styles.infoKey}>Favorite Animals</span>
+              <span className={styles.infoValue}>Birds &amp; Seals</span>
+            </div>
+          </div>
+
         </div>
-
-        {/* Bottom: lifestyle photo + skills */}
-        <div className={styles.bottomGrid}>
-          <div className={styles.lifestylePhoto}>
-            <Image
-              src="/images/bondi-sunrise.jpg"
-              alt="Landscape"
-              fill
-              sizes="(max-width: 768px) 100vw, 50vw"
-            />
-          </div>
-
-          <div className={styles.skillsCard}>
-            <h3 className={styles.skillsTitle}>Things I Love</h3>
-            <ul className={styles.skillsList}>
-              {skills.map((s) => (
-                <li key={s.label} className={styles.skillItem}>
-                  <span className={styles.skillDot} style={{ backgroundColor: s.color }} />
-                  {s.label}
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-
-        {/* Favorite Destinations section removed for About page (kept in Gallery) */}
       </div>
     </section>
   )
