@@ -2,10 +2,7 @@
    About Me — clean scrapbook layout
    ======================================== */
 
-.section {
-  padding: 5rem 2rem 5rem;
-  background-color: transparent;
-}
+.section { padding: 1rem 0 2rem; background-color: #e9e8e4; }
 
 .container {
   max-width: 1200px;
@@ -19,16 +16,16 @@
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.18em;
-  color: var(--color-heading);
+  color: #77756f;
   margin-bottom: 0.5rem;
 }
 
 .heading {
   text-align: center;
-  font-family: var(--font-section, 'M PLUS Rounded 1c', cursive, sans-serif);
+  font-family: var(--font-display);
   font-size: clamp(2rem, 5vw, 2.8rem);
-  font-weight: 800;
-  color: var(--scrapbook-forest-dark, #5A6B4F);
+  font-weight: 400;
+  color: #181817;
   margin-bottom: 0.75rem;
   position: relative;
   display: inline-block;
@@ -38,14 +35,13 @@
 .heading::after {
   content: '';
   position: absolute;
-  bottom: -8px;
+  bottom: -1.2rem;
   left: 50%;
   transform: translateX(-50%);
-  width: 160px;
-  height: 3px;
-  background: var(--scrapbook-leaf, #8FA582);
-  border-radius: 50%;
-  opacity: 0.5;
+  width: 4rem;
+  height: 1px;
+  background: #b34339;
+  opacity: 1;
 }
 
 /* ---- 3-column grid (desktop) ---- */
@@ -82,7 +78,7 @@
 
 /* Label — section heading style */
 .infoKey {
-  font-family: var(--font-section, 'M PLUS Rounded 1c', cursive, sans-serif);
+  font-family: var(--font-display);
   font-size: 1.25rem;
   font-weight: 700;
   letter-spacing: 0.03em;
@@ -91,6 +87,19 @@
   margin-bottom: 0.65rem;
   border-bottom: 1px solid rgba(155, 139, 126, 0.35);
   width: 100%;
+}
+
+.birthdayKey {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.birthdayIcon {
+  width: 16px;
+  height: 16px;
+  color: currentColor;
+  flex-shrink: 0;
 }
 
 /* Content below the label */
@@ -129,13 +138,10 @@
   position: relative;
   width: 260px;
   height: 260px;
-  border-radius: 50%;
+  border-radius: 0;
   overflow: hidden;
-  border: 4px solid var(--scrapbook-leaf, #8FA582);
-  box-shadow:
-    0 0 0 8px var(--scrapbook-cream, #F8F4ED),
-    0 0 0 10px var(--scrapbook-sand, #E5DCCE),
-    0 14px 40px rgba(58, 58, 58, 0.15);
+  border: 1px solid #c8c7c2;
+  box-shadow: none;
   flex-shrink: 0;
 }
 
@@ -145,7 +151,7 @@
 }
 
 .portraitName {
-  font-family: var(--font-section, 'M PLUS Rounded 1c', cursive);
+  font-family: var(--font-display);
   font-size: 1.1rem;
   font-weight: 700;
   color: var(--scrapbook-forest-dark, #5A6B4F);
@@ -224,6 +230,10 @@
     margin-bottom: 0.55rem;
   }
 
+  .birthdayKey {
+    justify-content: center;
+  }
+
   .infoValue {
     font-size: 1rem;
     text-align: center;
@@ -236,5 +246,362 @@
   .hobbyItem {
     font-size: 1rem;
     text-align: center;
+  }
+}
+
+/* ============================================================
+   Countries I've Visited — Travel Section
+   ============================================================ */
+
+.travelSection {
+  margin-top: 7rem;
+  text-align: left;
+  border-top: 1px solid #c8c7c2;
+  padding-top: 1.5rem;
+}
+
+/* Title row: ✈  Countries I've Visited  🌿 */
+.travelTitleRow {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.9rem;
+}
+
+.travelDoodle {
+  font-size: 1.25rem;
+  opacity: 0.7;
+  line-height: 1;
+}
+
+.travelIconWrapper {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 1rem;
+  color: #b34339;
+  font: 0.62rem var(--font-body);
+  letter-spacing: 0.12em;
+  flex-shrink: 0;
+}
+
+.travelHeading {
+  font-family: var(--font-display);
+  font-size: clamp(1.7rem, 4vw, 2.5rem);
+  font-weight: 400;
+  color: #181817;
+  letter-spacing: -0.03em;
+  margin: 0;
+}
+
+/* thin decorative line under title */
+.travelDivider {
+  width: 4rem;
+  height: 1px;
+  background: #b34339;
+  margin: 0 0 2rem;
+}
+
+/* Soft rounded container */
+.travelBox {
+  display: grid;
+  grid-template-columns: 1.45fr 1fr;
+  gap: clamp(1.5rem, 5vw, 5rem);
+  align-items: center;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid #c8c7c2;
+  padding: 0 0 2.5rem;
+  position: relative;
+  overflow: visible;
+}
+
+/* decorative leaf — top-left */
+.travelBox::before {
+  display: none;
+}
+
+/* decorative star — bottom-right */
+.travelBox::after {
+  display: none;
+}
+
+/* World map SVG */
+.worldMap {
+  width: 100%;
+  height: auto;
+  border-radius: 0;
+  border: 1px solid #c8c7c2;
+  display: block;
+}
+
+/* Country list side */
+.countrySide {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.countryList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.countryItem {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.65rem 0;
+  border-bottom: 1px solid #c8c7c2;
+}
+
+.countryItem:last-child {
+  border-bottom: none;
+}
+
+.countryFlag {
+  width: 32px;
+  height: 22px;
+  border-radius: 0;
+  object-fit: cover;
+  flex-shrink: 0;
+  display: block;
+  box-shadow: none;
+}
+
+.countryName {
+  font-family: var(--font-display);
+  font-size: 0.92rem;
+  font-weight: 400;
+  color: #181817;
+  letter-spacing: 0.02em;
+}
+
+/* ============================================================
+   Favorite Moments — Film strip
+   ============================================================ */
+.momentsSection {
+  margin-top: 4rem;
+  text-align: left;
+}
+
+.momentsBox {
+  max-width: 980px;
+  margin: 0 auto;
+}
+
+.filmWrap {
+  margin-top: 1.6rem;
+  position: relative;
+}
+
+.filmTape {
+  background: transparent;
+  padding: 0 0 1.5rem;
+  border-radius: 0;
+  border-bottom: 1px solid #c8c7c2;
+  box-shadow: none;
+  overflow: hidden;
+}
+
+.filmViewportInner {
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  padding: 8px 0 12px;
+}
+
+/* hide scrollbar elegantly */
+.filmViewportInner::-webkit-scrollbar { height: 8px; }
+.filmViewportInner::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.12); border-radius: 8px; }
+.filmViewportInner { scrollbar-width: none; -ms-overflow-style: none; }
+.filmViewportInner::-webkit-scrollbar { display: none; }
+
+.filmStrip {
+  display: inline-flex;
+  gap: 1rem;
+  align-items: flex-start;
+  padding: 6px 0;
+  background: transparent;
+  border-radius: 0;
+  position: relative;
+}
+
+/* sprocket holes: subtle repeating dots on top and bottom */
+.filmStrip::before,
+.filmStrip::after {
+  content: '';
+  position: absolute;
+  left: 24px;
+  right: 24px;
+  height: 12px;
+  background-image: radial-gradient(circle, rgba(0,0,0,0.75) 0 40%, transparent 41%);
+  background-size: 48px 12px;
+  background-repeat: repeat-x;
+  opacity: 0.18;
+  pointer-events: none;
+}
+.filmStrip::before { top: -6px; transform: translateY(-50%); }
+.filmStrip::after { bottom: -6px; transform: translateY(50%); }
+
+.filmFrame {
+  display: inline-block;
+  width: 320px;
+  aspect-ratio: 4 / 3;
+  background: #181817;
+  border-radius: 0;
+  border: 1px solid #181817;
+  padding: 4px;
+  box-shadow: none;
+  position: relative;
+  overflow: visible;
+}
+
+.frameInner {
+  position: relative;
+  width: 100%;
+  height: calc(100% - 46px);
+  border-radius: 0;
+  overflow: hidden;
+  background: #111;
+}
+
+.frameImg {
+  object-fit: cover;
+}
+
+.frameLabel {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding-top: 8px;
+  text-align: left;
+  color: var(--scrapbook-text, #333);
+}
+
+.frameLocation {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: #f1f0ec;
+}
+
+.frameMeta {
+  font-size: 0.88rem;
+  color: rgba(241,240,236,0.65);
+}
+
+/* grain + vignette */
+.filmStrip::after { mix-blend-mode: multiply; }
+.filmStrip::before { mix-blend-mode: multiply; }
+
+/* Modal */
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(10,10,10,0.6);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 60;
+}
+
+.modalContent {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+  max-width: 92vw;
+  max-height: 86vh;
+  padding: 18px;
+}
+
+.modalNav {
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: 1.6rem;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.modalImageWrap {
+  position: relative;
+  width: min(78vw, 1100px);
+  height: min(70vh, 720px);
+  border-radius: 0;
+  overflow: hidden;
+  box-shadow: 0 26px 60px rgba(0,0,0,0.5);
+}
+
+.modalImage {
+  object-fit: contain;
+}
+
+.modalCaption {
+  position: absolute;
+  left: 18px;
+  bottom: 18px;
+  color: #fff;
+  background: linear-gradient(90deg, rgba(0,0,0,0.45), rgba(0,0,0,0.2));
+  padding: 8px 12px;
+  border-radius: 0;
+  font-size: 0.95rem;
+}
+
+/* Responsive: show fewer frames at smaller widths */
+@media (max-width: 1024px) {
+  .filmFrame { width: 260px; }
+}
+
+@media (max-width: 768px) {
+  .filmFrame { width: 220px; }
+  .filmViewportInner { padding: 8px 6px; }
+}
+
+@media (max-width: 480px) {
+  .filmFrame { width: 160px; aspect-ratio: 3 / 4; }
+}
+
+/* ---- Travel Section responsive ---- */
+@media (max-width: 768px) {
+  .travelSection {
+    margin-top: 3.5rem;
+  }
+
+  .travelHeading {
+    font-size: clamp(1.3rem, 6vw, 1.75rem);
+  }
+
+  .travelBox {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    padding: 1.8rem 1.4rem 2rem;
+  }
+
+  .mapSide {
+    order: 0;
+  }
+
+  .countrySide {
+    order: 1;
+  }
+
+  .countryFlag {
+    width: 28px;
+    height: 19px;
+  }
+
+  .countryName {
+    font-size: 1rem;
+  }
+
+  .countryItem {
+    padding: 0.55rem 0;
   }
 }

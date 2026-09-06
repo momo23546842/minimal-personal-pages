@@ -21,17 +21,13 @@ export function NotebookTabs({ tabs, activeTab, onTabChange, children }: Noteboo
     <div className={styles.container}>
       {/* Tab Navigation */}
       <div className={styles.tabsRow}>
-        {tabs.map((tab, index) => (
+        {tabs.map((tab) => (
           <button
             key={tab.id}
             onClick={() => onTabChange(tab.id)}
             data-tab={tab.id}
             className={`${styles.tab} ${activeTab === tab.id ? styles.tabActive : styles.tabInactive}`}
-            style={{
-              // Slight offset for each tab to create organic feel
-              transform: `translateY(${activeTab === tab.id ? '0' : '4px'}) rotate(${-1 + index * 0.5}deg)`,
-              zIndex: activeTab === tab.id ? 10 : 5 - index,
-            }}
+              style={{ zIndex: activeTab === tab.id ? 2 : 1 }}
           >
             {tab.icon && <span className={styles.tabIcon}>{tab.icon}</span>}
             <span className={styles.tabLabel}>{tab.label}</span>

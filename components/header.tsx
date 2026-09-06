@@ -37,10 +37,13 @@ export function Header() {
   }
 
   useEffect(() => {
-    setMounted(true)
+    const frame = window.requestAnimationFrame(() => setMounted(true))
     const onScroll = () => setScrolled(window.scrollY > 20)
     window.addEventListener("scroll", onScroll, { passive: true })
-    return () => window.removeEventListener("scroll", onScroll)
+    return () => {
+      window.cancelAnimationFrame(frame)
+      window.removeEventListener("scroll", onScroll)
+    }
   }, [])
 
   const scrollToAssistant = (tab: "chat" | "call") => {
@@ -73,7 +76,7 @@ export function Header() {
         scrolled ? "backdrop-blur-lg border-b" : ""
       }`}
       style={{
-        backgroundColor: scrolled ? 'rgba(245, 241, 232, 0.95)' : 'transparent',
+        backgroundColor: scrolled ? 'rgba(233, 232, 228, 0.95)' : 'transparent',
         borderBottomColor: scrolled ? 'var(--scrapbook-sand, #E5DCCE)' : 'transparent'
       }}
     >
@@ -83,7 +86,7 @@ export function Header() {
           className="text-lg font-semibold tracking-tight transition-colors"
           style={{
             color: 'var(--scrapbook-forest-dark, #5A6B4F)',
-            fontFamily: "var(--font-baloo, 'Baloo 2', cursive, sans-serif)"
+            fontFamily: "var(--font-display)"
           }}
         >
           {PUBLIC_SAFE_MODE ? "AI" : "Momo's Page"}

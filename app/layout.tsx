@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
-import { PUBLIC_SAFE_MODE } from '@/lib/safeMode'
-import { Playfair_Display, Poppins, M_PLUS_Rounded_1c } from "next/font/google";
+import { Playfair_Display, Poppins } from "next/font/google";
 import { Header } from '@/components/header'
 import "./globals.css";
 import ThemeProvider from "@/components/theme-provider";
@@ -10,12 +9,6 @@ const playfair = Playfair_Display({
   variable: "--font-playfair",
   subsets: ["latin"],
   weight: ["400", "700"],
-})
-
-const mPlusRounded = M_PLUS_Rounded_1c({
-  variable: "--font-section",
-  subsets: ["latin"],
-  weight: ["400", "700", "800"],
 })
 
 const poppins = Poppins({
@@ -38,7 +31,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body
         suppressHydrationWarning
-        className={`${poppins.variable} ${playfair.variable} ${mPlusRounded.variable} antialiased`}
+        className={`${poppins.variable} ${playfair.variable} antialiased`}
       >
         <Script
           id="theme-init"

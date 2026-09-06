@@ -348,19 +348,17 @@ export function AiAssistant() {
   const chatPlaceholder = PUBLIC_SAFE_MODE ? "Ask the assistant anything" : "Ask me about my hobbies or favorites!"
 
   return (
-    <section id="assistant" className="relative px-6 py-12" style={{ backgroundColor: 'transparent' }}>
-      <div className="relative mx-auto max-w-5xl">
+    <section id="assistant" className="relative px-6 py-16" style={{ backgroundColor: 'var(--scrapbook-bg)' }}>
+      <div className="relative mx-auto max-w-5xl border-t border-border pt-6">
         <h2 
-          className="mb-4 text-3xl font-bold tracking-tight md:text-4xl"
+          className="mb-4 text-3xl font-normal tracking-tight md:text-4xl"
           style={{
-            color: 'var(--scrapbook-forest-dark, #5A6B4F)',
-            fontFamily: "var(--font-baloo, 'Baloo 2', cursive, sans-serif)",
+            color: 'var(--scrapbook-forest-dark, #181817)',
+            fontFamily: "var(--font-display)",
             position: 'relative',
             display: 'inline-block',
-            paddingLeft: '2.5rem'
           }}
         >
-          <span style={{ position: 'absolute', left: 0, fontSize: '2rem' }}>💬</span>
           Chat with Me
         </h2>
         <p 
@@ -373,46 +371,31 @@ export function AiAssistant() {
         </p>
 
         <div 
-          className="overflow-hidden rounded-2xl shadow-lg"
+          className="overflow-hidden"
           style={{
-            backgroundColor: 'var(--scrapbook-paper, #FAF7F0)',
-            border: '2px solid var(--scrapbook-brown, #9B8B7E)',
-            boxShadow: '0 8px 24px rgba(58, 58, 58, 0.15)',
-            position: 'relative',
-            backgroundImage: `repeating-linear-gradient(
-              90deg,
-              transparent,
-              transparent 2px,
-              rgba(90, 107, 79, 0.01) 2px,
-              rgba(90, 107, 79, 0.01) 4px
-            )`
+            backgroundColor: 'var(--scrapbook-paper, #F1F0EC)',
+            border: '1px solid var(--scrapbook-sand, #C8C7C2)',
           }}
         >
-          <div className="flex gap-2 px-4 pt-4">
+          <div className="flex border-b border-border">
             <button 
               onClick={() => setTab("chat")} 
-              className="flex flex-1 items-center justify-center gap-2 py-3 text-sm font-medium transition-all rounded-t-lg"
+              className="flex flex-1 items-center justify-center gap-2 border-b-2 py-3 text-sm font-medium transition-all"
               style={{
-                backgroundColor: tab === "chat" ? 'var(--scrapbook-tab-green, #C8D5C0)' : 'var(--scrapbook-paper-alt, #F0EBE0)',
-                color: tab === "chat" ? 'var(--scrapbook-forest-dark, #5A6B4F)' : 'var(--scrapbook-text-light, #6B6356)',
-                border: tab === "chat" ? '2px solid var(--scrapbook-forest-light, #A6B89A)' : '2px solid transparent',
-                borderBottom: tab === "chat" ? 'none' : '2px solid transparent',
-                transform: tab === "chat" ? 'translateY(2px)' : 'translateY(0)',
-                boxShadow: tab === "chat" ? '0 -4px 8px rgba(58, 58, 58, 0.08)' : 'none'
+                backgroundColor: 'transparent',
+                color: tab === "chat" ? 'var(--scrapbook-text, #181817)' : 'var(--scrapbook-text-light, #77756F)',
+                borderBottomColor: tab === "chat" ? 'var(--scrapbook-forest, #B34339)' : 'transparent',
               }}
             >
               <MessageCircle className="h-4 w-4" /> Chat
             </button>
             <button 
               onClick={() => setTab("call")} 
-              className="flex flex-1 items-center justify-center gap-2 py-3 text-sm font-medium transition-all rounded-t-lg"
+              className="flex flex-1 items-center justify-center gap-2 border-b-2 py-3 text-sm font-medium transition-all"
               style={{
-                backgroundColor: tab === "call" ? 'var(--scrapbook-tab-brown, #D9CFC0)' : 'var(--scrapbook-paper-alt, #F0EBE0)',
-                color: tab === "call" ? 'var(--scrapbook-forest-dark, #5A6B4F)' : 'var(--scrapbook-text-light, #6B6356)',
-                border: tab === "call" ? '2px solid var(--scrapbook-brown, #9B8B7E)' : '2px solid transparent',
-                borderBottom: tab === "call" ? 'none' : '2px solid transparent',
-                transform: tab === "call" ? 'translateY(2px)' : 'translateY(0)',
-                boxShadow: tab === "call" ? '0 -4px 8px rgba(58, 58, 58, 0.08)' : 'none'
+                backgroundColor: 'transparent',
+                color: tab === "call" ? 'var(--scrapbook-text, #181817)' : 'var(--scrapbook-text-light, #77756F)',
+                borderBottomColor: tab === "call" ? 'var(--scrapbook-forest, #B34339)' : 'transparent',
               }}
             >
               <Phone className="h-4 w-4" /> Call
@@ -426,18 +409,17 @@ export function AiAssistant() {
                   {messages.map(msg => (
                     <div key={msg.id} className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}>
                       <div 
-                        className="max-w-[85%] rounded-2xl px-5 py-3 text-sm leading-relaxed"
+                        className="max-w-[85%] border px-5 py-3 text-sm leading-relaxed"
                         style={{
                           backgroundColor: msg.role === "user" 
-                            ? 'var(--scrapbook-forest, #7A9172)' 
-                            : 'var(--scrapbook-cream, #F8F4ED)',
+                            ? 'var(--scrapbook-forest, #B34339)' 
+                            : 'var(--scrapbook-cream, #F1F0EC)',
                           color: msg.role === "user" 
                             ? 'white' 
-                            : 'var(--scrapbook-text, #3A3A3A)',
+                            : 'var(--scrapbook-text, #181817)',
                           border: msg.role === "user" 
-                            ? 'none' 
-                            : '1px solid var(--scrapbook-sand, #E5DCCE)',
-                          boxShadow: '0 2px 6px rgba(58, 58, 58, 0.08)'
+                            ? '1px solid var(--scrapbook-forest, #B34339)' 
+                            : '1px solid var(--scrapbook-sand, #C8C7C2)',
                         }}
                       >
                         {msg.role === "assistant" ? renderMessage(msg) : msg.content}
@@ -449,8 +431,8 @@ export function AiAssistant() {
               <div 
                 className="px-6 py-4"
                 style={{
-                  borderTop: '2px solid var(--scrapbook-sand, #E5DCCE)',
-                  backgroundColor: 'var(--scrapbook-cream, #F8F4ED)'
+                  borderTop: '1px solid var(--scrapbook-sand, #C8C7C2)',
+                  backgroundColor: 'var(--scrapbook-paper, #F1F0EC)'
                 }}
               >
                 <form onSubmit={e => { e.preventDefault(); handleSend() }} className="flex items-center gap-3">
@@ -459,20 +441,20 @@ export function AiAssistant() {
                     value={input} 
                     onChange={e => setInput(e.target.value)} 
                     placeholder={chatPlaceholder} 
-                    className="flex-1 rounded-xl px-5 py-3 text-sm focus:outline-none"
+                    className="flex-1 border-b px-5 py-3 text-sm focus:outline-none"
                     style={{
-                      backgroundColor: 'white',
-                      border: '1px solid var(--scrapbook-sand, #E5DCCE)',
-                      color: 'var(--scrapbook-text, #3A3A3A)'
+                      backgroundColor: 'transparent',
+                      borderColor: 'var(--scrapbook-sand, #C8C7C2)',
+                      color: 'var(--scrapbook-text, #181817)'
                     }}
                   />
                   <button 
                     type="submit" 
                     disabled={!input.trim()} 
-                    className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl text-white shadow-sm transition-colors disabled:opacity-40" 
-                    style={{ backgroundColor: 'var(--scrapbook-forest, #7A9172)' }}
-                    onMouseEnter={(e) => { if (!(e.currentTarget as HTMLButtonElement).disabled) e.currentTarget.style.backgroundColor = 'var(--scrapbook-forest-dark, #5A6B4F)' }}
-                    onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = 'var(--scrapbook-forest, #7A9172)')}
+                    className="flex h-11 w-11 shrink-0 items-center justify-center text-white transition-colors disabled:opacity-40" 
+                    style={{ backgroundColor: 'var(--scrapbook-forest, #B34339)' }}
+                    onMouseEnter={(e) => { if (!(e.currentTarget as HTMLButtonElement).disabled) e.currentTarget.style.backgroundColor = 'var(--scrapbook-forest-dark, #181817)' }}
+                    onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = 'var(--scrapbook-forest, #B34339)')}
                   >
                     <Send className="h-4 w-4" />
                   </button>
@@ -482,7 +464,7 @@ export function AiAssistant() {
           )}
 
           {tab === "call" && (
-            <div className="flex flex-col items-center justify-center py-10 gap-4" style={{ minHeight: '420px', background: isCallActive ? 'linear-gradient(180deg, oklch(0.22 0.02 155) 0%, oklch(0.16 0.015 160) 100%)' : undefined }}>
+            <div className="flex flex-col items-center justify-center py-10 gap-4" style={{ minHeight: '420px', background: isCallActive ? '#181817' : undefined }}>
 
               {!isCallActive ? (
                 <div className="flex flex-col items-center gap-8 text-center py-8">
@@ -498,7 +480,7 @@ export function AiAssistant() {
                   </div>
                   <button onClick={startCall}
                     className="flex h-16 w-16 items-center justify-center rounded-full shadow-lg transition-transform hover:scale-110 active:scale-95"
-                    style={{ backgroundColor: '#6F7F89', boxShadow: '0 10px 15px -3px rgba(111,127,137,0.3)' }}>
+                    style={{ backgroundColor: 'var(--scrapbook-forest, #B34339)' }}>
                     <Phone className="h-7 w-7 text-white" />
                   </button>
                   <p className="text-xs text-muted-foreground">Best in Chrome</p>

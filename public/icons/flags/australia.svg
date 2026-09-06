@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600">
+  <!-- Blue top third -->
+  <rect width="900" height="200" fill="#00008B"/>
+  <!-- Red center third -->
+  <rect y="200" width="900" height="200" fill="#CC0000"/>
+  <!-- Blue bottom third -->
+  <rect y="400" width="900" height="200" fill="#00008B"/>
+  <!-- Union Jack canton (top-left) -->
+  <rect width="360" height="200" fill="#012169"/>
+  <path d="M0,0 L360,200 M360,0 L0,200" stroke="#fff" stroke-width="40"/>
+  <path d="M0,0 L360,200" stroke="#C8102E" stroke-width="24"/>
+  <path d="M360,0 L0,200" stroke="#C8102E" stroke-width="24"/>
+  <rect x="155" width="50" height="200" fill="#fff"/>
+  <rect y="75" width="360" height="50" fill="#fff"/>
+  <rect x="165" width="30" height="200" fill="#C8102E"/>
+  <rect y="85" width="360" height="30" fill="#C8102E"/>
+  <!-- Commonwealth Star (simplified) -->
+  <circle cx="180" cy="430" r="20" fill="#fff"/>
+  <!-- Southern Cross — simplified 5 white stars -->
+  <circle cx="580" cy="150" r="14" fill="#fff"/>
+  <circle cx="680" cy="220" r="14" fill="#fff"/>
+  <circle cx="640" cy="350" r="14" fill="#fff"/>
+  <circle cx="510" cy="330" r="14" fill="#fff"/>
+  <circle cx="730" cy="420" r="8"  fill="#fff"/>
+</svg>

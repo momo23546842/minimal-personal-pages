@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600">
+  <!-- Blue top & bottom bands -->
+  <rect width="900" height="200" fill="#003DA5"/>
+  <rect y="400" width="900" height="200" fill="#003DA5"/>
+  <!-- Red center band -->
+  <rect y="200" width="900" height="200" fill="#E00025"/>
+  <!-- Simplified Angkor Wat silhouette in white -->
+  <g fill="#fff">
+    <!-- Base platform -->
+    <rect x="330" y="255" width="240" height="90"/>
+    <!-- Central tower -->
+    <rect x="420" y="205" width="60" height="50"/>
+    <polygon points="450,185 420,205 480,205"/>
+    <!-- Left tower -->
+    <rect x="355" y="230" width="40" height="30"/>
+    <polygon points="375,215 355,230 395,230"/>
+    <!-- Right tower -->
+    <rect x="505" y="230" width="40" height="30"/>
+    <polygon points="525,215 505,230 545,230"/>
+  </g>
+</svg>

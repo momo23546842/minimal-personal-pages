@@ -51,7 +51,7 @@ export function FavoritesGrid({ items, onItemClick }: { items: FavItem[], onItem
             <h4 
               className="mb-2 text-xs md:text-sm font-bold leading-tight"
               style={{ 
-                fontFamily: 'var(--font-sans)',
+                fontFamily: 'var(--font-body)',
                 color: 'var(--scrapbook-forest-dark, #5A6B4F)'
               }}
             >{it.title}</h4>

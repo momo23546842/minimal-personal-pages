@@ -1,108 +1,13 @@
-/* ========================================
-   Journey Section - Cozy Scrapbook Style
-   ======================================== */
-
-.section {
-  padding: 5rem 1.5rem;
-  background: var(--scrapbook-cream, #F8F4ED);
-  background-image: 
-    repeating-linear-gradient(
-      0deg,
-      transparent,
-      transparent 2px,
-      rgba(229, 220, 206, 0.15) 2px,
-      rgba(229, 220, 206, 0.15) 4px
-    );
-}
-
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-/* ---- Section Header ---- */
-.header {
-  text-align: center;
-  margin-bottom: 4rem;
-}
-
-.titleRow {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-  margin-bottom: 1rem;
-}
-
-.headerIcon {
-  color: var(--scrapbook-forest, #7A9172);
-  flex-shrink: 0;
-}
-
-.title {
-  font-family: var(--font-section, 'M PLUS Rounded 1c', 'Baloo 2', cursive, sans-serif);
-  font-size: clamp(2rem, 5vw, 3rem);
-  font-weight: 600;
-  color: var(--scrapbook-forest-dark, #5A6B4F);
-  margin: 0;
-  transform: rotate(-1.5deg);
-  display: inline-block;
-}
-
-.subtitle {
-  font-size: clamp(0.938rem, 2vw, 1.125rem);
-  line-height: 1.7;
-  color: var(--scrapbook-text-light, #6B6356);
-  opacity: 0.85;
-  margin: 0;
-  max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-/* ---- Cards Container ---- */
-.cardsContainer {
-  display: flex;
-  flex-direction: column;
-  gap: 3rem;
-}
-
-/* ---- Mobile Layout ---- */
+.section { padding: 1rem 0 2rem; background: #e9e8e4; }
+.container { max-width: 1180px; margin: 0 auto; }
+.header { display: flex; justify-content: space-between; align-items: end; gap: 2rem; margin-bottom: 3rem; padding-bottom: 1.25rem; border-bottom: 1px solid #c8c7c2; }
+.titleRow { display: flex; align-items: center; gap: .75rem; }
+.headerIcon { color: #b34339; }
+.title { margin: 0; font: 400 clamp(2.5rem, 6vw, 4.8rem)/.9 var(--font-playfair), Georgia, serif; letter-spacing: -.04em; color: #181817; }
+.subtitle { max-width: 230px; margin: 0; color: #77756f; font: .7rem/1.7 var(--font-poppins), sans-serif; letter-spacing: .08em; text-transform: uppercase; }
+.cardsContainer { display: flex; flex-direction: column; gap: 1.5rem; }
 @media (max-width: 768px) {
-  .section {
-    padding: 3.5rem 1rem;
-  }
-
-  .header {
-    margin-bottom: 2.5rem;
-  }
-
-  .titleRow {
-    gap: 0.75rem;
-  }
-
-  .headerIcon {
-    width: 22px;
-    height: 22px;
-  }
-
-  .title {
-    font-size: 2rem;
-  }
-
-  .subtitle {
-    font-size: 0.938rem;
-    padding: 0 0.5rem;
-  }
-
-  .cardsContainer {
-    gap: 2rem;
-  }
-}
-
-/* ---- Tablet Layout ---- */
-@media (min-width: 769px) and (max-width: 1024px) {
-  .cardsContainer {
-    gap: 2.5rem;
-  }
+  .section { padding: 1rem 0 2rem; }
+  .header { align-items: start; flex-direction: column; gap: 1rem; margin-bottom: 2rem; }
+  .subtitle { max-width: 320px; }
 }

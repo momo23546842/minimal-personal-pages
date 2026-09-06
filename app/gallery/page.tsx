@@ -1,11 +1,13 @@
 "use client"
 
+import React from "react"
 import { useState, useEffect, useCallback } from "react"
 import { FavoritesGrid, food, japan, australia, philippines, cafe } from "@/components/favorites"
 import type { FavItem } from "@/components/favorites"
 import Link from "next/link"
 import Image from "next/image"
 import { MapPin, X } from "lucide-react"
+import { Footer } from "@/components/footer"
 
 function GalleryLightbox({ item, onClose }: { item: FavItem; onClose: () => void }) {
   // Close on Escape key
@@ -73,7 +75,7 @@ function GalleryLightbox({ item, onClose }: { item: FavItem; onClose: () => void
         {/* Info */}
         <div style={{ paddingInline: "4px" }}>
           <h3 style={{
-            fontFamily: "var(--font-baloo, 'Baloo 2', cursive, sans-serif)",
+            fontFamily: "var(--font-display)",
             fontSize: "1.2rem",
             fontWeight: 700,
             color: "var(--scrapbook-forest-dark, #5A6B4F)",
@@ -90,8 +92,8 @@ function GalleryLightbox({ item, onClose }: { item: FavItem; onClose: () => void
                     target="_blank"
                     rel="noopener noreferrer"
                     style={{ color: 'var(--scrapbook-forest, #7A9172)', textDecoration: 'none', fontWeight: 600 }}
-                    onMouseEnter={(e: any) => { e.currentTarget.style.color = 'var(--scrapbook-forest-dark, #5A6B4F)'; e.currentTarget.style.textDecoration = 'underline' }}
-                    onMouseLeave={(e: any) => { e.currentTarget.style.color = 'var(--scrapbook-forest, #7A9172)'; e.currentTarget.style.textDecoration = 'none' }}
+                    onMouseEnter={(e: React.MouseEvent<HTMLAnchorElement>) => { e.currentTarget.style.color = 'var(--scrapbook-forest-dark, #5A6B4F)'; e.currentTarget.style.textDecoration = 'underline' }}
+                    onMouseLeave={(e: React.MouseEvent<HTMLAnchorElement>) => { e.currentTarget.style.color = 'var(--scrapbook-forest, #7A9172)'; e.currentTarget.style.textDecoration = 'none' }}
                   >{item.placeName}</a>
                 ) : null}
                 <span style={{ color: 'var(--scrapbook-text-light, #6B6356)' }}>{item.placeName ? `— ${item.location}` : item.location}</span>
@@ -144,16 +146,16 @@ export default function GalleryPage() {
     <>
     {selected && <GalleryLightbox item={selected} onClose={closeModal} />}
     <main 
-      className="px-3 md:px-6 py-20"
+      className="page-shell"
       style={{ backgroundColor: 'transparent' }}
     >
-      <div className="mx-auto max-w-7xl px-2 lg:px-8">
+      <div className="page-content">
         <div className="flex items-center justify-between mb-8">
           <div>
             <h1 
               className="text-2xl md:text-3xl font-bold"
               style={{ 
-                fontFamily: "var(--font-baloo, 'Baloo 2', cursive, sans-serif)",
+                fontFamily: "var(--font-display)",
                 color: 'var(--scrapbook-forest-dark, #5A6B4F)',
                 position: 'relative',
                 display: 'inline-block'
@@ -268,7 +270,7 @@ export default function GalleryPage() {
             <h2 
               className="mb-4 text-base md:text-lg font-semibold"
               style={{
-                fontFamily: "var(--font-baloo, 'Baloo 2', cursive, sans-serif)",
+                fontFamily: "var(--font-display)",
                 color: 'var(--scrapbook-forest-dark, #5A6B4F)'
               }}
             >
@@ -289,7 +291,7 @@ export default function GalleryPage() {
             <h2 
               className="mb-4 text-base md:text-lg font-semibold"
               style={{
-                fontFamily: "var(--font-baloo, 'Baloo 2', cursive, sans-serif)",
+                fontFamily: "var(--font-display)",
                 color: 'var(--scrapbook-forest-dark, #5A6B4F)'
               }}
             >
@@ -310,7 +312,7 @@ export default function GalleryPage() {
             <h2 
               className="mb-4 text-base md:text-lg font-semibold"
               style={{
-                fontFamily: "var(--font-baloo, 'Baloo 2', cursive, sans-serif)",
+                fontFamily: "var(--font-display)",
                 color: 'var(--scrapbook-forest-dark, #5A6B4F)'
               }}
             >
@@ -331,7 +333,7 @@ export default function GalleryPage() {
             <h2 
               className="mb-4 text-base md:text-lg font-semibold"
               style={{
-                fontFamily: "var(--font-baloo, 'Baloo 2', cursive, sans-serif)",
+                fontFamily: "var(--font-display)",
                 color: 'var(--scrapbook-forest-dark, #5A6B4F)'
               }}
             >
@@ -352,7 +354,7 @@ export default function GalleryPage() {
             <h2 
               className="mb-4 text-base md:text-lg font-semibold"
               style={{
-                fontFamily: "var(--font-baloo, 'Baloo 2', cursive, sans-serif)",
+                fontFamily: "var(--font-display)",
                 color: 'var(--scrapbook-forest-dark, #5A6B4F)'
               }}
             >
@@ -365,6 +367,7 @@ export default function GalleryPage() {
         )}
       </div>
     </main>
+    <Footer />
     </>
   )
 }

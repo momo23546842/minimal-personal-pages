@@ -76,6 +76,26 @@ export const foodPhotos = [
     mapUrl: 'https://www.google.com/maps?q=A+to+Z+cafe+表参道',
     caption: 'A cozy and stylish café offering wholesome Japanese set meals in a relaxed atmosphere.',
     tags: ['healthy meal', 'Tokyo']
+  },
+  {
+    category: 'food',
+    image: '/images/food/letao-otaru-japan.jpg',
+    title: 'LeTAO Cheesecake',
+    location: 'Otaru, Hokkaido',
+    placeName: 'LeTAO',
+    mapUrl: 'https://www.google.com/maps?q=LeTAO+Otaru+Hokkaido',
+    caption: 'Famous for its rich and creamy cheesecakes, a must-visit in Otaru.',
+    tags: ['cheesecake', 'hokkaido']
+  },
+  {
+    category: 'food',
+    image: '/images/food/jinroku.jpg',
+    title: 'Udon with Tempura',
+    location: 'Shinjuku, Tokyo',
+    placeName: 'Kirimugiya Jinroku',
+    mapUrl: 'https://www.google.com/maps?q=Kirimugiya+Jinroku+Shinjuku+Tokyo',
+    caption: 'Delicious udon with tempura in a cozy setting.',
+    tags: ['udon', 'tempura', 'tokyo']
   }
 ]
 
